@@ -19,10 +19,21 @@ The project also uses `QGIS <https://www.qgis.org>`_, so different **plugins** h
 The aim is to bridge environmental data science with operational wildfire management, enabling better risk prediction
 and efficient firefighting deployment.
 
+The documents ar organized as follow:
+
+- **GisFIRE Setup**:
+- **GisFIRE Data Model**:
+- **GisFIRE Project Modules**:
+    - **Geo**:
+- **GisFIRE API**:
+- **Applications**:
+- **QGIS Plugins**:
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    setup
-
+   data_model
+   modules
 

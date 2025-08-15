@@ -1,4 +1,14 @@
-# Docs
+# Docs system
 sphinx>=8.2.3
 sphinx-rtd-theme>=3.0.2
 Pygments>=2.19.2
+# Project dependencies
+psycopg[binary]>=3.2.9
+SQLAlchemy>=2.0.43
+GeoAlchemy2>=0.15.1
+pyproj>=3.6.1
+shapely>=2.0.5
+# Testing dependencies
+pytest>=8.1.1
+pytest-cov>=4.1.0
+pytest-postgresql>=5.1.1

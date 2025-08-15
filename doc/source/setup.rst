@@ -1,5 +1,5 @@
-GisFIRE2 Setup
-==============
+Setup
+=====
 
 .. contents::
    :local:
