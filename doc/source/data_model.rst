@@ -100,6 +100,7 @@ General Data Model Pages
    src/data_model/mixins
    src/data_model/base
    src/data_model/data_provider
+   src/data_model/lightning
 
 Bombers de la Generalitat de Catalunya Data Model Pages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

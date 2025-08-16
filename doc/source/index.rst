@@ -36,4 +36,6 @@ The documents ar organized as follow:
    setup
    data_model
    modules
+   apps
+   testing
 
