@@ -66,7 +66,7 @@ class DataProvider(Base, TimeStampMixIn):
     description: Mapped[str] = mapped_column('description')
     url: Mapped[str] = mapped_column('url')
     # Relations
-    # lightnings: Mapped[List["Lightning"]] = relationship(back_populates="data_provider")
+    lightnings: Mapped[List["Lightning"]] = relationship(back_populates="data_provider")
 
 
     def __init__(self, **kwargs: Unpack[DataProviderParams]) -> None:
@@ -92,3 +92,26 @@ class DataProvider(Base, TimeStampMixIn):
         for key, value in kwargs.items():
             if hasattr(self, key):
                 setattr(self, key, value)
+
+    def __eq__(self, other: object) -> bool:
+        """
+        Compare equality with another object.
+
+        Two `DataProvider` instances are considered equal if they have
+        the same `name`. Other attributes (e.g., description, url) are
+        not taken into account.
+
+        Parameters
+        ----------
+        other : object
+            The object to compare against.
+
+        Returns
+        -------
+        bool
+            ``True`` if `other` is a `DataProvider` with the same `name`,
+            otherwise ``False``.
+        """
+        if not isinstance(other, DataProvider):
+            return False
+        return self.name == other.name

@@ -113,3 +113,5 @@ Servei Meteorològic de Catalunya
 
 .. toctree::
    :maxdepth: 1
+
+   src/meteocat/data_model/lightning

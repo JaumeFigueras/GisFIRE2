@@ -56,7 +56,7 @@ class LightningParams(TypedDict):
     x_4326: NotRequired[float]
     y_4326: NotRequired[float]
     date_time: datetime.datetime
-    data_provider: NotRequired[DataProvider]
+    data_provider: DataProvider
 
 class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
     """
@@ -151,7 +151,7 @@ class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
             location, and datetime fields.
         """
         yield "id", self.id
-        yield "data_provider", self.data_provider_name
+        yield "data_provider", self.data_provider.name
         yield from LocationMixIn.__iter__(self)
         yield from DateTimeMixIn.__iter__(self)
 

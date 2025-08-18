@@ -61,4 +61,5 @@ Pages
    test/conftest
    test/fixtures
    test/database
+   test/data_model
 

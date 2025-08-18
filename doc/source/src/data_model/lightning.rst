@@ -19,8 +19,8 @@ Lightning
    :show-inheritance:
    :exclude-members: __tablename__, x_4326, y_4326, date_time, data_provider, type
 
-DataProviderParams
-^^^^^^^^^^^^^^^^^^
+LightningParams
+^^^^^^^^^^^^^^^
 
 .. autoclass:: src.data_model.lightning.LightningParams
    :members:

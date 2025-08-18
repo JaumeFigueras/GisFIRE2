@@ -38,6 +38,7 @@ from sqlalchemy.schema import CreateTable  # pragma: no cover
 from src.data_model import Base  # pragma: no cover
 from src.data_model.data_provider import DataProvider  # pragma: no cover
 from src.data_model.lightning import Lightning  # pragma: no cover
+from src.meteocat.data_model.lightning import MeteocatLightning  # pragma: no cover
 
 
 def main(e: Engine):  # pragma: no cover
@@ -59,6 +60,7 @@ def main(e: Engine):  # pragma: no cover
     # Base.metadata.create_all(e)
     print(CreateTable(DataProvider.__table__).compile(e))
     print(CreateTable(Lightning.__table__).compile(e))
+    # print(CreateTable(MeteocatLightning.__table__).compile(e))
 
     # print(CreateTable(Request.__table__).compile(e))
     # print(CreateTable(User.__table__).compile(e))
