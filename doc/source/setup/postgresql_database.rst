@@ -7,7 +7,7 @@ PostgreSQL Database
 
     .. code-block:: bash
 
-      $ sudo pg_createcluster -d /home/postgresql-15/gisfire -l /home/postgresql-15/gisfire/gisfire.log -p 5433 --start --start-conf auto 15 richal
+      $ sudo pg_createcluster -d /home/postgresql-15/clusters/gisfire -l /home/postgresql-15/clusters/gisfire/gisfire.log -p 5433 --start --start-conf auto 15 gisfire
 
     **Important** Change the por (5433) to your preferred port
 
@@ -42,7 +42,7 @@ PostgreSQL Database
 
     .. code-block:: bash
 
-      $ psql -p 5433 -d richal_db
+      $ psql -p 5433 -d gisfire_db
 
     Inside the SQL command line write.
 
