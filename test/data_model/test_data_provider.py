@@ -83,7 +83,7 @@ def test_data_provider_init_02():
     dp = DataProvider(
         name="data provider name",
         description="data provider description",
-        estra_field="extra",
+        estra_field="extra", # type: ignore
     )
     assert dp.name == "data provider name"
     assert dp.description == "data provider description"
@@ -103,7 +103,7 @@ def test_data_provider_init_03():
     - `description` is ``None``.
     - `url` is ``None``.
     """
-    dp = DataProvider()
+    dp = DataProvider() # type: ignore
     assert getattr(dp, "name", None) is None
     assert getattr(dp, "description", None) is None
     assert getattr(dp, "url", None) is None

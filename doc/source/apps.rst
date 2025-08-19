@@ -19,3 +19,4 @@ Auxiliar Applications Pages
    :maxdepth: 1
 
    src/apps/auxiliar/get_sql
+   src/apps/auxiliar/create_data_providers

@@ -97,7 +97,7 @@ def test_lightning_init_01(db_session: Session, data_provider: List[DataProvider
         y_4326=41.388147,
         date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[1],
-        extra_field="extra field"
+        extra_field="extra field"  # type: ignore
     )
     assert lightning.x_4326 == 2.113066
     assert lightning.y_4326 == 41.388147
@@ -123,7 +123,7 @@ def test_lightning_init_02():
     - `date_time` is ``None``.
     - `data_provider` is ``None``.
     """
-    lightning = Lightning()
+    lightning = Lightning()  # type: ignore
     assert getattr(lightning, "x_4326", None) is None
     assert getattr(lightning, "y_4326", None) is None
     assert getattr(lightning, "geometry_4326", None) is None

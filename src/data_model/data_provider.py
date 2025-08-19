@@ -66,7 +66,8 @@ class DataProvider(Base, TimeStampMixIn):
     description: Mapped[str] = mapped_column('description')
     url: Mapped[str] = mapped_column('url')
     # Relations
-    lightnings: Mapped[List["Lightning"]] = relationship(back_populates="data_provider")
+    lightnings: Mapped[List["Lightning"]] = relationship(back_populates="data_provider")  # type: ignore
+    requests: Mapped[List["APIRequestLog"]] = relationship(back_populates="data_provider")  # type: ignore
 
 
     def __init__(self, **kwargs: Unpack[DataProviderParams]) -> None:

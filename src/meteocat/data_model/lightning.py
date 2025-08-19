@@ -4,26 +4,21 @@
 from __future__ import annotations  # Needed to allow returning type of enclosing class PEP 563
 
 import datetime
-import json
 
 from src.data_model.lightning import LightningParams
 from src.data_model.lightning import Lightning
-from src.data_model.data_provider import DataProvider
 
 from sqlalchemy import Integer
 from sqlalchemy import Float
 from sqlalchemy import Boolean
 from sqlalchemy import String
-from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from shapely.geometry import Point
 
-from typing import Optional
 from typing import Union
 from typing import Dict
 from typing import Any
-from typing import TypedDict
 from typing_extensions import Unpack
 from typing_extensions import NotRequired
 
@@ -43,7 +38,7 @@ class MeteocatLightningParams(LightningParams):
     peak_current : float
         Peak current of the lightning discharge, in kiloamperes.
     multiplicity : int, optional
-        Number of strokes in the same flash (may be ``None``).
+        Number of strokes in the same flash (maybe ``None``).
     chi_squared : float
         Chi-squared value from location quality estimation.
     ellipse_major_axis : float
@@ -109,7 +104,7 @@ class MeteocatLightning(Lightning):
     hit_ground : bool
         Whether the lightning stroke reached ground.
     multiplicity : int, optional
-        Number of strokes in the same flash (may be ``None``).
+        Number of strokes in the same flash (maybe ``None``).
     municipality_code : str, optional
         Code of the municipality where the event was located.
     x_25831, y_25831 : float
@@ -168,7 +163,7 @@ class MeteocatLightning(Lightning):
         super().__init__(**kwargs)
         for key, value in kwargs.items():
             if hasattr(self, key):
-                if (key == 'number_of_sensors') and (value < 1):
+                if (key == 'number_of_sensors') and (value < 0): # Allow 0 for old data that not recorded this information
                     raise ValueError("Number of sensors must be a positive integer")
                 setattr(self, key, value)
 
@@ -240,22 +235,23 @@ class MeteocatLightning(Lightning):
                                   "number_of_sensors", "hit_ground", "municipality_code", "id",
                                   "data_provider", "x_25831", "y_25831", "x_4258", "y_4258",
                                   "date_time")):
-            lightning = MeteocatLightning()
-            lightning.meteocat_id = int(dct['meteocat_id'])
-            lightning.peak_current = float(dct['peak_current'])
-            lightning.multiplicity = int(dct['multiplicity']) if dct['multiplicity'] is not None else None
-            lightning.chi_squared = float(dct['chi_squared'])
-            lightning.ellipse_major_axis = float(dct['ellipse_major_axis'])
-            lightning.ellipse_minor_axis = float(dct['ellipse_minor_axis'])
-            lightning.ellipse_angle = float(dct['ellipse_angle'])
-            lightning.number_of_sensors = int(dct['number_of_sensors'])
-            lightning.hit_ground = bool(dct['hit_ground'])
-            lightning.municipality_code = dct['municipality_code']
+            lightning = MeteocatLightning(
+                meteocat_id=int(dct['meteocat_id']),
+                peak_current=float(dct['peak_current']),
+                multiplicity=int(dct['multiplicity']) if dct['multiplicity'] is not None else None,
+                chi_squared=float(dct['chi_squared']),
+                ellipse_major_axis=float(dct['ellipse_major_axis']),
+                ellipse_minor_axis=float(dct['ellipse_minor_axis']),
+                ellipse_angle=float(dct['ellipse_angle']),
+                number_of_sensors=int(dct['number_of_sensors']),
+                hit_ground=bool(dct['hit_ground']),
+                municipality_code=dct['municipality_code'],
+                data_provider=dct['data_provider'],
+                x_4258=float(dct['x_4258']),
+                y_4258=float(dct['y_4258']),
+                date_time=datetime.datetime.strptime(dct['date_time'], "%Y-%m-%dT%H:%M:%S.%f%z")
+            )
             lightning.id = int(dct['id'])
-            lightning.data_provider_name = dct['data_provider']
-            lightning.x_4258 = float(dct['x_4258'])
-            lightning.y_4258 = float(dct['y_4258'])
-            lightning.date_time = datetime.datetime.strptime(dct['date_time'], "%Y-%m-%dT%H:%M:%S.%f%z")
             return lightning
         return None  # pragma: no cover
 

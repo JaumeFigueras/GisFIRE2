@@ -14,7 +14,7 @@ Run from the command line with the required connection arguments:
 
 .. code-block:: bash
 
-    python get_sql.py --host localhost --port 5432 --database testdb --username user --password pass
+    python3 get_sql.py --host localhost --port 5432 --database testdb --username user --password pass
 
 Named Arguments
 ---------------
@@ -24,7 +24,7 @@ Named Arguments
 | :code:`-u, --username`: Database username for authentication.
 | :code:`-w, --password`: Password for authentication.
 
-"""
+""" # noinspection GrammarInspection
 
 import argparse  # pragma: no cover
 import sys  # pragma: no cover
@@ -38,7 +38,9 @@ from sqlalchemy.schema import CreateTable  # pragma: no cover
 from src.data_model import Base  # pragma: no cover
 from src.data_model.data_provider import DataProvider  # pragma: no cover
 from src.data_model.lightning import Lightning  # pragma: no cover
-from src.meteocat.data_model.lightning import MeteocatLightning  # pragma: no cover
+from src.data_model.api_request_log import APIRequestLog  # pragma: no cover
+from src.meteocat.data_model.lightning import MeteocatLightning  # pragma: no cover # noqa: F401
+
 
 
 def main(e: Engine):  # pragma: no cover
@@ -60,6 +62,7 @@ def main(e: Engine):  # pragma: no cover
     # Base.metadata.create_all(e)
     print(CreateTable(DataProvider.__table__).compile(e))
     print(CreateTable(Lightning.__table__).compile(e))
+    print(CreateTable(APIRequestLog.__table__).compile(e))
     # print(CreateTable(MeteocatLightning.__table__).compile(e))
 
     # print(CreateTable(Request.__table__).compile(e))

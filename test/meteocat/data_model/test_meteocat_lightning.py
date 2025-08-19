@@ -205,7 +205,7 @@ def test_meteocat_lightning_init_02(db_session: Session, data_provider: List[Dat
         number_of_sensors=2,
         hit_ground=True,
         municipality_code="08445",
-        extra_field="extra field"
+        extra_field="extra field"  # type: ignore
     )
     # Coordinate and datetime checks
     assert lightning.x_4326 == 2.113066
@@ -251,7 +251,7 @@ def test_meteocat_lightning_init_03(db_session: Session, data_provider: List[Dat
     -----------------
     - All coordinate, geometry, date/time, data provider, and Meteocat-specific attributes are `None`.
     """
-    lightning = MeteocatLightning()
+    lightning = MeteocatLightning()  # type: ignore
     # Coordinate and datetime checks
     assert getattr(lightning, "x_4326", None) is None
     assert getattr(lightning, "y_4326", None) is None
@@ -296,7 +296,7 @@ def test_meteocat_lightning_init_04(db_session: Session, data_provider: List[Dat
     - Initializing with `number_of_sensors < 0` raises a `ValueError`.
     """
     with pytest.raises(ValueError):
-        lightning = MeteocatLightning(
+        _ = MeteocatLightning(
             date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
             data_provider=data_provider[0],
             x_4258=2.113066,

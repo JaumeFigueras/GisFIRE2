@@ -69,13 +69,6 @@ class HashableHSTORE(TypeDecorator):
     cache_ok : bool
         Flag indicating whether the type is safe to cache, set to True.
 
-    Examples
-    --------
-    >>> from sqlalchemy import Column
-    >>> class MyModel(Base):
-    ...     __tablename__ = 'example'
-    ...     id = Column(Integer, primary_key=True)
-    ...     data = Column(HashableHSTORE)
     """
     impl = HSTORE
     cache_ok = True
@@ -99,11 +92,12 @@ class HashableHSTORE(TypeDecorator):
         HashableMutableDict or None
             The converted mutable dictionary if ``value`` is not ``None``,
             otherwise ``None``.
-
-        Examples
-        --------
-        >>> hstore = {'a': '1', 'b': '2'}
-        >>> HashableHSTORE().process_result_value(hstore, None)
-        {'a': '1', 'b': '2'}
         """
         return HashableMutableDict(value)
+
+
+from src.data_model.data_provider import DataProvider
+from src.data_model.lightning import Lightning
+from src.data_model.api_request_log import APIRequestLog
+# from src.meteocat.data_model.lightning import MeteocatLightning  # noqa: F401
+

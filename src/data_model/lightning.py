@@ -48,7 +48,7 @@ class LightningParams(TypedDict):
         Longitude in EPSG:4326 coordinates.
     y_4326 : float, optional
         Latitude in EPSG:4326 coordinates.
-    date_time : datetime.datetime
+    date_time : datetime.datetime  # noinspection GrammarInspection
         Datetime of the lightning event.
     data_provider : DataProvider, optional
         The data provider that recorded the lightning event.
@@ -56,7 +56,7 @@ class LightningParams(TypedDict):
     x_4326: NotRequired[float]
     y_4326: NotRequired[float]
     date_time: datetime.datetime
-    data_provider: DataProvider
+    data_provider: Union[DataProvider, str]
 
 class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
     """
@@ -83,7 +83,7 @@ class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
         Latitude in EPSG:4326 coordinates (from LocationMixIn).
     geometry_4326 : str or Point
         Geometric representation of the lightning location.
-    date_time : datetime.datetime
+    date_time : datetime.datetime  # noinspection GrammarInspection
         Datetime of the lightning event.
     tzinfo_date_time : str
         Timezone information for the event datetime.
@@ -138,7 +138,10 @@ class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
         TimeStampMixIn.__init__(self)
         for key, value in kwargs.items():
             if hasattr(self, key):
-                setattr(self, key, value)
+                if key == "data_provider" and isinstance(value, str):
+                    self.data_provider_name = value
+                else:
+                    setattr(self, key, value)
 
     def __iter__(self):
         """

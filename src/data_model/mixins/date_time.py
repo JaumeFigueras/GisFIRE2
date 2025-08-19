@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pytz
-from dateutil.tz import tzoffset  # Do not remove, necessary for eval tzoffset in run-time
+from dateutil.tz import tzoffset  # Do not remove, necessary for eval tzoffset in run-time # noqa: F401
 
 from sqlalchemy.orm import declarative_mixin
 

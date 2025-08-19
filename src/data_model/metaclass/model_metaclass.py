@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import pytz
 
 from sqlalchemy import DateTime, String
 from sqlalchemy import Float
