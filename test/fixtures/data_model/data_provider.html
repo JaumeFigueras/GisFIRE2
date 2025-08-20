@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>data_provider Fixture &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Meteocat Fixtures" href="../meteocat.html" />
+    <link rel="prev" title="Data Model Fixtures" href="../data_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apps.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../testing.html">Testing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../testing.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../testing.html#conftest-py">conftest.py</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../testing.html#pages">Pages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../conftest.html">conftest.py</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../fixtures.html">Testing Fixtures</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../fixtures.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../fixtures.html#why-fixtures-are-necessary">Why Fixtures are Necessary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../fixtures.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../fixtures.html#advanced-usage">Advanced Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../fixtures.html#references">References</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../fixtures.html#pages">Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../database.html">Database Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html">Data Model Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../apps.html">Apps Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../testing.html">Testing</a></li>
+          <li class="breadcrumb-item"><a href="../../fixtures.html">Testing Fixtures</a></li>
+          <li class="breadcrumb-item"><a href="../data_model.html">Data Model Fixtures</a></li>
+      <li class="breadcrumb-item active">data_provider Fixture</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/test/fixtures/data_model/data_provider.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-provider-fixture">
+<h1>data_provider Fixture<a class="headerlink" href="#data-provider-fixture" title="Link to this heading"></a></h1>
+<section id="module-test.fixtures.data_model.data_provider">
+<span id="code-contents"></span><h2>Code Contents<a class="headerlink" href="#module-test.fixtures.data_model.data_provider" title="Link to this heading"></a></h2>
+<p>Pytest fixture module for creating sample <cite>DataProvider</cite> entries in the database.</p>
+<p>This module provides a utility function and a pytest fixture for initializing
+test data in the database. It is intended for use in functional or integration
+tests that require sample <cite>DataProvider</cite> records.</p>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>create_data_providers(session: Session) -&gt; List[DataProvider]</dt><dd><p>Creates and commits two sample <cite>DataProvider</cite> instances to the database.</p>
+</dd>
+</dl>
+</section>
+<section id="fixtures">
+<h3>Fixtures<a class="headerlink" href="#fixtures" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>data_provider(db_session: Session)</dt><dd><p>Pytest fixture that yields the sample <cite>DataProvider</cite> instances for use in tests.
+Cleans up the session after each test function.</p>
+</dd>
+</dl>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="test.fixtures.data_model.data_provider.create_data_providers">
+<span class="sig-prename descclassname"><span class="pre">test.fixtures.data_model.data_provider.</span></span><span class="sig-name descname"><span class="pre">create_data_providers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#test.fixtures.data_model.data_provider.create_data_providers" title="Link to this definition"></a></dt>
+<dd><p>Create and persist sample <cite>DataProvider</cite> records in the database.</p>
+<p>This function creates two sample data providers:</p>
+<ol class="arabic simple">
+<li><p>‘Meteo.cat’ - Servei Meteorològic de Catalunya</p></li>
+<li><p>‘Bombers.cat’ - Bombers de la Generalitat de Catalunya</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>session</strong> (<em>Session</em>) – SQLAlchemy session connected to the test database.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The list of created <cite>DataProvider</cite> instances.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider">DataProvider</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.fixtures.data_model.data_provider.data_provider">
+<span class="sig-prename descclassname"><span class="pre">test.fixtures.data_model.data_provider.</span></span><span class="sig-name descname"><span class="pre">data_provider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test.fixtures.data_model.data_provider.data_provider" title="Link to this definition"></a></dt>
+<dd><p>Pytest fixture that provides sample <cite>DataProvider</cite> instances for tests.</p>
+<p>This fixture:
+- Uses <cite>create_data_providers</cite> to insert sample records into the test database.
+- Yields the list of <cite>DataProvider</cite> objects to the test.
+- Commits the session after each test function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>db_session</strong> (<em>Session</em>) – The SQLAlchemy session fixture for the test database.</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>List[DataProvider]</em> – The sample <cite>DataProvider</cite> instances.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../data_model.html" class="btn btn-neutral float-left" title="Data Model Fixtures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../meteocat.html" class="btn btn-neutral float-right" title="Meteocat Fixtures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

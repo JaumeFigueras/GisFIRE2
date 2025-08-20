@@ -1,0 +1,199 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=10f1778b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="conftest.py" href="test/conftest.html" />
+    <link rel="prev" title="import_lightnings_from_csv_mp.py" href="src/apps/meteocat/import_lightnings_from_csv_mp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apps.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conftest-py">conftest.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#temporary-postgresql-instance">Temporary PostgreSQL instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-schema-initialization">Database schema initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scoped-sqlalchemy-session-fixture">Scoped SQLAlchemy session fixture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pages">Pages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test/conftest.html">conftest.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test/fixtures.html">Testing Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test/database.html">Database Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test/data_model.html">Data Model Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test/apps.html">Apps Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Testing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/testing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#conftest-py" id="id2">conftest.py</a></p>
+<ul>
+<li><p><a class="reference internal" href="#temporary-postgresql-instance" id="id3">Temporary PostgreSQL instance</a></p></li>
+<li><p><a class="reference internal" href="#database-schema-initialization" id="id4">Database schema initialization</a></p></li>
+<li><p><a class="reference internal" href="#scoped-sqlalchemy-session-fixture" id="id5">Scoped SQLAlchemy session fixture</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#pages" id="id6">Pages</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Testing is a critical part of software development. It ensures that your code behaves as expected, helps catch bugs early, and improves maintainability.</p>
+<p><strong>Why testing is necessary:</strong></p>
+<ul class="simple">
+<li><p>Detect regressions and bugs before they reach production.</p></li>
+<li><p>Provide confidence when refactoring code.</p></li>
+<li><p>Serve as documentation for code behavior.</p></li>
+</ul>
+<p><strong>Using pytest:</strong></p>
+<p><a class="reference external" href="https://docs.pytest.org/en/stable/">pytest</a> is a powerful testing framework for Python. Some key points:</p>
+<ul class="simple">
+<li><p>Simple syntax for writing tests.</p></li>
+<li><p>Supports fixtures for reusable test setup.</p></li>
+<li><p>Integrates with CI/CD pipelines for automated testing.</p></li>
+</ul>
+</section>
+<section id="conftest-py">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">conftest.py</a><a class="headerlink" href="#conftest-py" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> file is a special pytest configuration file. It provides reusable fixtures and setup code for your tests.</p>
+<p>In this project, <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> specifically handles a temporary PostgreSQL test database with SQLAlchemy. Here’s what it does:</p>
+<section id="temporary-postgresql-instance">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Temporary PostgreSQL instance</a><a class="headerlink" href="#temporary-postgresql-instance" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses <code class="docutils literal notranslate"><span class="pre">pytest_postgresql</span></code> to create an ephemeral database for testing.</p></li>
+<li><p>Ensures tests run in isolation and do not affect production data.</p></li>
+</ul>
+</section>
+<section id="database-schema-initialization">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Database schema initialization</a><a class="headerlink" href="#database-schema-initialization" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Executes a series of SQL files to create all necessary tables and relationships in the test database.</p></li>
+</ul>
+</section>
+<section id="scoped-sqlalchemy-session-fixture">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Scoped SQLAlchemy session fixture</a><a class="headerlink" href="#scoped-sqlalchemy-session-fixture" title="Link to this heading"></a></h3>
+<p>Provides a <code class="docutils literal notranslate"><span class="pre">db_session</span></code> fixture, which:</p>
+<ul class="simple">
+<li><p>Connects to the temporary database.</p></li>
+<li><p>Yields a SQLAlchemy <code class="docutils literal notranslate"><span class="pre">scoped_session</span></code> for tests to use.</p></li>
+<li><p>Cleans up by deleting all table contents at the end of each test function.</p></li>
+</ul>
+</section>
+</section>
+<section id="pages">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Pages</a><a class="headerlink" href="#pages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="test/conftest.html">conftest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test/fixtures.html">Testing Fixtures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test/database.html">Database Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test/data_model.html">Data Model Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test/apps.html">Apps Tests</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src/apps/meteocat/import_lightnings_from_csv_mp.html" class="btn btn-neutral float-left" title="import_lightnings_from_csv_mp.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test/conftest.html" class="btn btn-neutral float-right" title="conftest.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>location_converter &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Applications" href="../../apps.html" />
+    <link rel="prev" title="geometry_generator" href="geometry_generator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_model.html">Data Model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#overview">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modules.html#modules-pages">Modules Pages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../geo.html">Geo Module</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../geo.html#geo-module-pages">Geo Module Pages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../modules.html">Modules</a></li>
+          <li class="breadcrumb-item"><a href="../geo.html">Geo Module</a></li>
+      <li class="breadcrumb-item active">location_converter</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/geo/location_converter.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="location-converter">
+<h1>location_converter<a class="headerlink" href="#location-converter" title="Link to this heading"></a></h1>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.geo.location_converter.PointLocationConverter">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.geo.location_converter.</span></span><span class="sig-name descname"><span class="pre">PointLocationConverter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_x_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_y_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_geom_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_x_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_y_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_geom_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.geo.location_converter.PointLocationConverter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Converts point coordinates between two coordinate reference systems (CRS)
+and generates corresponding WKT geometry strings.</p>
+<p>This helper is typically used in ORM models to keep both source and
+destination coordinates, as well as their geometries, in sync.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.geo.location_converter.PointLocationConverter.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_x_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_y_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_geom_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_x_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_y_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_geom_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.geo.location_converter.PointLocationConverter.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the PointLocationConverter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_x_attr</strong> (<em>str</em>) – Name of the attribute containing the source X coordinate.</p></li>
+<li><p><strong>src_y_attr</strong> (<em>str</em>) – Name of the attribute containing the source Y coordinate.</p></li>
+<li><p><strong>src_epsg</strong> (<em>str</em>) – EPSG code for the source CRS.</p></li>
+<li><p><strong>src_geom_attr</strong> (<em>str</em>) – Name of the attribute where the generated source geometry string is stored.</p></li>
+<li><p><strong>dst_x_attr</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the attribute containing the destination X coordinate.</p></li>
+<li><p><strong>dst_y_attr</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the attribute containing the destination Y coordinate.</p></li>
+<li><p><strong>dst_epsg</strong> (<em>str</em><em>, </em><em>optional</em>) – EPSG code for the destination CRS.</p></li>
+<li><p><strong>dst_geom_attr</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the attribute where the generated destination geometry string is stored.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.geo.location_converter.PointLocationConverter.convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.geo.location_converter.PointLocationConverter.convert" title="Link to this definition"></a></dt>
+<dd><p>Convert the source location to the destination CRS and generate geometry strings.</p>
+<p>This method:
+- Reads the source X and Y coordinates from the object.
+- Generates a WKT geometry string for the source location.
+- Converts the coordinates to the destination CRS using <cite>pyproj.Transformer</cite>.
+- Sets the destination X and Y coordinates.
+- Generates a WKT geometry string for the destination location.</p>
+<p>If any of the source coordinates are missing, both source and destination
+attributes are set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj</strong> (<em>Any</em>) – Object containing the coordinate and geometry attributes.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">Dummy</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">x1</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">... </span>    <span class="n">y1</span> <span class="o">=</span> <span class="mf">45.0</span>
+<span class="gp">... </span>    <span class="n">geom1</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">... </span>    <span class="n">x2</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">... </span>    <span class="n">y2</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">... </span>    <span class="n">geom2</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conv</span> <span class="o">=</span> <span class="n">PointLocationConverter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;y1&#39;</span><span class="p">,</span> <span class="s1">&#39;4326&#39;</span><span class="p">,</span> <span class="s1">&#39;geom1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;x2&#39;</span><span class="p">,</span> <span class="s1">&#39;y2&#39;</span><span class="p">,</span> <span class="s1">&#39;3857&#39;</span><span class="p">,</span> <span class="s1">&#39;geom2&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dummy</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conv</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">dummy</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dummy</span><span class="o">.</span><span class="n">geom1</span>
+<span class="go">&#39;SRID=4326;POINT(2.0 45.0)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dummy</span><span class="o">.</span><span class="n">geom2</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SRID=3857;POINT&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.geo.location_converter.PointLocationConverter.__dict__">
+<span class="sig-name descname"><span class="pre">__dict__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">mappingproxy({'__module__':</span> <span class="pre">'src.geo.location_converter',</span> <span class="pre">'__doc__':</span> <span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Converts</span> <span class="pre">point</span> <span class="pre">coordinates</span> <span class="pre">between</span> <span class="pre">two</span> <span class="pre">coordinate</span> <span class="pre">reference</span> <span class="pre">systems</span> <span class="pre">(CRS)\n</span>&#160;&#160;&#160; <span class="pre">and</span> <span class="pre">generates</span> <span class="pre">corresponding</span> <span class="pre">WKT</span> <span class="pre">geometry</span> <span class="pre">strings.\n\n</span>&#160;&#160;&#160; <span class="pre">This</span> <span class="pre">helper</span> <span class="pre">is</span> <span class="pre">typically</span> <span class="pre">used</span> <span class="pre">in</span> <span class="pre">ORM</span> <span class="pre">models</span> <span class="pre">to</span> <span class="pre">keep</span> <span class="pre">both</span> <span class="pre">source</span> <span class="pre">and\n</span>&#160;&#160;&#160; <span class="pre">destination</span> <span class="pre">coordinates,</span> <span class="pre">as</span> <span class="pre">well</span> <span class="pre">as</span> <span class="pre">their</span> <span class="pre">geometries,</span> <span class="pre">in</span> <span class="pre">sync.\n</span>&#160;&#160;&#160; <span class="pre">',</span> <span class="pre">'__init__':</span> <span class="pre">&lt;function</span> <span class="pre">PointLocationConverter.__init__&gt;,</span> <span class="pre">'convert':</span> <span class="pre">&lt;function</span> <span class="pre">PointLocationConverter.convert&gt;,</span> <span class="pre">'__dict__':</span> <span class="pre">&lt;attribute</span> <span class="pre">'__dict__'</span> <span class="pre">of</span> <span class="pre">'PointLocationConverter'</span> <span class="pre">objects&gt;,</span> <span class="pre">'__weakref__':</span> <span class="pre">&lt;attribute</span> <span class="pre">'__weakref__'</span> <span class="pre">of</span> <span class="pre">'PointLocationConverter'</span> <span class="pre">objects&gt;,</span> <span class="pre">'__annotations__':</span> <span class="pre">{}})</span></em><a class="headerlink" href="#src.geo.location_converter.PointLocationConverter.__dict__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.geo.location_converter.PointLocationConverter.__module__">
+<span class="sig-name descname"><span class="pre">__module__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'src.geo.location_converter'</span></em><a class="headerlink" href="#src.geo.location_converter.PointLocationConverter.__module__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.geo.location_converter.PointLocationConverter.__weakref__">
+<span class="sig-name descname"><span class="pre">__weakref__</span></span><a class="headerlink" href="#src.geo.location_converter.PointLocationConverter.__weakref__" title="Link to this definition"></a></dt>
+<dd><p>list of weak references to the object</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="geometry_generator.html" class="btn btn-neutral float-left" title="geometry_generator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../apps.html" class="btn btn-neutral float-right" title="Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
