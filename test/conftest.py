@@ -34,6 +34,7 @@ Notes
 # General imports
 import tempfile
 import pytest
+import logging
 # Specific imports
 from pytest_postgresql import factories
 from pathlib import Path
@@ -77,6 +78,8 @@ def db_session(postgresql_gisfire):
     sql_filenames = [
         str(test_folder) + '/database_init.sql',
         str(test_folder.parent) + '/src/data_model/database/data_provider.sql',
+        str(test_folder.parent) + '/src/data_model/database/lightning.sql',
+        str(test_folder.parent) + '/src/data_model/database/api_request_log.sql',
     ]
 
     # Execute each SQL file to initialize the schema
@@ -91,7 +94,24 @@ def db_session(postgresql_gisfire):
         tbl.delete()
     session.commit()
 
+@pytest.fixture(scope="function")
+def logger() -> logging.Logger:
+    """
+    Setups the logger configration and returns a configured logger for module 'test'. The fixture has a function scope
+
+    :return: A configured logger for module 'test'
+    :rtype: logging.Logger
+    """
+    logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(levelname)s] %(message)s',
+                        encoding='utf-8',
+                        level=logging.INFO,
+                        datefmt="%Y-%m-%d %H:%M:%S"
+                        )
+    return logging.getLogger('test')
+
 # Optionally enable additional pytest fixture plugins
 pytest_plugins = [
     'test.fixtures.data_model.data_provider',
+    'test.fixtures.apps.mp',
+    'test.fixtures.meteocat.data_model.lightnings',
 ]

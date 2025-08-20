@@ -160,9 +160,13 @@ class MeteocatLightning(Lightning):
         ValueError
             If ``number_of_sensors`` is provided and is less than 1.
         """
+
+        def is_defined_in_parents(cls, attr):
+            return any(attr in base.__dict__ for base in cls.__bases__)
+
         super().__init__(**kwargs)
         for key, value in kwargs.items():
-            if hasattr(self, key):
+            if hasattr(self, key) and not is_defined_in_parents(MeteocatLightning, key):
                 if (key == 'number_of_sensors') and (value < 0): # Allow 0 for old data that not recorded this information
                     raise ValueError("Number of sensors must be a positive integer")
                 setattr(self, key, value)

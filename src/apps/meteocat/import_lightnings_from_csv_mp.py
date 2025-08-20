@@ -19,36 +19,27 @@ Features
 
 Usage
 -----
-Run the script directly with the required arguments::
 
-    python meteocat_lightning_importer.py \
-        --host <DB_HOST> \
-        --port <DB_PORT> \
-        --database <DB_NAME> \
-        --username <DB_USER> \
-        --password <DB_PASS> \
-        --file <CSV_FILE> \
-        [--log-file <LOG_FILE>]
+Run the script directly with the required arguments:
 
-Arguments
----------
--H, --host : str
-    Host name where the database cluster is located.
--p, --port : int
-    Database cluster port.
--d, --database : str
-    Database name.
--u, --username : str
-    Database username.
--w, --password : str
-    Database password.
--f, --file : str
-    CSV file containing lightning strike records.
--l, --log-file : str, optional
-    File to log progress or errors. Defaults to console logging.
+.. code-block:: bash
+
+   python3 import_lightnings_from_csv_mp.py --host <DB_HOST> --port <DB_PORT> --database <DB_NAME> --username <DB_USER> --password <DB_PASS> --file <CSV_FILE> [--log-file <LOG_FILE>]
+
+Named Arguments
+---------------
+
+| ``-H, --host``: Host name where the database cluster is located.
+| ``-p, --port``: Database cluster port.
+| ``-d, --database``: Database name.
+| ``-u, --username``: Database username.
+| ``-w, --password``: Database password.
+| ``-f, --file``: CSV file containing lightning strike records.
+| ``-l, --log-file``: File to log progress or errors. Defaults to console logging.
 
 Dependencies
 ------------
+
 - SQLAlchemy for ORM and database connectivity.
 - `MeteocatLightning` ORM model (`src.meteocat.data_model.lightning`).
 - `APIRequestLog` ORM model (`src.data_model.api_request_log`).
@@ -56,6 +47,7 @@ Dependencies
 
 Notes
 -----
+
 - CSV is expected to have a header and use `;` as the delimiter.
 - Data chunks of 10,000 records are processed in parallel.
 - All records must be valid `MeteocatLightning` objects before insertion.
@@ -74,6 +66,9 @@ import logging
 from sqlalchemy import URL
 from sqlalchemy import Engine
 from sqlalchemy import create_engine
+from sqlalchemy import func
+from sqlalchemy import select
+from sqlalchemy import and_
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from logging.handlers import RotatingFileHandler
@@ -204,6 +199,12 @@ def process_requests(db_session, year):
     try:
         while date.year == year:
             endpoint = URL_LIGHTNINGS.format(year=date.year, month=date.month, day=date.day, hour=date.hour)
+            if db_session.scalar(select(func.count(APIRequestLog.id)).where(
+                and_(APIRequestLog.endpoint == endpoint, APIRequestLog.http_status == 200, APIRequestLog.data_provider_name == 'Meteo.cat')
+            )):
+                logger.error(f"Error found in record {i}. Rolling back all changes")
+                db_session.rollback()
+                raise ValueError("Duplicated request.")
             simulated_request = APIRequestLog(endpoint=endpoint, http_status=200, data_provider='Meteo.cat')
             date = date + datetime.timedelta(hours=1)
             db_session.add(simulated_request)
@@ -211,7 +212,7 @@ def process_requests(db_session, year):
                 logger.info("Processing day: {0:}".format(date.strftime("%Y-%m-%d")))
             i += 1
         db_session.commit()
-    except SQLAlchemyError as e:
+    except SQLAlchemyError as e:  # pragma: no cover
         logger.error("Error found in record {0:}. Rolling back all changes. Exception text: {1:}".format(i, str(e)))
         db_session.rollback()
         raise e

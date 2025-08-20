@@ -20,3 +20,11 @@ Auxiliar Applications Pages
 
    src/apps/auxiliar/get_sql
    src/apps/auxiliar/create_data_providers
+
+Meteo.cat Applications Pages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   src/apps/meteocat/import_lightnings_from_csv_mp

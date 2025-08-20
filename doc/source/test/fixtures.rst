@@ -78,3 +78,5 @@ Pages
    :maxdepth: 1
 
    fixtures/data_model
+   fixtures/meteocat
+   fixtures/apps

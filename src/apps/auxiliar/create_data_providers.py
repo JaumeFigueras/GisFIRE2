@@ -81,12 +81,12 @@ def main(db_session: Session) -> None:
     - Commits changes at the end of execution.
     - Intended to be used during database initialization or setup.
     """
-    qty = session.scalar(select(func.count(DataProvider.name)).where(DataProvider.name == "Meteo.cat"))
+    qty = db_session.scalar(select(func.count(DataProvider.name)).where(DataProvider.name == "Meteo.cat"))
     if qty == 0:
         meteo_cat = DataProvider(name='Meteo.cat', description='Servei Meteorològic de Catalunya',
                                  url='https://www.meteo.cat/')
         db_session.add(meteo_cat)
-    qty = session.scalar(select(func.count(DataProvider.name)).where(DataProvider.name == "Bombers.cat"))
+    qty = db_session.scalar(select(func.count(DataProvider.name)).where(DataProvider.name == "Bombers.cat"))
     if qty == 0:
         bombers_gencat = DataProvider(name='Bombers.cat', description='Bombers de la Generalitat de Catalunya',
                                       url='https://interior.gencat.cat/ca/arees_dactuacio/bombers')
