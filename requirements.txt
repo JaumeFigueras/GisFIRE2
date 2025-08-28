@@ -8,6 +8,7 @@ SQLAlchemy>=2.0.43
 GeoAlchemy2>=0.15.1
 pyproj>=3.6.1
 shapely>=2.0.5
+pytz>=2025.2
 # Testing dependencies
 pytest>=8.1.1
 pytest-cov>=4.1.0
