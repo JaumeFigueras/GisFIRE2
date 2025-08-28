@@ -41,8 +41,16 @@ def create_data_providers(session: Session) -> List[DataProvider]:
     Returns:
         List[DataProvider]: The list of created `DataProvider` instances.
     """
-    dp1 = DataProvider(name='Meteo.cat', description='Servei Meteorològic de Catalunya', url='https://www.meteo.cat/')
-    dp2 = DataProvider(name='Bombers.cat', description='Bombers de la Generalitat de Catalunya', url='https://interior.gencat.cat/ca/arees_dactuacio/bombers')
+    dp1 = DataProvider(
+        data_provider_name='Meteo.cat',
+        data_provider_description='Servei Meteorològic de Catalunya',
+        data_provider_url='https://www.meteo.cat/'
+    )
+    dp2 = DataProvider(
+        data_provider_name='Bombers.cat',
+        data_provider_description='Bombers de la Generalitat de Catalunya',
+        data_provider_url='https://interior.gencat.cat/ca/arees_dactuacio/bombers'
+    )
     session.add_all([dp1, dp2])
     session.commit()
     return [dp1, dp2]

@@ -101,6 +101,8 @@ General Data Model Pages
    src/data_model/base
    src/data_model/data_provider
    src/data_model/lightning
+   src/data_model/thunderstorm_experiment
+   src/data_model/thunderstorm
 
 Bombers de la Generalitat de Catalunya Data Model Pages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -4,6 +4,7 @@ from __future__ import annotations  # Needed to allow returning type of enclosin
 
 import datetime
 
+from sqlalchemy import String
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
@@ -12,6 +13,7 @@ from src.data_model import Base
 from src.data_model.mixins.time_stamp import TimeStampMixIn
 
 from typing import List
+from typing import Optional
 from typing import TypedDict
 from typing_extensions import NotRequired
 from typing_extensions import Unpack
@@ -23,16 +25,16 @@ class DataProviderParams(TypedDict):
 
     Parameters
     ----------
-    name : str
+    data_provider_name : str
         Name of the data provider.
-    description : str
+    data_provider_description : str
         Description of the data provider.
-    url : str, optional
+    data_provider_url : str, optional
         URL of the data provider's website or API.
     """
-    name: str
-    description: str
-    url: NotRequired[str]
+    data_provider_name: str
+    data_provider_description: str
+    data_provider_url: NotRequired[str]
 
 class DataProvider(Base, TimeStampMixIn):
     """
@@ -48,11 +50,11 @@ class DataProvider(Base, TimeStampMixIn):
     ----------
     __tablename__ : str
         Name of the database table for this model (`data_provider`).
-    name : Mapped[str]
+    data_provider_name : Mapped[str]
         Primary key. The unique name of the data provider.
-    description : Mapped[str]
+    data_provider_description : Mapped[str]
         A description of the data provider.
-    url : Mapped[str]
+    data_provider_url : Mapped[str]
         Optional URL for the data provider.
     ts : Mapped[datetime.datetime]
         Timestamp of creation, automatically set by the database.
@@ -62,12 +64,13 @@ class DataProvider(Base, TimeStampMixIn):
     # Table metadata
     __tablename__ = 'data_provider'
     # Columns
-    name: Mapped[str] = mapped_column('name', primary_key=True)
-    description: Mapped[str] = mapped_column('description')
-    url: Mapped[str] = mapped_column('url')
+    data_provider_name: Mapped[str] = mapped_column('data_provider_name', String, primary_key=True)
+    data_provider_description: Mapped[str] = mapped_column('data_provider_description', String, nullable=False)
+    data_provider_url: Mapped[Optional[str]] = mapped_column('data_provider_url', String, nullable=True)
     # Relations
     lightnings: Mapped[List["Lightning"]] = relationship(back_populates="data_provider")  # type: ignore
     requests: Mapped[List["APIRequestLog"]] = relationship(back_populates="data_provider")  # type: ignore
+    thunderstorm_experiments: Mapped[List["ThunderstormExperiment"]] = relationship(back_populates="data_provider")  # type: ignore
 
 
     def __init__(self, **kwargs: Unpack[DataProviderParams]) -> None:
@@ -115,4 +118,4 @@ class DataProvider(Base, TimeStampMixIn):
         """
         if not isinstance(other, DataProvider):
             return False
-        return self.name == other.name
+        return self.data_provider_name == other.data_provider_name

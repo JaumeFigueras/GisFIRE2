@@ -7,6 +7,7 @@ import datetime
 
 from src.data_model.lightning import LightningParams
 from src.data_model.lightning import Lightning
+from src.data_model import Base
 
 from sqlalchemy import Integer
 from sqlalchemy import Float
@@ -35,7 +36,7 @@ class MeteocatLightningParams(LightningParams):
     ----------
     meteocat_id : int
         Unique Meteocat identifier for the lightning event.
-    peak_current : float
+    meteocat_peak_current : float
         Peak current of the lightning discharge, in kiloamperes.
     multiplicity : int, optional
         Number of strokes in the same flash (maybe ``None``).
@@ -59,15 +60,15 @@ class MeteocatLightningParams(LightningParams):
         Y coordinate (latitude/northing) in EPSG:4258.
     """
     meteocat_id: int
-    peak_current: float
-    multiplicity: NotRequired[int]
-    chi_squared: float
-    ellipse_major_axis: float
-    ellipse_minor_axis: float
-    ellipse_angle: float
-    number_of_sensors: int
-    hit_ground: bool
-    municipality_code: NotRequired[str]
+    meteocat_peak_current: float
+    meteocat_chi_squared: float
+    meteocat_ellipse_major_axis: float
+    meteocat_ellipse_minor_axis: float
+    meteocat_ellipse_angle: float
+    meteocat_number_of_sensors: int
+    meteocat_hit_ground: bool
+    meteocat_multiplicity: NotRequired[int]
+    meteocat_municipality_code: NotRequired[str]
     x_4258: float
     y_4258: float
 
@@ -89,23 +90,23 @@ class MeteocatLightning(Lightning):
     ----------
     meteocat_id : int
         Unique Meteocat identifier for the lightning event.
-    peak_current : float
+    meteocat_peak_current : float
         Peak current of the lightning discharge, in kiloamperes.
-    chi_squared : float
+    meteocat_chi_squared : float
         Chi-squared value from location quality estimation.
-    ellipse_major_axis : float
+    meteocat_ellipse_major_axis : float
         Length of the confidence ellipse major axis.
-    ellipse_minor_axis : float
+    meteocat_ellipse_minor_axis : float
         Length of the confidence ellipse minor axis.
-    ellipse_angle : float
+    meteocat_ellipse_angle : float
         Angle (degrees) of the ellipse orientation.
-    number_of_sensors : int
+    meteocat_number_of_sensors : int
         Number of sensors that detected the event (must be > 0).
-    hit_ground : bool
+    meteocat_hit_ground : bool
         Whether the lightning stroke reached ground.
-    multiplicity : int, optional
+    meteocat_multiplicity : int, optional
         Number of strokes in the same flash (maybe ``None``).
-    municipality_code : str, optional
+    meteocat_municipality_code : str, optional
         Code of the municipality where the event was located.
     x_25831, y_25831 : float
         Projected coordinates in EPSG:25831.
@@ -119,8 +120,8 @@ class MeteocatLightning(Lightning):
         {'epsg': 4258, 'validation': 'geographic', 'conversion': [
             {'src': 4258, 'dst': 4326},
             {'src': 4258, 'dst': 25831}
-        ]},
-        {'epsg': 25831, 'validation': False, 'conversion': False}
+        ], 'nullable': True},
+        {'epsg': 25831, 'validation': False, 'conversion': False, 'nullable': True},
     ]
     # Type hint fot generated attributes by the metaclass
     x_25831: float
@@ -130,16 +131,16 @@ class MeteocatLightning(Lightning):
     geometry_4258: Union[str, Point]
     geometry_25831: Union[str, Point]
     # SQLAlchemy columns
-    meteocat_id: Mapped[int] = mapped_column('meteocat_id', Integer, nullable=False)
-    peak_current: Mapped[float] = mapped_column('meteocat_peak_current', Float, nullable=False)
-    chi_squared: Mapped[float] = mapped_column('meteocat_chi_squared', Float, nullable=False)
-    ellipse_major_axis: Mapped[float] = mapped_column('meteocat_ellipse_major_axis', Float, nullable=False)
-    ellipse_minor_axis: Mapped[float] = mapped_column('meteocat_ellipse_minor_axis', Float, nullable=False)
-    ellipse_angle: Mapped[float] = mapped_column('meteocat_ellipse_angle', Float, nullable=False)
-    number_of_sensors: Mapped[Union[int, None]] = mapped_column('meteocat_number_of_sensors', Integer, nullable=False)
-    hit_ground: Mapped[bool] = mapped_column('meteocat_hit_ground', Boolean, nullable=False, default=False)
-    multiplicity: Mapped[int] = mapped_column('meteocat_multiplicity', Integer, nullable=True, default=None)
-    municipality_code: Mapped[str] = mapped_column('meteocat_municipality_code', String, nullable=True, default=None)
+    meteocat_id: Mapped[int] = mapped_column('meteocat_id', Integer, nullable=True)
+    meteocat_peak_current: Mapped[float] = mapped_column('meteocat_peak_current', Float, nullable=True)
+    meteocat_chi_squared: Mapped[float] = mapped_column('meteocat_chi_squared', Float, nullable=True)
+    meteocat_ellipse_major_axis: Mapped[float] = mapped_column('meteocat_ellipse_major_axis', Float, nullable=True)
+    meteocat_ellipse_minor_axis: Mapped[float] = mapped_column('meteocat_ellipse_minor_axis', Float, nullable=True)
+    meteocat_ellipse_angle: Mapped[float] = mapped_column('meteocat_ellipse_angle', Float, nullable=True)
+    meteocat_number_of_sensors: Mapped[Union[int, None]] = mapped_column('meteocat_number_of_sensors', Integer, nullable=True)
+    meteocat_hit_ground: Mapped[bool] = mapped_column('meteocat_hit_ground', Boolean, nullable=True)
+    meteocat_multiplicity: Mapped[int] = mapped_column('meteocat_multiplicity', Integer, nullable=True)
+    meteocat_municipality_code: Mapped[str] = mapped_column('meteocat_municipality_code', String, nullable=True)
     # SQLAlchemy Inheritance options
     __mapper_args__ = {
         "polymorphic_identity": "meteocat_lightning",
@@ -160,14 +161,10 @@ class MeteocatLightning(Lightning):
         ValueError
             If ``number_of_sensors`` is provided and is less than 1.
         """
-
-        def is_defined_in_parents(cls, attr):
-            return any(attr in base.__dict__ for base in cls.__bases__)
-
         super().__init__(**kwargs)
         for key, value in kwargs.items():
-            if hasattr(self, key) and not is_defined_in_parents(MeteocatLightning, key):
-                if (key == 'number_of_sensors') and (value < 0): # Allow 0 for old data that not recorded this information
+            if hasattr(self, key) and not Base.is_defined_in_parents(MeteocatLightning, key):
+                if (key == 'meteocat_number_of_sensors') and (value < 0): # Allow 0 for old data that not recorded this information
                     raise ValueError("Number of sensors must be a positive integer")
                 setattr(self, key, value)
 
@@ -192,15 +189,15 @@ class MeteocatLightning(Lightning):
         """
         yield from super().__iter__()
         yield "meteocat_id", self.meteocat_id
-        yield "peak_current", self.peak_current
-        yield "multiplicity", self.multiplicity
-        yield "chi_squared", self.chi_squared
-        yield "ellipse_major_axis", self.ellipse_major_axis
-        yield "ellipse_minor_axis", self.ellipse_minor_axis
-        yield "ellipse_angle", self.ellipse_angle
-        yield "number_of_sensors", self.number_of_sensors
-        yield "hit_ground", self.hit_ground
-        yield "municipality_code", self.municipality_code
+        yield "meteocat_peak_current", self.meteocat_peak_current
+        yield "meteocat_multiplicity", self.meteocat_multiplicity
+        yield "meteocat_chi_squared", self.meteocat_chi_squared
+        yield "meteocat_ellipse_major_axis", self.meteocat_ellipse_major_axis
+        yield "meteocat_ellipse_minor_axis", self.meteocat_ellipse_minor_axis
+        yield "meteocat_ellipse_angle", self.meteocat_ellipse_angle
+        yield "meteocat_number_of_sensors", self.meteocat_number_of_sensors
+        yield "meteocat_hit_ground", self.meteocat_hit_ground
+        yield "meteocat_municipality_code", self.meteocat_municipality_code
 
     @staticmethod
     def object_hook_gisfire_api(dct: Dict[str, Any]) -> Union[MeteocatLightning, Dict[str, Any], None]:
@@ -234,28 +231,28 @@ class MeteocatLightning(Lightning):
         """
         if all(k in dct for k in ('lightning', 'distance')):
             return dct
-        if all(k in dct for k in ("meteocat_id", "peak_current", "multiplicity", "chi_squared",
-                                  "ellipse_major_axis", "ellipse_minor_axis", "ellipse_angle",
-                                  "number_of_sensors", "hit_ground", "municipality_code", "id",
-                                  "data_provider", "x_25831", "y_25831", "x_4258", "y_4258",
-                                  "date_time")):
+        if all(k in dct for k in ("meteocat_id", "meteocat_peak_current", "meteocat_multiplicity",
+                                  "meteocat_chi_squared", "meteocat_ellipse_major_axis", "meteocat_ellipse_minor_axis",
+                                  "meteocat_ellipse_angle", "meteocat_number_of_sensors", "meteocat_hit_ground",
+                                  "meteocat_municipality_code", "lightning_id", "data_provider", "x_25831", "y_25831",
+                                  "x_4258", "y_4258", "lightning_utc_date_time")):
             lightning = MeteocatLightning(
                 meteocat_id=int(dct['meteocat_id']),
-                peak_current=float(dct['peak_current']),
-                multiplicity=int(dct['multiplicity']) if dct['multiplicity'] is not None else None,
-                chi_squared=float(dct['chi_squared']),
-                ellipse_major_axis=float(dct['ellipse_major_axis']),
-                ellipse_minor_axis=float(dct['ellipse_minor_axis']),
-                ellipse_angle=float(dct['ellipse_angle']),
-                number_of_sensors=int(dct['number_of_sensors']),
-                hit_ground=bool(dct['hit_ground']),
-                municipality_code=dct['municipality_code'],
+                meteocat_peak_current=float(dct['meteocat_peak_current']),
+                meteocat_multiplicity=int(dct['meteocat_multiplicity']) if dct['meteocat_multiplicity'] is not None else None,
+                meteocat_chi_squared=float(dct['meteocat_chi_squared']),
+                meteocat_ellipse_major_axis=float(dct['meteocat_ellipse_major_axis']),
+                meteocat_ellipse_minor_axis=float(dct['meteocat_ellipse_minor_axis']),
+                meteocat_ellipse_angle=float(dct['meteocat_ellipse_angle']),
+                meteocat_number_of_sensors=int(dct['meteocat_number_of_sensors']),
+                meteocat_hit_ground=bool(dct['meteocat_hit_ground']),
+                meteocat_municipality_code=dct['meteocat_municipality_code'],
                 data_provider=dct['data_provider'],
                 x_4258=float(dct['x_4258']),
                 y_4258=float(dct['y_4258']),
-                date_time=datetime.datetime.strptime(dct['date_time'], "%Y-%m-%dT%H:%M:%S.%f%z")
+                lightning_utc_date_time=datetime.datetime.strptime(dct['lightning_utc_date_time'], "%Y-%m-%dT%H:%M:%S.%f%z")
             )
-            lightning.id = int(dct['id'])
+            lightning.lightning_id = int(dct['lightning_id'])
             return lightning
         return None  # pragma: no cover
 

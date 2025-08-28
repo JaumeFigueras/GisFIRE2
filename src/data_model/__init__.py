@@ -10,8 +10,14 @@ from sqlalchemy.dialects.postgresql import HSTORE
 
 from src.data_model.metaclass.model_metaclass import ModelMeta
 
+class Base(object):
+
+    @staticmethod
+    def is_defined_in_parents(cls, attr):
+        return any(attr in base.__dict__ for base in cls.__bases__)
+
 # Creation of a declarative base for the SQL Alchemy models to inherit from
-Base = declarative_base(metaclass=ModelMeta)
+Base = declarative_base(cls=Base, metaclass=ModelMeta)
 
 class HashableMutableDict(MutableDict):
     """
@@ -99,5 +105,8 @@ class HashableHSTORE(TypeDecorator):
 from src.data_model.data_provider import DataProvider
 from src.data_model.lightning import Lightning
 from src.data_model.api_request_log import APIRequestLog
+from src.data_model.thunderstorm import Thunderstorm
+from src.data_model.thunderstorm import ThunderstormLightningAssociation
+from src.data_model.thunderstorm_experiment import ThunderstormExperiment
 # from src.meteocat.data_model.lightning import MeteocatLightning  # noqa: F401
 

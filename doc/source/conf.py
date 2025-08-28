@@ -39,3 +39,23 @@ autodoc_member_order = 'bysource' # Keep attrs and functions order when generati
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+
+from sqlalchemy.ext.hybrid import hybrid_property
+from sphinx.ext.autodoc import PropertyDocumenter
+
+
+class HybridPropertyDocumenter(PropertyDocumenter):
+    """
+    Custom documenter to treat SQLAlchemy hybrid_property like a normal @property.
+    """
+    objtype = "hybrid_property"
+    directivetype = "attribute"
+
+    @classmethod
+    def can_document_member(cls, member, membername, isattr, parent):
+        return isinstance(member, hybrid_property)
+
+
+def setup(app):
+    # Register our custom documenter
+    app.add_autodocumenter(HybridPropertyDocumenter)

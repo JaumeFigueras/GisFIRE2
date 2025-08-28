@@ -60,12 +60,12 @@ def test_lightning_init_00(db_session: Session, data_provider: List[DataProvider
     lightning = Lightning(
         x_4326=2.113066,
         y_4326=41.388147,
-        date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+        lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[1]
     )
     assert lightning.x_4326 == 2.113066
     assert lightning.y_4326 == 41.388147
-    assert lightning.date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
+    assert lightning.lightning_utc_date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
     assert lightning.data_provider == data_provider[1]
     assert lightning.geometry_4326 ==  'SRID=4326;POINT(2.113066 41.388147)'
 
@@ -95,15 +95,15 @@ def test_lightning_init_01(db_session: Session, data_provider: List[DataProvider
     lightning = Lightning(
         x_4326=2.113066,
         y_4326=41.388147,
-        date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+        lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[1],
         extra_field="extra field"  # type: ignore
     )
     assert lightning.x_4326 == 2.113066
     assert lightning.y_4326 == 41.388147
-    assert lightning.date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
+    assert lightning.lightning_utc_date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
     assert lightning.data_provider == data_provider[1]
-    assert lightning.data_provider.name == data_provider[1].name
+    assert lightning.data_provider.data_provider_name == data_provider[1].data_provider_name
     assert lightning.geometry_4326 ==  'SRID=4326;POINT(2.113066 41.388147)'
     assert not hasattr(lightning, "extra_field")
 
@@ -159,18 +159,18 @@ def test_lightning_iter_00(db_session: Session, data_provider: List[DataProvider
     lightning = Lightning(
         x_4326=2.113066,
         y_4326=41.388147,
-        date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+        lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[0],
     )
-    lightning.id = 1  # mimic a persisted object with PK
+    lightning.lightning_id = 1  # mimic a persisted object with PK
 
     iter_dict = dict(lightning)
 
-    assert iter_dict["id"] == 1
-    assert iter_dict["data_provider"] == data_provider[0].name
+    assert iter_dict["lightning_id"] == 1
+    assert iter_dict["data_provider"] == data_provider[0].data_provider_name
     assert iter_dict["x_4326"] == 2.113066
     assert iter_dict["y_4326"] == 41.388147
-    assert iter_dict["date_time"] == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S.%f%z")
+    assert iter_dict["lightning_utc_date_time"] == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S.%f%z")
 
 
 

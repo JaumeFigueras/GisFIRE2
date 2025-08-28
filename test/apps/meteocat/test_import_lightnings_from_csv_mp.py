@@ -137,7 +137,7 @@ def test_process_requests_00(db_session, data_provider):
         Fixture providing Meteocat API data provider configuration.
     """
     process_requests(db_session, 2016)
-    assert db_session.scalar(select(func.count(APIRequestLog.id))) == 366 * 24 # Leap year!
+    assert db_session.scalar(select(func.count(APIRequestLog.api_request_id))) == 366 * 24 # Leap year!
 
 def test_process_requests_01(db_session, data_provider):
     """

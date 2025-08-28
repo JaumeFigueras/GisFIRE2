@@ -40,7 +40,10 @@ from src.data_model.data_provider import DataProvider  # pragma: no cover
 from src.data_model.lightning import Lightning  # pragma: no cover
 from src.data_model.api_request_log import APIRequestLog  # pragma: no cover
 from src.meteocat.data_model.lightning import MeteocatLightning  # pragma: no cover # noqa: F401
-
+from src.data_model.thunderstorm import Thunderstorm  # pragma: no cover
+from src.data_model.thunderstorm import ThunderstormLightningAssociation  # pragma: no cover
+from src.data_model.thunderstorm_experiment import ThunderstormExperiment  # pragma: no cover
+from src.meteocat.data_model.thunderstorm import MeteocatThunderstorm  # pragma: no cover # noqa: F401
 
 
 def main(e: Engine):  # pragma: no cover
@@ -63,6 +66,9 @@ def main(e: Engine):  # pragma: no cover
     print(CreateTable(DataProvider.__table__).compile(e))
     print(CreateTable(Lightning.__table__).compile(e))
     print(CreateTable(APIRequestLog.__table__).compile(e))
+    print(CreateTable(Thunderstorm.__table__).compile(e))
+    print(CreateTable(ThunderstormLightningAssociation.__table__).compile(e))
+    print(CreateTable(ThunderstormExperiment.__table__).compile(e))
     # print(CreateTable(MeteocatLightning.__table__).compile(e))
 
     # print(CreateTable(Request.__table__).compile(e))

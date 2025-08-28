@@ -65,26 +65,26 @@ def test_meteocat_lightning_init_00(db_session: Session, data_provider: List[Dat
       `number_of_sensors`, `hit_ground`, `municipality_code`) are correctly set.
     """
     lightning = MeteocatLightning(
-        date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+        lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[0],
         x_4258=2.113066,
         y_4258=41.388147,
         meteocat_id=123456,
-        peak_current=1.23,
-        multiplicity=4,
-        chi_squared=0.98,
-        ellipse_major_axis=1234.56,
-        ellipse_minor_axis=-654.321,
-        ellipse_angle=25.86,
-        number_of_sensors=2,
-        hit_ground=True,
-        municipality_code="08445"
+        meteocat_peak_current=1.23,
+        meteocat_multiplicity=4,
+        meteocat_chi_squared=0.98,
+        meteocat_ellipse_major_axis=1234.56,
+        meteocat_ellipse_minor_axis=-654.321,
+        meteocat_ellipse_angle=25.86,
+        meteocat_number_of_sensors=2,
+        meteocat_hit_ground=True,
+        meteocat_municipality_code="08445"
     )
     # Coordinate and datetime checks
     assert lightning.x_4326 == 2.113066
     assert lightning.y_4326 == 41.388147
     assert lightning.geometry_4326 == 'SRID=4326;POINT(2.113066 41.388147)'
-    assert lightning.date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
+    assert lightning.lightning_utc_date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
     assert lightning.data_provider == data_provider[0]
     # Meteocat-specific attribute checks
     assert lightning.x_4258 == 2.113066
@@ -94,15 +94,15 @@ def test_meteocat_lightning_init_00(db_session: Session, data_provider: List[Dat
     assert lightning.y_25831 == 4582226.001558889
     assert lightning.geometry_25831 == 'SRID=25831;POINT(425846.42118526914 4582226.001558889)'
     assert lightning.meteocat_id == 123456
-    assert lightning.peak_current == 1.23
-    assert lightning.multiplicity == 4
-    assert lightning.chi_squared == 0.98
-    assert lightning.ellipse_major_axis == 1234.56
-    assert lightning.ellipse_minor_axis == -654.321
-    assert lightning.ellipse_angle == 25.86
-    assert lightning.number_of_sensors == 2
-    assert lightning.hit_ground is True
-    assert lightning.municipality_code == "08445"
+    assert lightning.meteocat_peak_current == 1.23
+    assert lightning.meteocat_multiplicity == 4
+    assert lightning.meteocat_chi_squared == 0.98
+    assert lightning.meteocat_ellipse_major_axis == 1234.56
+    assert lightning.meteocat_ellipse_minor_axis == -654.321
+    assert lightning.meteocat_ellipse_angle == 25.86
+    assert lightning.meteocat_number_of_sensors == 2
+    assert lightning.meteocat_hit_ground is True
+    assert lightning.meteocat_municipality_code == "08445"
 
 def test_meteocat_lightning_init_01(db_session: Session, data_provider: List[DataProvider]):
     """
@@ -131,24 +131,24 @@ def test_meteocat_lightning_init_01(db_session: Session, data_provider: List[Dat
     - Optional attributes (`multiplicity`, `municipality_code`) default to `None`.
     """
     lightning = MeteocatLightning(
-        date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+        lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[0],
         x_4258=2.113066,
         y_4258=41.388147,
         meteocat_id=123456,
-        peak_current=1.23,
-        chi_squared=0.98,
-        ellipse_major_axis=1234.56,
-        ellipse_minor_axis=-654.321,
-        ellipse_angle=25.86,
-        number_of_sensors=2,
-        hit_ground=True
+        meteocat_peak_current=1.23,
+        meteocat_chi_squared=0.98,
+        meteocat_ellipse_major_axis=1234.56,
+        meteocat_ellipse_minor_axis=-654.321,
+        meteocat_ellipse_angle=25.86,
+        meteocat_number_of_sensors=2,
+        meteocat_hit_ground=True
     )
     # Coordinate and datetime checks
     assert lightning.x_4326 == 2.113066
     assert lightning.y_4326 == 41.388147
     assert lightning.geometry_4326 == 'SRID=4326;POINT(2.113066 41.388147)'
-    assert lightning.date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
+    assert lightning.lightning_utc_date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
     assert lightning.data_provider == data_provider[0]
     # Meteocat-specific attribute checks
     assert lightning.x_4258 == 2.113066
@@ -158,15 +158,15 @@ def test_meteocat_lightning_init_01(db_session: Session, data_provider: List[Dat
     assert lightning.y_25831 == 4582226.001558889
     assert lightning.geometry_25831 == 'SRID=25831;POINT(425846.42118526914 4582226.001558889)'
     assert lightning.meteocat_id == 123456
-    assert lightning.peak_current == 1.23
-    assert lightning.chi_squared == 0.98
-    assert lightning.ellipse_major_axis == 1234.56
-    assert lightning.ellipse_minor_axis == -654.321
-    assert lightning.ellipse_angle == 25.86
-    assert lightning.number_of_sensors == 2
-    assert lightning.hit_ground is True
-    assert lightning.multiplicity is None
-    assert lightning.municipality_code is None
+    assert lightning.meteocat_peak_current == 1.23
+    assert lightning.meteocat_chi_squared == 0.98
+    assert lightning.meteocat_ellipse_major_axis == 1234.56
+    assert lightning.meteocat_ellipse_minor_axis == -654.321
+    assert lightning.meteocat_ellipse_angle == 25.86
+    assert lightning.meteocat_number_of_sensors == 2
+    assert lightning.meteocat_hit_ground is True
+    assert lightning.meteocat_multiplicity is None
+    assert lightning.meteocat_municipality_code is None
 
 def test_meteocat_lightning_init_02(db_session: Session, data_provider: List[DataProvider]) -> None:
     """
@@ -191,27 +191,27 @@ def test_meteocat_lightning_init_02(db_session: Session, data_provider: List[Dat
     - `extra_field` does not exist on the resulting instance.
     """
     lightning = MeteocatLightning(
-        date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+        lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[0],
         x_4258=2.113066,
         y_4258=41.388147,
         meteocat_id=123456,
-        peak_current=1.23,
-        multiplicity=4,
-        chi_squared=0.98,
-        ellipse_major_axis=1234.56,
-        ellipse_minor_axis=-654.321,
-        ellipse_angle=25.86,
-        number_of_sensors=2,
-        hit_ground=True,
-        municipality_code="08445",
+        meteocat_peak_current=1.23,
+        meteocat_multiplicity=4,
+        meteocat_chi_squared=0.98,
+        meteocat_ellipse_major_axis=1234.56,
+        meteocat_ellipse_minor_axis=-654.321,
+        meteocat_ellipse_angle=25.86,
+        meteocat_number_of_sensors=2,
+        meteocat_hit_ground=True,
+        meteocat_municipality_code="08445",
         extra_field="extra field"  # type: ignore
     )
     # Coordinate and datetime checks
     assert lightning.x_4326 == 2.113066
     assert lightning.y_4326 == 41.388147
     assert lightning.geometry_4326 == 'SRID=4326;POINT(2.113066 41.388147)'
-    assert lightning.date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
+    assert lightning.lightning_utc_date_time == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC)
     assert lightning.data_provider == data_provider[0]
     # Meteocat-specific attribute checks
     assert lightning.x_4258 == 2.113066
@@ -221,15 +221,15 @@ def test_meteocat_lightning_init_02(db_session: Session, data_provider: List[Dat
     assert lightning.y_25831 == 4582226.001558889
     assert lightning.geometry_25831 == 'SRID=25831;POINT(425846.42118526914 4582226.001558889)'
     assert lightning.meteocat_id == 123456
-    assert lightning.peak_current == 1.23
-    assert lightning.multiplicity == 4
-    assert lightning.chi_squared == 0.98
-    assert lightning.ellipse_major_axis == 1234.56
-    assert lightning.ellipse_minor_axis == -654.321
-    assert lightning.ellipse_angle == 25.86
-    assert lightning.number_of_sensors == 2
-    assert lightning.hit_ground is True
-    assert lightning.municipality_code == "08445"
+    assert lightning.meteocat_peak_current == 1.23
+    assert lightning.meteocat_multiplicity == 4
+    assert lightning.meteocat_chi_squared == 0.98
+    assert lightning.meteocat_ellipse_major_axis == 1234.56
+    assert lightning.meteocat_ellipse_minor_axis == -654.321
+    assert lightning.meteocat_ellipse_angle == 25.86
+    assert lightning.meteocat_number_of_sensors == 2
+    assert lightning.meteocat_hit_ground is True
+    assert lightning.meteocat_municipality_code == "08445"
     assert not hasattr(lightning, "extra_field")
 
 def test_meteocat_lightning_init_03(db_session: Session, data_provider: List[DataProvider]) -> None:
@@ -297,20 +297,20 @@ def test_meteocat_lightning_init_04(db_session: Session, data_provider: List[Dat
     """
     with pytest.raises(ValueError):
         _ = MeteocatLightning(
-            date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+            lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
             data_provider=data_provider[0],
             x_4258=2.113066,
             y_4258=41.388147,
             meteocat_id=123456,
-            peak_current=1.23,
-            multiplicity=4,
-            chi_squared=0.98,
-            ellipse_major_axis=1234.56,
-            ellipse_minor_axis=-654.321,
-            ellipse_angle=25.86,
-            number_of_sensors=-2,
-            hit_ground=True,
-            municipality_code="08445"
+            meteocat_peak_current=1.23,
+            meteocat_multiplicity=4,
+            meteocat_chi_squared=0.98,
+            meteocat_ellipse_major_axis=1234.56,
+            meteocat_ellipse_minor_axis=-654.321,
+            meteocat_ellipse_angle=25.86,
+            meteocat_number_of_sensors=-2,
+            meteocat_hit_ground=True,
+            meteocat_municipality_code="08445"
         )
 
 def test_lightning_iter_00(db_session: Session, data_provider: List[DataProvider]):
@@ -333,44 +333,44 @@ def test_lightning_iter_00(db_session: Session, data_provider: List[DataProvider
     - Attribute values match initialization.
     """
     lightning = MeteocatLightning(
-        date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+        lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[0],
         x_4258=2.113066,
         y_4258=41.388147,
         meteocat_id=123456,
-        peak_current=1.23,
-        multiplicity=4,
-        chi_squared=0.98,
-        ellipse_major_axis=1234.56,
-        ellipse_minor_axis=654.321,
-        ellipse_angle=25.86,
-        number_of_sensors=2,
-        hit_ground=True,
-        municipality_code="08445"
+        meteocat_peak_current=1.23,
+        meteocat_multiplicity=4,
+        meteocat_chi_squared=0.98,
+        meteocat_ellipse_major_axis=1234.56,
+        meteocat_ellipse_minor_axis=654.321,
+        meteocat_ellipse_angle=25.86,
+        meteocat_number_of_sensors=2,
+        meteocat_hit_ground=True,
+        meteocat_municipality_code="08445"
     )
-    lightning.id = 1  # mimic a persisted object with PK
+    lightning.lightning_id = 1  # mimic a persisted object with PK
 
     iter_dict = dict(lightning)
 
-    assert iter_dict["id"] == 1
-    assert iter_dict["data_provider"] == data_provider[0].name
+    assert iter_dict["lightning_id"] == 1
+    assert iter_dict["data_provider"] == data_provider[0].data_provider_name
     assert iter_dict["x_4326"] == 2.113066
     assert iter_dict["y_4326"] == 41.388147
-    assert iter_dict["date_time"] == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S.%f%z")
+    assert iter_dict["lightning_utc_date_time"] == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S.%f%z")
     assert iter_dict["x_4258"] == 2.113066
     assert iter_dict["y_4258"] == 41.388147
     assert iter_dict["x_25831"] == 425846.42118526914
     assert iter_dict["y_25831"] == 4582226.001558889
     assert iter_dict["meteocat_id"] == 123456
-    assert iter_dict["peak_current"] == 1.23
-    assert iter_dict["multiplicity"] == 4
-    assert iter_dict["chi_squared"] == 0.98
-    assert iter_dict["ellipse_major_axis"] == 1234.56
-    assert iter_dict["ellipse_minor_axis"] == 654.321
-    assert iter_dict["ellipse_angle"] == 25.86
-    assert iter_dict["number_of_sensors"] == 2
-    assert iter_dict["hit_ground"] == True
-    assert iter_dict["municipality_code"] == "08445"
+    assert iter_dict["meteocat_peak_current"] == 1.23
+    assert iter_dict["meteocat_multiplicity"] == 4
+    assert iter_dict["meteocat_chi_squared"] == 0.98
+    assert iter_dict["meteocat_ellipse_major_axis"] == 1234.56
+    assert iter_dict["meteocat_ellipse_minor_axis"] == 654.321
+    assert iter_dict["meteocat_ellipse_angle"] == 25.86
+    assert iter_dict["meteocat_number_of_sensors"] == 2
+    assert iter_dict["meteocat_hit_ground"] == True
+    assert iter_dict["meteocat_municipality_code"] == "08445"
 
 def test_lightning_iter_01(db_session: Session, data_provider: List[DataProvider]):
     """
@@ -392,42 +392,42 @@ def test_lightning_iter_01(db_session: Session, data_provider: List[DataProvider
     - Optional attributes (`multiplicity`, `municipality_code`) are `None`.
     """
     lightning = MeteocatLightning(
-        date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
+        lightning_utc_date_time=datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC),
         data_provider=data_provider[0],
         x_4258=2.113066,
         y_4258=41.388147,
         meteocat_id=123456,
-        peak_current=1.23,
-        chi_squared=0.98,
-        ellipse_major_axis=1234.56,
-        ellipse_minor_axis=654.321,
-        ellipse_angle=25.86,
-        number_of_sensors=2,
-        hit_ground=True
+        meteocat_peak_current=1.23,
+        meteocat_chi_squared=0.98,
+        meteocat_ellipse_major_axis=1234.56,
+        meteocat_ellipse_minor_axis=654.321,
+        meteocat_ellipse_angle=25.86,
+        meteocat_number_of_sensors=2,
+        meteocat_hit_ground=True
     )
-    lightning.id = 1  # mimic a persisted object with PK
+    lightning.lightning_id = 1  # mimic a persisted object with PK
 
     iter_dict = dict(lightning)
 
-    assert iter_dict["id"] == 1
-    assert iter_dict["data_provider"] == data_provider[0].name
+    assert iter_dict["lightning_id"] == 1
+    assert iter_dict["data_provider"] == data_provider[0].data_provider_name
     assert iter_dict["x_4326"] == 2.113066
     assert iter_dict["y_4326"] == 41.388147
-    assert iter_dict["date_time"] == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S.%f%z")
+    assert iter_dict["lightning_utc_date_time"] == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S.%f%z")
     assert iter_dict["x_4258"] == 2.113066
     assert iter_dict["y_4258"] == 41.388147
     assert iter_dict["x_25831"] == 425846.42118526914
     assert iter_dict["y_25831"] == 4582226.001558889
     assert iter_dict["meteocat_id"] == 123456
-    assert iter_dict["peak_current"] == 1.23
-    assert iter_dict["multiplicity"] is None
-    assert iter_dict["chi_squared"] == 0.98
-    assert iter_dict["ellipse_major_axis"] == 1234.56
-    assert iter_dict["ellipse_minor_axis"] == 654.321
-    assert iter_dict["ellipse_angle"] == 25.86
-    assert iter_dict["number_of_sensors"] == 2
-    assert iter_dict["hit_ground"] == True
-    assert iter_dict["municipality_code"] is None
+    assert iter_dict["meteocat_peak_current"] == 1.23
+    assert iter_dict["meteocat_multiplicity"] is None
+    assert iter_dict["meteocat_chi_squared"] == 0.98
+    assert iter_dict["meteocat_ellipse_major_axis"] == 1234.56
+    assert iter_dict["meteocat_ellipse_minor_axis"] == 654.321
+    assert iter_dict["meteocat_ellipse_angle"] == 25.86
+    assert iter_dict["meteocat_number_of_sensors"] == 2
+    assert iter_dict["meteocat_hit_ground"] == True
+    assert iter_dict["meteocat_municipality_code"] is None
 
 def test_meteocat_lightning_object_hook_gisfire_api_json_loads_00():
     """
@@ -467,39 +467,39 @@ def test_meteocat_lightning_object_hook_gisfire_api_json_loads_02():
     """
     dct = {
         "meteocat_id": "101",
-        "peak_current": "12.5",
-        "multiplicity": "3",
-        "chi_squared": "1.2",
-        "ellipse_major_axis": "4.5",
-        "ellipse_minor_axis": "2.3",
-        "ellipse_angle": "45.0",
-        "number_of_sensors": "7",
-        "hit_ground": True,
-        "municipality_code": "08019",
-        "id": "555",
+        "meteocat_peak_current": "12.5",
+        "meteocat_multiplicity": "3",
+        "meteocat_chi_squared": "1.2",
+        "meteocat_ellipse_major_axis": "4.5",
+        "meteocat_ellipse_minor_axis": "2.3",
+        "meteocat_ellipse_angle": "45.0",
+        "meteocat_number_of_sensors": "7",
+        "meteocat_hit_ground": True,
+        "meteocat_municipality_code": "08019",
+        "lightning_id": "555",
         "data_provider": "TestProvider",
         "x_25831": "425846.42118526914",
         "y_25831": "4582226.001558889",
         "x_4258": "2.113066",
         "y_4258": "41.388147",
-        "date_time": "2024-08-15T12:34:56.000111+0000"
+        "lightning_utc_date_time": "2024-08-15T12:34:56.000111+0000"
     }
     json_str = json.dumps(dct)
     result = json.loads(json_str, object_hook=MeteocatLightning.object_hook_gisfire_api)
     assert isinstance(result, MeteocatLightning)
     assert result.meteocat_id == 101
-    assert result.peak_current == 12.5
-    assert result.multiplicity == 3
-    assert result.chi_squared == 1.2
-    assert result.ellipse_major_axis == 4.5
-    assert result.ellipse_minor_axis == 2.3
-    assert result.ellipse_angle == 45.0
-    assert result.number_of_sensors == 7
-    assert result.hit_ground is True
-    assert result.municipality_code == "08019"
-    assert result.id == 555
+    assert result.meteocat_peak_current == 12.5
+    assert result.meteocat_multiplicity == 3
+    assert result.meteocat_chi_squared == 1.2
+    assert result.meteocat_ellipse_major_axis == 4.5
+    assert result.meteocat_ellipse_minor_axis == 2.3
+    assert result.meteocat_ellipse_angle == 45.0
+    assert result.meteocat_number_of_sensors == 7
+    assert result.meteocat_hit_ground is True
+    assert result.meteocat_municipality_code == "08019"
+    assert result.lightning_id == 555
     assert result.data_provider_name == "TestProvider"
-    assert result.date_time == datetime.datetime(2024, 8, 15, 12, 34, 56, microsecond=111, tzinfo=datetime.timezone.utc)
+    assert result.lightning_utc_date_time == datetime.datetime(2024, 8, 15, 12, 34, 56, microsecond=111, tzinfo=datetime.timezone.utc)
     assert result.x_4326 == 2.113066
     assert result.y_4326 == 41.388147
     assert result.geometry_4326 == 'SRID=4326;POINT(2.113066 41.388147)'
@@ -523,22 +523,22 @@ def test_meteocat_lightning_object_hook_gisfire_api_json_loads_03():
     """
     dct = {
         "meteocat_id": "101",
-        "peak_current": "12.5",
-        "multiplicity": "3",
-        "chi_squared": "1.2",
-        "ellipse_major_axis": "4.5",
-        "ellipse_minor_axis": "2.3",
-        "ellipse_angle": "45.0",
-        "number_of_sensors": "7",
-        "hit_ground": True,
-        "municipality_code": "08019",
-        "id": "555",
+        "meteocat_peak_current": "12.5",
+        "meteocat_multiplicity": "3",
+        "meteocat_chi_squared": "1.2",
+        "meteocat_ellipse_major_axis": "4.5",
+        "meteocat_ellipse_minor_axis": "2.3",
+        "meteocat_ellipse_angle": "45.0",
+        "meteocat_number_of_sensors": "7",
+        "meteocat_hit_ground": True,
+        "meteocat_municipality_code": "08019",
+        "lightning_id": "555",
         "data_provider": "TestProvider",
         "x_25831": "425846.42118526914",
         "y_25831": "4582226.001558889",
         "x_4258": "2.113066",
         "y_4258": "41.388147",
-        "date_time": "2024-08-15T12:34:56.000111+0000"
+        "lightning_utc_date_time": "2024-08-15T12:34:56.000111+0000"
     }
     lst = [{"lightning": dct, "distance": 45.6}, {"lightning": dct, "distance": 45.6}]
     json_str = json.dumps(lst)
@@ -547,18 +547,18 @@ def test_meteocat_lightning_object_hook_gisfire_api_json_loads_03():
         lightning = result["lightning"]
         assert isinstance(lightning, MeteocatLightning)
         assert lightning.meteocat_id == 101
-        assert lightning.peak_current == 12.5
-        assert lightning.multiplicity == 3
-        assert lightning.chi_squared == 1.2
-        assert lightning.ellipse_major_axis == 4.5
-        assert lightning.ellipse_minor_axis == 2.3
-        assert lightning.ellipse_angle == 45.0
-        assert lightning.number_of_sensors == 7
-        assert lightning.hit_ground is True
-        assert lightning.municipality_code == "08019"
-        assert lightning.id == 555
+        assert lightning.meteocat_peak_current == 12.5
+        assert lightning.meteocat_multiplicity == 3
+        assert lightning.meteocat_chi_squared == 1.2
+        assert lightning.meteocat_ellipse_major_axis == 4.5
+        assert lightning.meteocat_ellipse_minor_axis == 2.3
+        assert lightning.meteocat_ellipse_angle == 45.0
+        assert lightning.meteocat_number_of_sensors == 7
+        assert lightning.meteocat_hit_ground is True
+        assert lightning.meteocat_municipality_code == "08019"
+        assert lightning.lightning_id == 555
         assert lightning.data_provider_name == "TestProvider"
-        assert lightning.date_time == datetime.datetime(2024, 8, 15, 12, 34, 56, microsecond=111, tzinfo=datetime.timezone.utc)
+        assert lightning.lightning_utc_date_time == datetime.datetime(2024, 8, 15, 12, 34, 56, microsecond=111, tzinfo=datetime.timezone.utc)
         assert lightning.x_4326 == 2.113066
         assert lightning.y_4326 == 41.388147
         assert lightning.geometry_4326 == 'SRID=4326;POINT(2.113066 41.388147)'

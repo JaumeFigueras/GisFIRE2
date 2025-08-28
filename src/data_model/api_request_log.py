@@ -22,10 +22,10 @@ from typing_extensions import NotRequired
 from typing_extensions import Unpack
 
 class APIRequestLogParams(TypedDict):
-    endpoint: str
-    params: NotRequired[MutableDict[str, str]]
-    http_status: int
-    error_message: NotRequired[str]
+    api_request_endpoint: str
+    api_request_params: NotRequired[MutableDict[str, str]]
+    api_request_http_status: int
+    api_request_error_message: NotRequired[str]
     data_provider: Union[DataProvider, str]
 
 
@@ -43,13 +43,13 @@ class APIRequestLog(Base, TimeStampMixIn):
 
     __tablename__ = "api_request_log"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    endpoint: Mapped[str] = mapped_column(String, nullable=False)
-    params: Mapped[Optional[MutableDict]] = mapped_column('params', HashableMutableDict.as_mutable(HashableHSTORE), nullable=True)
-    http_status: Mapped[int] = mapped_column(Integer, nullable=False)
-    error_message: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    api_request_id: Mapped[int] = mapped_column('api_request_id', Integer, primary_key=True, autoincrement=True)
+    api_request_endpoint: Mapped[str] = mapped_column('api_request_endpoint', String, nullable=False)
+    api_request_params: Mapped[Optional[MutableDict]] = mapped_column('api_request_params', HashableMutableDict.as_mutable(HashableHSTORE), nullable=True)
+    api_request_http_status: Mapped[int] = mapped_column('api_request_http_status', Integer, nullable=False)
+    api_request_error_message: Mapped[Optional[str]] = mapped_column('api_request_error_message', String, nullable=True)
     # SQLAlchemy relations
-    data_provider_name: Mapped[str] = mapped_column('data_provider_name', ForeignKey('data_provider.name'), nullable=False)
+    data_provider_name: Mapped[str] = mapped_column('data_provider_name', ForeignKey('data_provider.data_provider_name'), nullable=False)
     data_provider: Mapped["DataProvider"] = relationship(back_populates="requests")
 
     def __init__(self, **kwargs: Unpack[APIRequestLogParams]) -> None:

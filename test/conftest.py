@@ -80,6 +80,9 @@ def db_session(postgresql_gisfire):
         str(test_folder.parent) + '/src/data_model/database/data_provider.sql',
         str(test_folder.parent) + '/src/data_model/database/lightning.sql',
         str(test_folder.parent) + '/src/data_model/database/api_request_log.sql',
+        str(test_folder.parent) + '/src/data_model/database/thunderstorm_experiment.sql',
+        str(test_folder.parent) + '/src/data_model/database/thunderstorm.sql',
+        str(test_folder.parent) + '/src/data_model/database/thunderstorm_lightning_association.sql',
     ]
 
     # Execute each SQL file to initialize the schema

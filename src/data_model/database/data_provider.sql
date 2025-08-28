@@ -1,11 +1,11 @@
 -- data_provider.sql
 
 CREATE TABLE data_provider (
-        name VARCHAR NOT NULL,
-        description VARCHAR NOT NULL,
-        url VARCHAR NOT NULL,
+        data_provider_name VARCHAR NOT NULL,
+        data_provider_description VARCHAR NOT NULL,
+        data_provider_url VARCHAR,
         ts TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
-        PRIMARY KEY (name)
+        PRIMARY KEY (data_provider_name)
 )
 WITH (
   OIDS = FALSE

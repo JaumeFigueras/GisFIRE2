@@ -36,13 +36,13 @@ def test_data_provider_init_00():
     - `url` is stored as given.
     """
     dp = DataProvider(
-        name="data provider name",
-        description="data provider description",
-        url="https://www.test.cat",
+        data_provider_name="data provider name",
+        data_provider_description="data provider description",
+        data_provider_url="https://www.test.cat",
     )
-    assert dp.name == "data provider name"
-    assert dp.description == "data provider description"
-    assert dp.url == "https://www.test.cat"
+    assert dp.data_provider_name == "data provider name"
+    assert dp.data_provider_description == "data provider description"
+    assert dp.data_provider_url == "https://www.test.cat"
 
 
 def test_data_provider_init_01():
@@ -59,12 +59,12 @@ def test_data_provider_init_01():
     - `url` is ``None``.
     """
     dp = DataProvider(
-        name="data provider name",
-        description="data provider description",
+        data_provider_name="data provider name",
+        data_provider_description="data provider description",
     )
-    assert dp.name == "data provider name"
-    assert dp.description == "data provider description"
-    assert dp.url is None
+    assert dp.data_provider_name == "data provider name"
+    assert dp.data_provider_description == "data provider description"
+    assert dp.data_provider_url is None
 
 
 def test_data_provider_init_02():
@@ -81,12 +81,12 @@ def test_data_provider_init_02():
     - Extra fields are ignored.
     """
     dp = DataProvider(
-        name="data provider name",
-        description="data provider description",
+        data_provider_name="data provider name",
+        data_provider_description="data provider description",
         estra_field="extra", # type: ignore
     )
-    assert dp.name == "data provider name"
-    assert dp.description == "data provider description"
+    assert dp.data_provider_name == "data provider name"
+    assert dp.data_provider_description == "data provider description"
     assert not hasattr(dp, "extra_field")
 
 
@@ -104,9 +104,9 @@ def test_data_provider_init_03():
     - `url` is ``None``.
     """
     dp = DataProvider() # type: ignore
-    assert getattr(dp, "name", None) is None
-    assert getattr(dp, "description", None) is None
-    assert getattr(dp, "url", None) is None
+    assert getattr(dp, "data_provider_name", None) is None
+    assert getattr(dp, "data_provider_description", None) is None
+    assert getattr(dp, "data_provider_url", None) is None
 
 def test_data_provider_eq_00():
     """
@@ -121,9 +121,16 @@ def test_data_provider_eq_00():
     - Instances with the same `name` are equal regardless of
       `description` or `url`.
     """
-    dp1 = DataProvider(name="provider", description="desc1", url="https://a.com")
-    dp2 = DataProvider(name="provider", description="desc2", url="https://b.com")
-
+    dp1 = DataProvider(
+        data_provider_name="provider",
+        data_provider_description="desc1",
+        data_provider_url="https://a.com"
+    )
+    dp2 = DataProvider(
+        data_provider_name="provider",
+        data_provider_description="desc2",
+        data_provider_url="https://b.com"
+    )
     assert dp1 == dp2
 
 
@@ -140,10 +147,21 @@ def test_data_provider_eq_01():
     - Instances with different `name` values are not equal.
     - `description` and `url` do not affect equality.
     """
-    dp1 = DataProvider(name="provider1", description="desc", url="https://a.com")
-    dp2 = DataProvider(name="provider2", description="desc", url="https://a.com")
-    dp3 = DataProvider(name="provider1", description="desc", url="https://a.com")
-
+    dp1 = DataProvider(
+        data_provider_name="provider1",
+        data_provider_description="desc",
+        data_provider_url="https://a.com"
+    )
+    dp2 = DataProvider(
+        data_provider_name="provider2",
+        data_provider_description="desc",
+        data_provider_url="https://a.com"
+    )
+    dp3 = DataProvider(
+        data_provider_name="provider1",
+        data_provider_description="desc",
+        data_provider_url="https://a.com"
+    )
     assert dp1 != dp2
     assert dp1 == dp3
 

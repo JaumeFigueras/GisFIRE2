@@ -81,15 +81,21 @@ def main(db_session: Session) -> None:
     - Commits changes at the end of execution.
     - Intended to be used during database initialization or setup.
     """
-    qty = db_session.scalar(select(func.count(DataProvider.name)).where(DataProvider.name == "Meteo.cat"))
+    qty = db_session.scalar(select(func.count(DataProvider.data_provider_name)).where(DataProvider.data_provider_name == "Meteo.cat"))
     if qty == 0:
-        meteo_cat = DataProvider(name='Meteo.cat', description='Servei Meteorològic de Catalunya',
-                                 url='https://www.meteo.cat/')
+        meteo_cat = DataProvider(
+            data_provider_name='Meteo.cat',
+            data_provider_description='Servei Meteorològic de Catalunya',
+            data_provider_url='https://www.meteo.cat/'
+        )
         db_session.add(meteo_cat)
-    qty = db_session.scalar(select(func.count(DataProvider.name)).where(DataProvider.name == "Bombers.cat"))
+    qty = db_session.scalar(select(func.count(DataProvider.data_provider_name)).where(DataProvider.data_provider_name == "Bombers.cat"))
     if qty == 0:
-        bombers_gencat = DataProvider(name='Bombers.cat', description='Bombers de la Generalitat de Catalunya',
-                                      url='https://interior.gencat.cat/ca/arees_dactuacio/bombers')
+        bombers_gencat = DataProvider(
+            data_provider_name='Bombers.cat',
+            data_provider_description='Bombers de la Generalitat de Catalunya',
+            data_provider_url='https://interior.gencat.cat/ca/arees_dactuacio/bombers'
+        )
         db_session.add(bombers_gencat)
     db_session.commit()
 

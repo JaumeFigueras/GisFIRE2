@@ -21,6 +21,7 @@ from __future__ import annotations  # Needed to allow returning type of enclosin
 import datetime
 
 from sqlalchemy import Integer
+from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Mapped
@@ -29,11 +30,11 @@ from shapely.geometry import Point
 
 from src.data_model import Base
 from src.data_model.mixins.time_stamp import TimeStampMixIn
-from src.data_model.mixins.date_time import DateTimeMixIn
 from src.data_model.mixins.location import LocationMixIn
 from src.data_model.data_provider import DataProvider
 
 from typing import Union
+from typing import List
 from typing import TypedDict
 from typing_extensions import Unpack
 from typing_extensions import NotRequired
@@ -48,17 +49,17 @@ class LightningParams(TypedDict):
         Longitude in EPSG:4326 coordinates.
     y_4326 : float, optional
         Latitude in EPSG:4326 coordinates.
-    date_time : datetime.datetime  # noinspection GrammarInspection
+    lightning_utc_date_time : datetime.datetime  # noinspection GrammarInspection
         Datetime of the lightning event.
     data_provider : DataProvider, optional
         The data provider that recorded the lightning event.
     """
     x_4326: NotRequired[float]
     y_4326: NotRequired[float]
-    date_time: datetime.datetime
+    lightning_utc_date_time: datetime.datetime
     data_provider: Union[DataProvider, str]
 
-class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
+class Lightning(Base, LocationMixIn, TimeStampMixIn):
     """
     ORM-mapped class representing a lightning event.
 
@@ -69,7 +70,7 @@ class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
 
     Attributes
     ----------
-    id : int
+    lightning_id : int
         Primary key for the lightning table.
     data_provider_name : str
         Foreign key linking to the DataProvider name.
@@ -83,14 +84,14 @@ class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
         Latitude in EPSG:4326 coordinates (from LocationMixIn).
     geometry_4326 : str or Point
         Geometric representation of the lightning location.
-    date_time : datetime.datetime  # noinspection GrammarInspection
+    lightning_utc_date_time : datetime.datetime  # noinspection GrammarInspection
         Datetime of the lightning event.
     tzinfo_date_time : str
         Timezone information for the event datetime.
     """
     # Metaclass location attributes
     __location__ = [
-        {'epsg': 4326, 'validation': 'geographic', 'conversion': False}
+        {'epsg': 4326, 'validation': 'geographic', 'conversion': False, 'nullable': False}
     ]
     # Type hint for generated attributes by the metaclass
     x_4326: float
@@ -100,19 +101,17 @@ class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
     __date__ = [
         {'name': 'date_time', 'nullable': False}
     ]
-    # Type hint for generated attributes by the metaclass
-    date_time: datetime.datetime
-    tzinfo_date_time: str
     # SQLAlchemy columns
     __tablename__ = "lightning"
-    id: Mapped[int] = mapped_column('id', Integer, primary_key=True, autoincrement=True)
+    lightning_id: Mapped[int] = mapped_column('lightning_id', Integer, primary_key=True, autoincrement=True)
+    lightning_utc_date_time: Mapped[datetime.datetime] = mapped_column('lightning_utc_date_time', DateTime(timezone=True), nullable=False)
     # SQLAlchemy relations
-    data_provider_name: Mapped[str] = mapped_column('data_provider_name', ForeignKey('data_provider.name'), nullable=False)
+    data_provider_name: Mapped[str] = mapped_column('data_provider_name', ForeignKey('data_provider.data_provider_name'), nullable=False)
     data_provider: Mapped["DataProvider"] = relationship(back_populates="lightnings")
     # many-to-many relationship to Parent, bypassing the `Association` class
-    # thunderstorms: Mapped[List["Thunderstorm"]] = relationship(secondary="thunderstorm_lightning_association", back_populates="lightnings")
+    thunderstorms: Mapped[List["Thunderstorm"]] = relationship(secondary="thunderstorm_lightning_association", back_populates="lightnings")  # type: ignore
     # association between Child -> Association -> Parent
-    # thunderstorm_associations: Mapped[List["ThunderstormLightningAssociation"]] = relationship(back_populates="lightning", viewonly=True)
+    thunderstorm_associations: Mapped[List["ThunderstormLightningAssociation"]] = relationship(back_populates="lightning", viewonly=True)  # type: ignore
 
     type: Mapped[str]
     __mapper_args__ = {
@@ -153,8 +152,8 @@ class Lightning(Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn):
             (attribute_name, value) pairs including id, data_provider_name,
             location, and datetime fields.
         """
-        yield "id", self.id
-        yield "data_provider", self.data_provider.name
+        yield "lightning_id", self.lightning_id
+        yield "lightning_utc_date_time", self.lightning_utc_date_time.strftime("%Y-%m-%dT%H:%M:%S.%f%z")
+        yield "data_provider", self.data_provider.data_provider_name
         yield from LocationMixIn.__iter__(self)
-        yield from DateTimeMixIn.__iter__(self)
 

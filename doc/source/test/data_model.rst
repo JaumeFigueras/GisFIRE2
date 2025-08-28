@@ -9,6 +9,7 @@ Pages
 
    data_model/data_provider
    data_model/lightning
+   data_model/thunderstorm_experiment
 
 Meteocat Data Models Pages
 --------------------------

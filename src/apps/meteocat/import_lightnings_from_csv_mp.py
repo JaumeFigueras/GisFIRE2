@@ -148,15 +148,15 @@ def process_lightnings(rows: List[Any]):
         try:
             lightning: MeteocatLightning = MeteocatLightning(
                 meteocat_id=int(row[0]),
-                date_time=datetime.datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S.%f').replace(tzinfo=pytz.UTC),
-                peak_current=float(row[2]),
-                chi_squared=float(row[3]),
-                ellipse_major_axis=float(row[4]),
-                ellipse_minor_axis=float(row[5]),
-                ellipse_angle=0.0,
-                number_of_sensors=int(row[6]),
-                hit_ground=row[7] == 't',
-                municipality_code=row[8] if row[8] != '' else None,
+                lightning_utc_date_time=datetime.datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S.%f').replace(tzinfo=pytz.UTC),
+                meteocat_peak_current=float(row[2]),
+                meteocat_chi_squared=float(row[3]),
+                meteocat_ellipse_major_axis=float(row[4]),
+                meteocat_ellipse_minor_axis=float(row[5]),
+                meteocat_ellipse_angle=0.0,
+                meteocat_number_of_sensors=int(row[6]),
+                meteocat_hit_ground=row[7] == 't',
+                meteocat_municipality_code=row[8] if row[8] != '' else None,
                 x_4258=float(row[9]),
                 y_4258=float(row[10]),
                 data_provider='Meteo.cat'
@@ -199,13 +199,25 @@ def process_requests(db_session, year):
     try:
         while date.year == year:
             endpoint = URL_LIGHTNINGS.format(year=date.year, month=date.month, day=date.day, hour=date.hour)
-            if db_session.scalar(select(func.count(APIRequestLog.id)).where(
-                and_(APIRequestLog.endpoint == endpoint, APIRequestLog.http_status == 200, APIRequestLog.data_provider_name == 'Meteo.cat')
-            )):
+            if db_session.scalar(
+                    select(
+                        func.count(APIRequestLog.api_request_id)
+                    ).where(
+                        and_(
+                            APIRequestLog.api_request_endpoint == endpoint,
+                            APIRequestLog.api_request_http_status == 200,
+                            APIRequestLog.data_provider_name == 'Meteo.cat'
+                        )
+                    )
+            ):
                 logger.error(f"Error found in record {i}. Rolling back all changes")
                 db_session.rollback()
                 raise ValueError("Duplicated request.")
-            simulated_request = APIRequestLog(endpoint=endpoint, http_status=200, data_provider='Meteo.cat')
+            simulated_request = APIRequestLog(
+                api_request_endpoint=endpoint,
+                api_request_http_status=200,
+                data_provider='Meteo.cat'
+            )
             date = date + datetime.timedelta(hours=1)
             db_session.add(simulated_request)
             if i % 24 == 0:
@@ -294,6 +306,6 @@ if __name__ == "__main__":  # pragma: no cover
     logger.info("Finished insert to the database")
 
     # Set up requests equivalents
-    process_requests(session, processed_lightnings[0].date_time.year)
+    process_requests(session, processed_lightnings[0].lightning_utc_date_time.year)
 
 

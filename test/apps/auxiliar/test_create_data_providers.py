@@ -21,11 +21,12 @@ Dependencies
 
 from sqlalchemy import select
 from sqlalchemy import func
+from sqlalchemy.orm import Session
 
 from src.apps.auxiliar.create_data_providers import main
 from src.data_model.data_provider import DataProvider
 
-def test_main_00(db_session):
+def test_main_00(db_session: Session) -> None:
     """
     Test creation of data providers when table is empty.
 
@@ -37,9 +38,9 @@ def test_main_00(db_session):
     db_session : sqlalchemy.orm.Session
         Database session fixture.
     """
-    assert db_session.scalar(select(func.count(DataProvider.name))) == 0
+    assert db_session.scalar(select(func.count(DataProvider.data_provider_name))) == 0
     main(db_session)
-    assert db_session.scalar(select(func.count(DataProvider.name))) == 2
+    assert db_session.scalar(select(func.count(DataProvider.data_provider_name))) == 2
 
 def test_main_01(db_session, data_provider):
     """
@@ -57,6 +58,6 @@ def test_main_01(db_session, data_provider):
         Fixture ensuring that the `DataProvider` table
         is pre-populated with entries.
     """
-    assert db_session.scalar(select(func.count(DataProvider.name))) == 2
+    assert db_session.scalar(select(func.count(DataProvider.data_provider_name))) == 2
     main(db_session)
-    assert db_session.scalar(select(func.count(DataProvider.name))) == 2
+    assert db_session.scalar(select(func.count(DataProvider.data_provider_name))) == 2

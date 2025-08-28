@@ -263,10 +263,11 @@ class ModelMeta(DeclarativeMeta):
                 epsg = str(col_def['epsg'])
                 validation = col_def['validation']
                 conversion = col_def['conversion']
+                nullable = bool(col_def['nullable'])
                 # Base columns
-                setattr(cls, '_x_' + epsg, mapped_column('x_' + epsg, Float, nullable=False))
-                setattr(cls, '_y_' + epsg, mapped_column('y_' + epsg, Float, nullable=False))
-                setattr(cls, '_geometry_' + epsg, mapped_column('geometry_' + epsg, Geometry(geometry_type='POINT', srid=int(epsg)), nullable=False))
+                setattr(cls, '_x_' + epsg, mapped_column('x_' + epsg, Float, nullable=nullable))
+                setattr(cls, '_y_' + epsg, mapped_column('y_' + epsg, Float, nullable=nullable))
+                setattr(cls, '_geometry_' + epsg, mapped_column('geometry_' + epsg, Geometry(geometry_type='POINT', srid=int(epsg)), nullable=nullable))
                 # Geometry property
                 setattr(cls, 'geometry_' + epsg, property_factory_geometry('geometry_' + epsg))
                 # Geometry generator
@@ -290,19 +291,5 @@ class ModelMeta(DeclarativeMeta):
                 else:
                     setattr(cls, 'x_' + epsg, property_factory_xy('x_' + epsg, 'geometry_generator_' + epsg, converter_attrs))
                     setattr(cls, 'y_' + epsg, property_factory_xy('y_' + epsg, 'geometry_generator_' + epsg, converter_attrs))
-
-        # Handle datetime properties
-        if '__date__' in dct:
-            dates = dct.pop('__date__', [])
-            for attribute in dates:
-                attribute_name = column_name = attribute['name']
-                protected_attribute_name = '_' + attribute_name
-                nullable = attribute['nullable']
-                # DateTime column
-                setattr(cls, protected_attribute_name, mapped_column(column_name, DateTime(timezone=True), nullable=nullable))
-                setattr(cls, '_tzinfo' + protected_attribute_name, mapped_column('tzinfo_' + column_name, String, nullable=nullable))
-                # Properties
-                setattr(cls, attribute_name, property_factory_datetime(protected_attribute_name))
-                setattr(cls, 'tzinfo_' + attribute_name, property_factory_default('_tzinfo' + protected_attribute_name))
 
         super().__init__(name, bases, dct)
