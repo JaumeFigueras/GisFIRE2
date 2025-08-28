@@ -77,3 +77,12 @@ PostgreSQL Database
 
       listen_addresses = '*'
 
+    Once everythig is saved
+
+    .. code-block::
+
+      sudo systemctl status postgresql
+      sudo systemctl restart postgresql
+      sudo systemctl status postgresql
+
+    So now your cluster is running and accepting remote connections
