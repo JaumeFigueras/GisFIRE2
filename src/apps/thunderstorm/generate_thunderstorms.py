@@ -78,7 +78,7 @@ def create_thunderstorm_experiment(engine: Engine, experiment_params: Dict[str, 
             )
         )
         if count > 0:
-            logger.error(f"{process_id}: Experiment with: {data_provider_name} and algorithm: TIME and parameters: {experiment_params} already exists")
+            main_logger.error(f"{process_id}: Experiment with: {data_provider_name} and algorithm: TIME and parameters: {experiment_params} already exists")
             return None
         experiment = ThunderstormExperiment(
             thunderstorm_experiment_algorithm=ThunderstormExperimentAlgorithm.TIME_DISTANCE,
@@ -156,7 +156,7 @@ def time_distance_algorithm(engine: Engine, from_date: datetime.datetime, to_dat
             if lightning_cluster is None:
                 return
             from_date = lightning_cluster[-1].lightning_utc_date_time + datetime.timedelta(seconds=1)
-            logger.info(f"Found lightning cluster of {len(lightning_cluster)} from {lightning_cluster[0].lightning_utc_date_time.strftime('%Y-%m-%d %H:%M:%S')} to {lightning_cluster[-1].lightning_utc_date_time.strftime('%Y-%m-%d %H:%M:%S')}")
+            logger.info(f"{process_id}: Found lightning cluster of {len(lightning_cluster)} from {lightning_cluster[0].lightning_utc_date_time.strftime('%Y-%m-%d %H:%M:%S')} to {lightning_cluster[-1].lightning_utc_date_time.strftime('%Y-%m-%d %H:%M:%S')}")
             storms = process_cluster(lightning_cluster, algorithm_distance, algorithm_time, experiment_id, logger, process_id)
             session.add_all(storms)
             session.commit()
@@ -180,7 +180,7 @@ if __name__ == "__main__":  # pragma: no cover
     parser.add_argument('-l', '--log-file', help='File to log progress or errors', required=False)
     args = parser.parse_args()
 
-    logger = logging.getLogger(__name__)
+    main_logger = logging.getLogger(__name__)
     if args.log_file is not None:
         handler = RotatingFileHandler(args.log_file, mode='a', maxBytes=5*1024*1024, backupCount=15, encoding='utf-8', delay=False)
         logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(levelname)s] %(message)s', handlers=[handler], encoding='utf-8', level=logging.DEBUG, datefmt="%Y-%m-%d %H:%M:%S")
@@ -189,31 +189,31 @@ if __name__ == "__main__":  # pragma: no cover
         logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(levelname)s] %(message)s', handlers=[handler], encoding='utf-8', level=logging.DEBUG, datefmt="%Y-%m-%d %H:%M:%S")
 
     # Process the CSV file and store it into the database
-    logger.info("Processing ignitions from 2009 to 2019")
-    logger.info("Connecting to database")
+    main_logger.info("Processing ignitions from 2009 to 2019")
+    main_logger.info("Connecting to database")
     database_url: URL = URL.create('postgresql+psycopg', username=args.username, password=args.password, host=args.host,
                                    port=args.port, database=args.database)
     try:
-        engine: Engine = create_engine(database_url)
-        session: Session = Session(engine)
+        main_engine: Engine = create_engine(database_url)
+        main_session: Session = Session(main_engine)
     except SQLAlchemyError as ex:
-        logger.error("Can't connect to database")
-        logger.error("Exception: {}".format(str(ex)))
+        main_logger.error("Can't connect to database")
+        main_logger.error("Exception: {}".format(str(ex)))
         sys.exit(-1)
 
     args.from_date.replace(tzinfo=pytz.UTC)
     args.end_date.replace(tzinfo=pytz.UTC)
 
     if args.algorithm == 'TIME':
-        time_algorithm(session, args.from_date, args.end_date, args.algorithm_time, args.data_provider, logger)
+        time_algorithm(main_session, args.from_date, args.end_date, args.algorithm_time, args.data_provider, main_logger)
     if args.algorithm == 'TIME-DISTANCE':
-        time_distance_algorithm(engine, args.from_date, args.end_date, args.algorithm_distance, args.algorithm_time, args.lightning_gap, args.data_provider, logger)
+        time_distance_algorithm(main_engine, args.from_date, args.end_date, args.algorithm_distance, args.algorithm_time, args.lightning_gap, args.data_provider, main_logger)
     elif args.algorithm == 'DBSCAN-D':
-        dbscan_distance_algorithm(session, args.from_date, args.end_date, args.algorithm_time, args.algorithm_distance, args.storm_max_time, logger)
+        dbscan_distance_algorithm(main_session, args.from_date, args.end_date, args.algorithm_time, args.algorithm_distance, args.storm_max_time, main_logger)
     elif args.algorithm == 'DBSCAN-TD':
-        dbscan_time_distance_algorithm(session, args.from_date, args.end_date, args.algorithm_time, args.algorithm_distance, args.storm_max_time, logger)
+        dbscan_time_distance_algorithm(main_session, args.from_date, args.end_date, args.algorithm_time, args.algorithm_distance, args.storm_max_time, main_logger)
 
-    session.close()
+    main_session.close()
 
 
 

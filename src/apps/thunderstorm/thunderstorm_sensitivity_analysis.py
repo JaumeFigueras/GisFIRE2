@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+
 import dateutil.parser
 import datetime
 import pytz
@@ -11,12 +12,13 @@ import multiprocessing as mp
 import time
 
 from logging.handlers import RotatingFileHandler
+from logging.handlers import QueueHandler
+from logging.handlers import QueueListener
 
 from sqlalchemy import create_engine
 from sqlalchemy import URL
 from sqlalchemy import Engine
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.orm import Session
 
 from src.apps.thunderstorm.generate_thunderstorms import time_distance_algorithm
 
@@ -24,7 +26,7 @@ from typing import Dict
 from typing import List
 from typing import Any
 
-def init_pool(lock_instance, logger_instance, db_engine_instance, process_id_instance):
+def init_pool(lock_instance, logger_queue_instance, db_engine_instance, process_id_instance):
     """
     Initialize multiprocessing pool worker context.
 
@@ -47,11 +49,11 @@ def init_pool(lock_instance, logger_instance, db_engine_instance, process_id_ins
     None
     """
     global lock
-    global logger
+    global logger_queue
     global db_engine
     global process_id
     lock = lock_instance
-    logger = logger_instance
+    logger_queue = logger_queue_instance
     db_engine = db_engine_instance
     process_id = process_id_instance
 
@@ -59,6 +61,10 @@ def process_configuration(configuration: Dict[str, Any]):
     with lock:
         my_id = process_id[0]
         process_id[0] += 1
+        qh = QueueHandler(logger_queue)
+        logger = logging.getLogger(f"[Process: {my_id}]")
+        logger.setLevel(logging.DEBUG)
+        logger.addHandler(qh)
         logger.info(f"Process: {my_id} - Processing analysis with configuration: {configuration}")
         engine: Engine = create_engine(db_engine[0], pool_size=30)
     time_distance_algorithm(
@@ -93,24 +99,29 @@ if __name__ == "__main__":  # pragma: no cover
     parser.add_argument('-l', '--log-file', help='File to log progress or errors', required=False)
     args = parser.parse_args()
 
-    logger = logging.getLogger(__name__)
+    main_logger = logging.getLogger(__name__)
     if args.log_file is not None:
         handler = RotatingFileHandler(args.log_file, mode='a', maxBytes=5*1024*1024, backupCount=15, encoding='utf-8', delay=False)
         logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(levelname)s] %(message)s', handlers=[handler], encoding='utf-8', level=logging.DEBUG, datefmt="%Y-%m-%d %H:%M:%S")
     else:
         handler = ch = logging.StreamHandler()
         logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(levelname)s] %(message)s', handlers=[handler], encoding='utf-8', level=logging.DEBUG, datefmt="%Y-%m-%d %H:%M:%S")
+    logger_queue = mp.Queue()
+    listener = QueueListener(logger_queue, *main_logger.handlers)
+    listener.start()
 
+    main_logger.info("Starting sensitivity analysis")
     # Process the CSV file and store it into the database
-    logger.info("Connecting to database")
+    main_logger.info("Connecting to database")
     database_url: URL = URL.create('postgresql+psycopg', username=args.username, password=args.password, host=args.host,
                                    port=args.port, database=args.database)
     try:
         engine: Engine = create_engine(database_url, pool_size=30)
     except SQLAlchemyError as ex:
-        logger.error("Can't connect to database")
-        logger.error("Exception: {}".format(str(ex)))
+        main_logger.error("Can't connect to database")
+        main_logger.error("Exception: {}".format(str(ex)))
         sys.exit(-1)
+    main_logger.info("Connected to database")
 
     args.from_date.replace(tzinfo=pytz.UTC)
     args.end_date.replace(tzinfo=pytz.UTC)
@@ -118,7 +129,7 @@ if __name__ == "__main__":  # pragma: no cover
     distances = [x * 1000 for x in [5, 10, 15, 20, 25]]
     times = [x * 60 for x in [10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]]
 
-    logger.info("Starting processing all lightnings in parallel")
+    main_logger.info(f"Starting processing all lightnings in parallel on {mp.cpu_count()} processes")
     chunks: List[Dict[str, Any]] = list()
     for d in distances:
         for t in times:
@@ -137,16 +148,9 @@ if __name__ == "__main__":  # pragma: no cover
     db_engine.append(database_url)
     process_id = mg.list()
     process_id.append(0)
-    pool = mp.Pool(mp.cpu_count() - 2, initializer=init_pool, initargs=(lock, logger, db_engine, process_id))
+    pool = mp.Pool(mp.cpu_count() - 2, initializer=init_pool, initargs=(lock, logger_queue, db_engine, process_id))
     pool.map(func=process_configuration, iterable=chunks)
     pool.close()
     pool.join()
-    logger.info("Finished processing all lightnings in parallel")
-
-
-    # for d in distances:
-    #     for t in times:
-    #         if args.algorithm == 'TIME-DISTANCE':
-    #             logger.info(f"{args.algorithm} sensitivity analysis for d={d}, t={t} started")
-    #             time_distance_algorithm(session, args.from_date, args.to_date, d, t, args.lightning_gap, args.data_provider, logger)
-    #             logger.info(f"{args.algorithm} sensitivity analysis for d={d}, t={t} finished")
+    listener.stop()
+    main_logger.info("Finished sensitivity analysis")
