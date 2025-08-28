@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ModelMeta Metaclass &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Mixins" href="mixins.html" />
+    <link rel="prev" title="Data Model" href="../../data_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../data_model.html">Data Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#what-is-a-data-model">What is a Data Model?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#id1">Data Model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../data_model.html#data-model-pages">Data Model Pages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../data_model.html#general-data-model-pages">General Data Model Pages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ModelMeta Metaclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins.html">Mixins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base.html">Base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_provider.html">Data Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lightning.html">Lightning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm_experiment.html">Thunderstorm Experiment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm.html">Thunderstorm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#bombers-de-la-generalitat-de-catalunya-data-model-pages">Bombers de la Generalitat de Catalunya Data Model Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#id2">Servei Meteorològic de Catalunya</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../data_model.html">Data Model</a></li>
+      <li class="breadcrumb-item active">ModelMeta Metaclass</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/data_model/metaclass.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="modelmeta-metaclass">
+<h1>ModelMeta Metaclass<a class="headerlink" href="#modelmeta-metaclass" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">ModelMeta</span></code> metaclass extends SQLAlchemy’s <code class="docutils literal notranslate"><span class="pre">DeclarativeMeta</span></code> to
+dynamically generate:</p>
+<ul class="simple">
+<li><p><strong>Location properties</strong>: <code class="docutils literal notranslate"><span class="pre">x_*</span></code>, <code class="docutils literal notranslate"><span class="pre">y_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">geometry_*</span></code> columns,
+including coordinate validation, geometry generation, and optional
+coordinate conversion.</p></li>
+<li><p><strong>DateTime properties</strong>: Attributes with timezone enforcement and
+automatic timezone column storage.</p></li>
+<li><p><strong>Default properties</strong>: Simple getters and setters for auxiliary fields.</p></li>
+</ul>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ModelMeta</span></code> is used as the metaclass for ORM models that require
+automatic generation of location and/or datetime fields based on
+configuration dictionaries defined in the model’s class body.</p>
+<p>The main goals of this metaclass are:</p>
+<ol class="arabic simple">
+<li><p>Avoid repetitive boilerplate for defining coordinate and datetime fields.</p></li>
+<li><p>Automatically link coordinates with geometry generation.</p></li>
+<li><p>Enforce geographic validation (longitude/latitude ranges) when required.</p></li>
+<li><p>Handle timezone-aware datetime values safely.</p></li>
+</ol>
+</section>
+<section id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading"></a></h2>
+<p>When a class is created with <code class="docutils literal notranslate"><span class="pre">ModelMeta</span></code> as its metaclass:</p>
+<ol class="arabic">
+<li><p><strong>Location properties</strong> are generated if the special <code class="docutils literal notranslate"><span class="pre">__location__</span></code>
+attribute exists in the class dictionary.</p>
+<blockquote>
+<div><p>Each location configuration is a dictionary with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">epsg</span></code>: EPSG code for the coordinate system (e.g., <code class="docutils literal notranslate"><span class="pre">4326</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validation</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;geographic&quot;</span></code> for lat/lon validation, or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conversion</span></code>: Optional list of coordinate system conversion mappings.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__location__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="p">{</span><span class="s1">&#39;epsg&#39;</span><span class="p">:</span> <span class="mi">4258</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">:</span> <span class="s1">&#39;geographic&#39;</span><span class="p">,</span> <span class="s1">&#39;conversion&#39;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="mi">4258</span><span class="p">,</span> <span class="s1">&#39;dst&#39;</span><span class="p">:</span> <span class="mi">4326</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="mi">4258</span><span class="p">,</span> <span class="s1">&#39;dst&#39;</span><span class="p">:</span> <span class="mi">25831</span><span class="p">}</span>
+<span class="p">]},</span>
+<span class="p">{</span><span class="s1">&#39;epsg&#39;</span><span class="p">:</span> <span class="mi">25831</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;conversion&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This example will create two locations for the two <code class="docutils literal notranslate"><span class="pre">epsg</span></code>, one is geographic and uses validation and when
+setted converts to the two <code class="docutils literal notranslate"><span class="pre">dst</span></code> attributes with its <code class="docutils literal notranslate"><span class="pre">epsg</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>Datetime properties</strong> are generated if the special <code class="docutils literal notranslate"><span class="pre">__date__</span></code>
+attribute exists in the class dictionary.</p>
+<p>Each datetime configuration is a dictionary with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Name of the datetime attribute.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nullable</span></code>: Boolean indicating whether the field can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__date__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;created_at&quot;</span><span class="p">,</span> <span class="s2">&quot;nullable&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Geometry columns are automatically linked to coordinate columns and
+generated using the <code class="docutils literal notranslate"><span class="pre">GeometryGenerator</span></code> helper.</p></li>
+<li><p>Optional coordinate conversions are performed using the
+<code class="docutils literal notranslate"><span class="pre">LocationConverter</span></code> helper.</p></li>
+</ol>
+</section>
+<section id="property-factories">
+<h2>Property Factories<a class="headerlink" href="#property-factories" title="Link to this heading"></a></h2>
+<p>The metaclass defines several internal “factory” functions to produce
+properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">property_factory_xy</span></code>:
+Creates <code class="docutils literal notranslate"><span class="pre">x_*</span></code> and <code class="docutils literal notranslate"><span class="pre">y_*</span></code> coordinate properties with optional validation
+and automatic geometry/conversion triggers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">property_factory_geometry</span></code>:
+Creates read-only <code class="docutils literal notranslate"><span class="pre">geometry_*</span></code> properties that return either a WKT string
+or a Shapely <code class="docutils literal notranslate"><span class="pre">Point</span></code> object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">property_factory_datetime</span></code>:
+Creates datetime properties with timezone enforcement and storage of
+timezone information in a separate column.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">property_factory_default</span></code>:
+Creates simple getter/setter properties for auxiliary fields.</p></li>
+</ul>
+</section>
+<section id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.models.modelmeta</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelMeta</span>
+
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ModelMeta</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Sensor</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;sensors&quot;</span>
+
+    <span class="n">__location__</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;epsg&quot;</span><span class="p">:</span> <span class="mi">4326</span><span class="p">,</span>
+            <span class="s2">&quot;validation&quot;</span><span class="p">:</span> <span class="s2">&quot;geographic&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;conversion&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="mi">4326</span><span class="p">,</span> <span class="s2">&quot;dst&quot;</span><span class="p">:</span> <span class="mi">3857</span><span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+
+    <span class="n">__date__</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;installed_at&quot;</span><span class="p">,</span> <span class="s2">&quot;nullable&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Additional columns and methods here</span>
+</pre></div>
+</div>
+<p>In this example:</p>
+<ul class="simple">
+<li><p>The metaclass automatically adds:
+- <code class="docutils literal notranslate"><span class="pre">x_4326</span></code> and <code class="docutils literal notranslate"><span class="pre">y_4326</span></code> properties with longitude/latitude validation.
+- <code class="docutils literal notranslate"><span class="pre">geometry_4326</span></code> property linked to the coordinates.
+- <code class="docutils literal notranslate"><span class="pre">installed_at</span></code> datetime property with timezone enforcement.</p></li>
+<li><p>Geometry is updated automatically when coordinates change.</p></li>
+<li><p>Conversions between coordinate systems are handled automatically.</p></li>
+</ul>
+</section>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.metaclass.model_metaclass.ModelMeta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.metaclass.model_metaclass.</span></span><span class="sig-name descname"><span class="pre">ModelMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dct</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.metaclass.model_metaclass.ModelMeta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DeclarativeMeta</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.data_model.metaclass.model_metaclass.ModelMeta.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dct</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.metaclass.model_metaclass.ModelMeta.__init__" title="Link to this definition"></a></dt>
+<dd><p>Metaclass constructor for SQLAlchemy ORM models.</p>
+<p>Dynamically generates:</p>
+<ul class="simple">
+<li><p>Location properties (x, y, geometry) with validation and conversion.</p></li>
+<li><p>DateTime properties with timezone handling.</p></li>
+<li><p>Default getter/setter properties.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Class name being created.</p></li>
+<li><p><strong>bases</strong> (<em>tuple</em>) – Base classes of the new class.</p></li>
+<li><p><strong>dct</strong> (<em>dict</em>) – Class attributes and methods dictionary.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method internally defines:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">property_factory_xy()</span></code> which handles location attributes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">property_factory_geometry()</span></code> which handles geometry attributes bound with shapely and WKT.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">property_factory_datetime()</span></code> which handles datetime attributes with time zone handling.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.metaclass.model_metaclass.ModelMeta.__annotations__">
+<span class="sig-name descname"><span class="pre">__annotations__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#src.data_model.metaclass.model_metaclass.ModelMeta.__annotations__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.metaclass.model_metaclass.ModelMeta.__module__">
+<span class="sig-name descname"><span class="pre">__module__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'src.data_model.metaclass.model_metaclass'</span></em><a class="headerlink" href="#src.data_model.metaclass.model_metaclass.ModelMeta.__module__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.metaclass.model_metaclass.ModelMeta.__parameters__">
+<span class="sig-name descname"><span class="pre">__parameters__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></em><a class="headerlink" href="#src.data_model.metaclass.model_metaclass.ModelMeta.__parameters__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../data_model.html" class="btn btn-neutral float-left" title="Data Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mixins.html" class="btn btn-neutral float-right" title="Mixins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

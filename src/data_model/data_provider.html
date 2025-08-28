@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Provider &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lightning" href="lightning.html" />
+    <link rel="prev" title="Base" href="base.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../data_model.html">Data Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#what-is-a-data-model">What is a Data Model?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#id1">Data Model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../data_model.html#data-model-pages">Data Model Pages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../data_model.html#general-data-model-pages">General Data Model Pages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="metaclass.html">ModelMeta Metaclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins.html">Mixins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base.html">Base</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Data Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lightning.html">Lightning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm_experiment.html">Thunderstorm Experiment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm.html">Thunderstorm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#bombers-de-la-generalitat-de-catalunya-data-model-pages">Bombers de la Generalitat de Catalunya Data Model Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#id2">Servei Meteorològic de Catalunya</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../data_model.html">Data Model</a></li>
+      <li class="breadcrumb-item active">Data Provider</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/data_model/data_provider.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-provider">
+<h1>Data Provider<a class="headerlink" href="#data-provider" title="Link to this heading"></a></h1>
+<p>This module defines the SQLAlchemy ORM model for a data provider in the
+GisFIRE system. A data provider represents an entity that supplies
+geospatial or lightning data to the platform. It includes metadata such
+as name, description, and an optional URL, as well as relationships to
+other models like <cite>Lightning</cite>.</p>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<p>The module uses <cite>__future__.annotations</cite> to allow type annotations
+referring to the enclosing class (PEP 563).</p>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<section id="dataprovider">
+<h3>DataProvider<a class="headerlink" href="#dataprovider" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProvider">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.data_provider.</span></span><span class="sig-name descname"><span class="pre">DataProvider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.data_provider.DataProvider" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code>, <a class="reference internal" href="mixins.html#src.data_model.mixins.time_stamp.TimeStampMixIn" title="src.data_model.mixins.time_stamp.TimeStampMixIn"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeStampMixIn</span></code></a></p>
+<p>SQLAlchemy ORM model representing a data provider in the GisFIRE
+system.</p>
+<p>This class stores metadata about data providers, including their
+name, description, optional URL, and a timestamp of creation through the
+TimeStamp mixin. It also maintains relationships to associated lightning
+records.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProvider.__tablename__">
+<span class="sig-name descname"><span class="pre">__tablename__</span></span><a class="headerlink" href="#src.data_model.data_provider.DataProvider.__tablename__" title="Link to this definition"></a></dt>
+<dd><p>Name of the database table for this model (<cite>data_provider</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProvider.data_provider_name">
+<span class="sig-name descname"><span class="pre">data_provider_name</span></span><a class="headerlink" href="#src.data_model.data_provider.DataProvider.data_provider_name" title="Link to this definition"></a></dt>
+<dd><p>Primary key. The unique name of the data provider.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mapped[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProvider.data_provider_description">
+<span class="sig-name descname"><span class="pre">data_provider_description</span></span><a class="headerlink" href="#src.data_model.data_provider.DataProvider.data_provider_description" title="Link to this definition"></a></dt>
+<dd><p>A description of the data provider.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mapped[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProvider.data_provider_url">
+<span class="sig-name descname"><span class="pre">data_provider_url</span></span><a class="headerlink" href="#src.data_model.data_provider.DataProvider.data_provider_url" title="Link to this definition"></a></dt>
+<dd><p>Optional URL for the data provider.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mapped[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProvider.ts">
+<span class="sig-name descname"><span class="pre">ts</span></span><a class="headerlink" href="#src.data_model.data_provider.DataProvider.ts" title="Link to this definition"></a></dt>
+<dd><p>Timestamp of creation, automatically set by the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mapped[datetime.datetime]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProvider.lightnings">
+<span class="sig-name descname"><span class="pre">lightnings</span></span><a class="headerlink" href="#src.data_model.data_provider.DataProvider.lightnings" title="Link to this definition"></a></dt>
+<dd><p>Relationship to associated <cite>Lightning</cite> records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mapped[List[“Lightning”]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProvider.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.data_provider.DataProvider.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a <cite>DataProvider</cite> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<em>Unpack</em><em>[</em><a class="reference internal" href="#src.data_model.data_provider.DataProviderParams" title="src.data_model.data_provider.DataProviderParams"><em>DataProviderParams</em></a><em>]</em>) – Keyword arguments matching the <cite>DataProviderParams</cite> typed
+dictionary. Unrecognized keys are ignored.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DataProvider</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NOAA&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;US National Weather Service&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.weather.gov&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">&lt;DataProvider(name=&#39;NOAA&#39;)&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="dataproviderparams">
+<h3>DataProviderParams<a class="headerlink" href="#dataproviderparams" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProviderParams">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.data_provider.</span></span><span class="sig-name descname"><span class="pre">DataProviderParams</span></span><a class="headerlink" href="#src.data_model.data_provider.DataProviderParams" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Typed dictionary for <cite>DataProvider</cite> initialization parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_provider_name</strong> (<em>str</em>) – Name of the data provider.</p></li>
+<li><p><strong>data_provider_description</strong> (<em>str</em>) – Description of the data provider.</p></li>
+<li><p><strong>data_provider_url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL of the data provider’s website or API.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProviderParams.data_provider_name">
+<span class="sig-name descname"><span class="pre">data_provider_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.data_model.data_provider.DataProviderParams.data_provider_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProviderParams.data_provider_description">
+<span class="sig-name descname"><span class="pre">data_provider_description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.data_model.data_provider.DataProviderParams.data_provider_description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.data_provider.DataProviderParams.data_provider_url">
+<span class="sig-name descname"><span class="pre">data_provider_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.data_model.data_provider.DataProviderParams.data_provider_url" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="base.html" class="btn btn-neutral float-left" title="Base" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lightning.html" class="btn btn-neutral float-right" title="Lightning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

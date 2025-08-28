@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lightning &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Thunderstorm Experiment" href="thunderstorm_experiment.html" />
+    <link rel="prev" title="Data Provider" href="data_provider.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../data_model.html">Data Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#what-is-a-data-model">What is a Data Model?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#id1">Data Model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../data_model.html#data-model-pages">Data Model Pages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../data_model.html#general-data-model-pages">General Data Model Pages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="metaclass.html">ModelMeta Metaclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins.html">Mixins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base.html">Base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_provider.html">Data Provider</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Lightning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm_experiment.html">Thunderstorm Experiment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm.html">Thunderstorm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#bombers-de-la-generalitat-de-catalunya-data-model-pages">Bombers de la Generalitat de Catalunya Data Model Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#id2">Servei Meteorològic de Catalunya</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../data_model.html">Data Model</a></li>
+      <li class="breadcrumb-item active">Lightning</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/data_model/lightning.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lightning">
+<h1>Lightning<a class="headerlink" href="#lightning" title="Link to this heading"></a></h1>
+<p>SQLAlchemy ORM model for Lightning events.</p>
+<p>This module defines the <cite>Lightning</cite> class representing lightning occurrences
+recorded by various data providers. It uses several mixins to provide common
+functionality such as timestamps, geospatial location, and datetime handling.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Lightning<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.lightning.</span></span><span class="sig-name descname"><span class="pre">Lightning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.lightning.Lightning" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code>, <a class="reference internal" href="mixins.html#src.data_model.mixins.location.LocationMixIn" title="src.data_model.mixins.location.LocationMixIn"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationMixIn</span></code></a>, <a class="reference internal" href="mixins.html#src.data_model.mixins.time_stamp.TimeStampMixIn" title="src.data_model.mixins.time_stamp.TimeStampMixIn"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeStampMixIn</span></code></a></p>
+<p>ORM-mapped class representing a lightning event.</p>
+<p>This class combines several mixins to provide:
+- Geospatial location (LocationMixIn)
+- Datetime handling (DateTimeMixIn)
+- Automatic timestamping (TimeStampMixIn)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.lightning_id">
+<span class="sig-name descname"><span class="pre">lightning_id</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.lightning_id" title="Link to this definition"></a></dt>
+<dd><p>Primary key for the lightning table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.data_provider_name">
+<span class="sig-name descname"><span class="pre">data_provider_name</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.data_provider_name" title="Link to this definition"></a></dt>
+<dd><p>Foreign key linking to the DataProvider name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.data_provider">
+<span class="sig-name descname"><span class="pre">data_provider</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.data_provider" title="Link to this definition"></a></dt>
+<dd><p>SQLAlchemy relationship to the DataProvider object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider">DataProvider</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.type" title="Link to this definition"></a></dt>
+<dd><p>Polymorphic type column to support inheritance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.x_4326">
+<span class="sig-name descname"><span class="pre">x_4326</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.x_4326" title="Link to this definition"></a></dt>
+<dd><p>Longitude in EPSG:4326 coordinates (from LocationMixIn).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.y_4326">
+<span class="sig-name descname"><span class="pre">y_4326</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.y_4326" title="Link to this definition"></a></dt>
+<dd><p>Latitude in EPSG:4326 coordinates (from LocationMixIn).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.geometry_4326">
+<span class="sig-name descname"><span class="pre">geometry_4326</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.geometry_4326" title="Link to this definition"></a></dt>
+<dd><p>Geometric representation of the lightning location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str or Point</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.lightning_utc_date_time">
+<span class="sig-name descname"><span class="pre">lightning_utc_date_time</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.lightning_utc_date_time" title="Link to this definition"></a></dt>
+<dd><p>Datetime of the lightning event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime.datetime  # noinspection GrammarInspection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.tzinfo_date_time">
+<span class="sig-name descname"><span class="pre">tzinfo_date_time</span></span><a class="headerlink" href="#src.data_model.lightning.Lightning.tzinfo_date_time" title="Link to this definition"></a></dt>
+<dd><p>Timezone information for the event datetime.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.lightning.Lightning.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a Lightning instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<a class="reference internal" href="#src.data_model.lightning.LightningParams" title="src.data_model.lightning.LightningParams"><em>LightningParams</em></a>) – Keyword arguments matching LightningParams TypedDict. Only attributes
+present in the class are set.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The constructor initializes the Base and TimeStampMixIn classes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.data_model.lightning.Lightning.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.lightning.Lightning.__iter__" title="Link to this definition"></a></dt>
+<dd><p>Iterate over Lightning attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>tuple</em> – (attribute_name, value) pairs including id, data_provider_name,
+location, and datetime fields.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="lightningparams">
+<h3>LightningParams<a class="headerlink" href="#lightningparams" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.lightning.LightningParams">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.lightning.</span></span><span class="sig-name descname"><span class="pre">LightningParams</span></span><a class="headerlink" href="#src.data_model.lightning.LightningParams" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>TypedDict defining the accepted parameters for initializing a Lightning instance.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.LightningParams.x_4326">
+<span class="sig-name descname"><span class="pre">x_4326</span></span><a class="headerlink" href="#src.data_model.lightning.LightningParams.x_4326" title="Link to this definition"></a></dt>
+<dd><p>Longitude in EPSG:4326 coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.LightningParams.y_4326">
+<span class="sig-name descname"><span class="pre">y_4326</span></span><a class="headerlink" href="#src.data_model.lightning.LightningParams.y_4326" title="Link to this definition"></a></dt>
+<dd><p>Latitude in EPSG:4326 coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.LightningParams.lightning_utc_date_time">
+<span class="sig-name descname"><span class="pre">lightning_utc_date_time</span></span><a class="headerlink" href="#src.data_model.lightning.LightningParams.lightning_utc_date_time" title="Link to this definition"></a></dt>
+<dd><p>Datetime of the lightning event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime.datetime  # noinspection GrammarInspection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.lightning.LightningParams.data_provider">
+<span class="sig-name descname"><span class="pre">data_provider</span></span><a class="headerlink" href="#src.data_model.lightning.LightningParams.data_provider" title="Link to this definition"></a></dt>
+<dd><p>The data provider that recorded the lightning event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider">DataProvider</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">lightning_utc_date_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="data_provider.html" class="btn btn-neutral float-left" title="Data Provider" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="thunderstorm_experiment.html" class="btn btn-neutral float-right" title="Thunderstorm Experiment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

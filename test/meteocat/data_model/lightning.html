@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meteocat Lightning &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Apps Tests" href="../../apps.html" />
+    <link rel="prev" title="ThunderstormExperiment" href="../../data_model/thunderstorm_experiment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apps.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../testing.html">Testing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../testing.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../testing.html#conftest-py">conftest.py</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../testing.html#pages">Pages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../conftest.html">conftest.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fixtures.html">Testing Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../database.html">Database Testing</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../data_model.html">Data Model Tests</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../data_model.html#pages">Pages</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../data_model.html#meteocat-data-models-pages">Meteocat Data Models Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../apps.html">Apps Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../testing.html">Testing</a></li>
+          <li class="breadcrumb-item"><a href="../../data_model.html">Data Model Tests</a></li>
+      <li class="breadcrumb-item active">Meteocat Lightning</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/test/meteocat/data_model/lightning.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="meteocat-lightning">
+<h1>Meteocat Lightning<a class="headerlink" href="#meteocat-lightning" title="Link to this heading"></a></h1>
+<section id="module-test.meteocat.data_model.test_meteocat_lightning">
+<span id="code-contents"></span><h2>Code Contents<a class="headerlink" href="#module-test.meteocat.data_model.test_meteocat_lightning" title="Link to this heading"></a></h2>
+<p>Unit tests for the <cite>MeteocatLightning</cite> ORM model.</p>
+<p>These tests validate initialization, iteration, validation rules, and
+JSON decoding behavior of <a class="reference internal" href="../../../src/meteocat/data_model/lightning.html#src.meteocat.data_model.lightning.MeteocatLightning" title="src.meteocat.data_model.lightning.MeteocatLightning"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeteocatLightning</span></code></a>.</p>
+<section id="tested-scenarios">
+<h3>Tested scenarios<a class="headerlink" href="#tested-scenarios" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Initialization with all parameters provided.</p></li>
+<li><p>Initialization with optional parameters omitted.</p></li>
+<li><p>Initialization with unexpected extra fields.</p></li>
+<li><p>Initialization with no parameters.</p></li>
+<li><p>Validation rules for invalid input values.</p></li>
+<li><p>Iteration protocol via <code class="docutils literal notranslate"><span class="pre">__iter__</span></code>.</p></li>
+<li><p>Decoding from GisFIRE API JSON via <code class="docutils literal notranslate"><span class="pre">object_hook_gisfire_api</span></code>.</p></li>
+</ul>
+</section>
+<section id="fixtures">
+<h3>Fixtures<a class="headerlink" href="#fixtures" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>db_session<span class="classifier">Session</span></dt><dd><p>SQLAlchemy database session fixture.</p>
+</dd>
+<dt>data_provider<span class="classifier">list of DataProvider</span></dt><dd><p>Fixture providing available data providers.</p>
+</dd>
+</dl>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_00">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_init_00</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_00" title="Link to this definition"></a></dt>
+<dd><p>Test initialization of <cite>MeteocatLightning</cite> with all parameters.</p>
+<p>This test ensures that when a <cite>MeteocatLightning</cite> instance is initialized
+with coordinates, timestamp, data provider, and additional lightning-specific
+attributes, all fields are correctly set and the geometry is properly constructed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>Session</em>) – SQLAlchemy database session fixture.</p></li>
+<li><p><strong>data_provider</strong> (<em>list</em><em> of </em><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture providing available data providers.</p></li>
+</ul>
+</dd>
+</dl>
+<section id="expected-behavior">
+<h3>Expected behavior<a class="headerlink" href="#expected-behavior" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Coordinates (<cite>x_4258</cite>, <cite>y_4258</cite>, <cite>x_4326</cite>, <cite>y_4326</cite>, <cite>x_25831</cite>, <cite>y_25831</cite>) are correctly stored.</p></li>
+<li><p><cite>date_time</cite> is stored with correct timezone.</p></li>
+<li><p><cite>data_provider</cite> is correctly linked.</p></li>
+<li><p><cite>geometry_4326</cite> is generated as a valid WKT point with SRID 4326.</p></li>
+<li><p><cite>geometry_4258</cite> is generated as a valid WKT point with SRID 4258.</p></li>
+<li><p><cite>geometry_25831</cite> is generated as a valid WKT point with SRID 25831.</p></li>
+<li><p>Meteocat-specific attributes (<cite>meteocat_id</cite>, <cite>peak_current</cite>, <cite>multiplicity</cite>,
+<cite>chi_squared</cite>, <cite>ellipse_major_axis</cite>, <cite>ellipse_minor_axis</cite>, <cite>ellipse_angle</cite>,
+<cite>number_of_sensors</cite>, <cite>hit_ground</cite>, <cite>municipality_code</cite>) are correctly set.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_01">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_init_01</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_01" title="Link to this definition"></a></dt>
+<dd><p>Test initialization of <cite>MeteocatLightning</cite> with only required parameters.</p>
+<p>Ensures that when optional fields (<cite>multiplicity</cite> and <cite>municipality_code</cite>)
+are omitted, the instance is still correctly initialized, with default
+<cite>None</cite> values for the missing attributes. Also verifies that coordinates
+in multiple reference systems and geometry fields are correctly computed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>Session</em>) – SQLAlchemy database session fixture.</p></li>
+<li><p><strong>data_provider</strong> (<em>list</em><em> of </em><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture providing available data providers.</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id1">
+<h3>Expected behavior<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Coordinates (<cite>x_4258</cite>, <cite>y_4258</cite>, <cite>x_4326</cite>, <cite>y_4326</cite>, <cite>x_25831</cite>, <cite>y_25831</cite>) are correctly set.</p></li>
+<li><p>Geometry fields (<cite>geometry_4258</cite>, <cite>geometry_4326</cite>, <cite>geometry_25831</cite>) are correctly generated.</p></li>
+<li><p>Date/time and data provider are stored correctly.</p></li>
+<li><p>Meteocat-specific attributes (<cite>meteocat_id</cite>, <cite>peak_current</cite>, <cite>chi_squared</cite>,
+<cite>ellipse_major_axis</cite>, <cite>ellipse_minor_axis</cite>, <cite>ellipse_angle</cite>, <cite>number_of_sensors</cite>, <cite>hit_ground</cite>) are set correctly.</p></li>
+<li><p>Optional attributes (<cite>multiplicity</cite>, <cite>municipality_code</cite>) default to <cite>None</cite>.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_02">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_init_02</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_02" title="Link to this definition"></a></dt>
+<dd><p>Test initialization of <cite>MeteocatLightning</cite> with unexpected extra fields.</p>
+<p>Verifies that the constructor ignores any unexpected keyword arguments,
+raising no errors, and that only valid attributes are set. All coordinate
+and Meteocat-specific fields are correctly initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>Session</em>) – SQLAlchemy database session fixture.</p></li>
+<li><p><strong>data_provider</strong> (<em>list</em><em> of </em><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture providing available data providers.</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id2">
+<h3>Expected behavior<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Extra keyword arguments are ignored.</p></li>
+<li><p>All valid coordinates, geometries, date/time, data provider, and Meteocat-specific attributes are correctly initialized.</p></li>
+<li><p><cite>extra_field</cite> does not exist on the resulting instance.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_03">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_init_03</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_03" title="Link to this definition"></a></dt>
+<dd><p>Test initialization of <cite>MeteocatLightning</cite> with no parameters.</p>
+<p>Ensures that a default <cite>MeteocatLightning</cite> instance can be created with
+all attributes initialized to <cite>None</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>Session</em>) – SQLAlchemy database session fixture.</p></li>
+<li><p><strong>data_provider</strong> (<em>list</em><em> of </em><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture providing available data providers.</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id3">
+<h3>Expected behavior<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>All coordinate, geometry, date/time, data provider, and Meteocat-specific attributes are <cite>None</cite>.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_04">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_init_04</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_init_04" title="Link to this definition"></a></dt>
+<dd><p>Test that <cite>MeteocatLightning</cite> raises a ValueError for invalid sensor count.</p>
+<p>Verifies that the class enforces a non-negative number of sensors. Attempting
+to initialize an instance with a negative <cite>number_of_sensors</cite> should raise a
+<cite>ValueError</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>Session</em>) – SQLAlchemy database session fixture.</p></li>
+<li><p><strong>data_provider</strong> (<em>list</em><em> of </em><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture providing available data providers.</p></li>
+<li><p><strong>behavior</strong> (<em>Expected</em>)</p></li>
+<li><p><strong>-----------------</strong></p></li>
+<li><p><strong>ValueError.</strong> (<em>- Initializing with number_of_sensors &lt; 0 raises a</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_lightning_iter_00">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_lightning_iter_00</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_lightning_iter_00" title="Link to this definition"></a></dt>
+<dd><p>Test iteration protocol of <cite>MeteocatLightning</cite> with full parameters.</p>
+<p>Ensures that <cite>__iter__</cite> yields expected key-value pairs when all
+attributes are populated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>Session</em>) – SQLAlchemy session fixture.</p></li>
+<li><p><strong>data_provider</strong> (<em>list</em><em> of </em><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture with available data providers.</p></li>
+<li><p><strong>behavior</strong> (<em>Expected</em>)</p></li>
+<li><p><strong>-----------------</strong></p></li>
+<li><p><strong>keys.</strong> (<em>- Converting instance to dict</em><em>(</em><em>) </em><em>returns all expected</em>)</p></li>
+<li><p><strong>initialization.</strong> (<em>- Attribute values match</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_lightning_iter_01">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_lightning_iter_01</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_lightning_iter_01" title="Link to this definition"></a></dt>
+<dd><p>Test iteration protocol of <cite>MeteocatLightning</cite> with optional attributes omitted.</p>
+<p>Ensures that iteration still produces a dictionary with correct keys,
+but optional attributes yield <cite>None</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>Session</em>) – SQLAlchemy session fixture.</p></li>
+<li><p><strong>data_provider</strong> (<em>list</em><em> of </em><a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture with available data providers.</p></li>
+<li><p><strong>behavior</strong> (<em>Expected</em>)</p></li>
+<li><p><strong>-----------------</strong></p></li>
+<li><p><strong>present.</strong> (<em>- All required attributes</em>)</p></li>
+<li><p><strong>(</strong><strong>multiplicity</strong> (<em>- Optional attributes</em>)</p></li>
+<li><p><strong>None.</strong> (<em>municipality_code</em><em>) </em><em>are</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_object_hook_gisfire_api_json_loads_00">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_object_hook_gisfire_api_json_loads_00</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_object_hook_gisfire_api_json_loads_00" title="Link to this definition"></a></dt>
+<dd><p>Test JSON decoding of GisFIRE API dict with <cite>lightning</cite> and <cite>distance</cite>.</p>
+<section id="id4">
+<h3>Expected behavior<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><cite>json.loads</cite> with <cite>object_hook</cite> returns the dictionary unchanged.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_object_hook_gisfire_api_json_loads_01">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_object_hook_gisfire_api_json_loads_01</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_object_hook_gisfire_api_json_loads_01" title="Link to this definition"></a></dt>
+<dd><p>Test JSON decoding of unrelated dict.</p>
+<section id="id5">
+<h3>Expected behavior<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><cite>json.loads</cite> with <cite>object_hook</cite> returns <cite>None</cite>.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_object_hook_gisfire_api_json_loads_02">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_object_hook_gisfire_api_json_loads_02</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_object_hook_gisfire_api_json_loads_02" title="Link to this definition"></a></dt>
+<dd><p>Test JSON decoding of a full MeteocatLightning dict.</p>
+<section id="id6">
+<h3>Expected behavior<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Returns a <cite>MeteocatLightning</cite> instance.</p></li>
+<li><p>All attributes correctly parsed and typed.</p></li>
+<li><p>Date/time parsed with microsecond precision and correct timezone.</p></li>
+<li><p>Coordinates and geometries computed correctly.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_object_hook_gisfire_api_json_loads_03">
+<span class="sig-prename descclassname"><span class="pre">test.meteocat.data_model.test_meteocat_lightning.</span></span><span class="sig-name descname"><span class="pre">test_meteocat_lightning_object_hook_gisfire_api_json_loads_03</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test.meteocat.data_model.test_meteocat_lightning.test_meteocat_lightning_object_hook_gisfire_api_json_loads_03" title="Link to this definition"></a></dt>
+<dd><p>Test JSON decoding of a list of dicts with <cite>lightning</cite> and <cite>distance</cite>.</p>
+<section id="id7">
+<h3>Expected behavior<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Returns a list of dicts.</p></li>
+<li><dl class="simple">
+<dt>Each dict contains:</dt><dd><ul>
+<li><p><cite>“lightning”</cite>: a <cite>MeteocatLightning</cite> instance with correctly parsed attributes.</p></li>
+<li><p><cite>“distance”</cite>: preserved as a float.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../data_model/thunderstorm_experiment.html" class="btn btn-neutral float-left" title="ThunderstormExperiment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../apps.html" class="btn btn-neutral float-right" title="Apps Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

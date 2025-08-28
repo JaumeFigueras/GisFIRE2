@@ -1,0 +1,184 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>create_data_providers.py Tests &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="import_lightnings_from_csv_mp.py Tests" href="../meteocat/import_lightnings_from_csv_mp.html" />
+    <link rel="prev" title="Apps Tests" href="../../apps.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apps.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../testing.html">Testing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../testing.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../testing.html#conftest-py">conftest.py</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../testing.html#pages">Pages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../conftest.html">conftest.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fixtures.html">Testing Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../database.html">Database Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html">Data Model Tests</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../apps.html">Apps Tests</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../../apps.html#auxiliar-applications">Auxiliar applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../apps.html#meteocat-applications">Meteocat applications</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../testing.html">Testing</a></li>
+          <li class="breadcrumb-item"><a href="../../apps.html">Apps Tests</a></li>
+      <li class="breadcrumb-item active">create_data_providers.py Tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/test/apps/auxiliar/create_data_providers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="create-data-providers-py-tests">
+<h1>create_data_providers.py Tests<a class="headerlink" href="#create-data-providers-py-tests" title="Link to this heading"></a></h1>
+<section id="module-test.apps.auxiliar.test_create_data_providers">
+<span id="code-contents"></span><h2>Code Contents<a class="headerlink" href="#module-test.apps.auxiliar.test_create_data_providers" title="Link to this heading"></a></h2>
+<p>Test suite for auxiliary data provider creation.</p>
+<p>This module validates the behavior of the <cite>main</cite> function
+from <cite>src.apps.auxiliar.create_data_providers</cite>, which is
+responsible for populating the <cite>DataProvider</cite> table.</p>
+<section id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><cite>test_main_00</cite> : Ensures providers are created when the table is initially empty.</p></li>
+<li><p><cite>test_main_01</cite> : Ensures running <cite>main</cite> again does not create duplicate providers.</p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>SQLAlchemy</p></li>
+<li><p>DataProvider model</p></li>
+<li><p>Auxiliary data provider creation script</p></li>
+</ul>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="test.apps.auxiliar.test_create_data_providers.test_main_00">
+<span class="sig-prename descclassname"><span class="pre">test.apps.auxiliar.test_create_data_providers.</span></span><span class="sig-name descname"><span class="pre">test_main_00</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#test.apps.auxiliar.test_create_data_providers.test_main_00" title="Link to this definition"></a></dt>
+<dd><p>Test creation of data providers when table is empty.</p>
+<p>This test verifies that running <cite>main</cite> with an empty
+<cite>DataProvider</cite> table correctly inserts exactly two entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Database session fixture.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.apps.auxiliar.test_create_data_providers.test_main_01">
+<span class="sig-prename descclassname"><span class="pre">test.apps.auxiliar.test_create_data_providers.</span></span><span class="sig-name descname"><span class="pre">test_main_01</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test.apps.auxiliar.test_create_data_providers.test_main_01" title="Link to this definition"></a></dt>
+<dd><p>Test idempotency of data provider creation.</p>
+<p>This test ensures that running <cite>main</cite> when the
+<cite>DataProvider</cite> table is already populated does not
+create duplicate entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>sqlalchemy.orm.Session</em>) – Database session fixture.</p></li>
+<li><p><strong>data_provider</strong> (<a class="reference internal" href="../../../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture ensuring that the <cite>DataProvider</cite> table
+is pre-populated with entries.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../apps.html" class="btn btn-neutral float-left" title="Apps Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../meteocat/import_lightnings_from_csv_mp.html" class="btn btn-neutral float-right" title="import_lightnings_from_csv_mp.py Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

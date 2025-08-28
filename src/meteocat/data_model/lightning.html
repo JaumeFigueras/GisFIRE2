@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MeteocatLightning &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Modules" href="../../../modules.html" />
+    <link rel="prev" title="Thunderstorm" href="../../data_model/thunderstorm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../data_model.html">Data Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../data_model.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../data_model.html#what-is-a-data-model">What is a Data Model?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../data_model.html#id1">Data Model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../data_model.html#data-model-pages">Data Model Pages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../data_model.html#general-data-model-pages">General Data Model Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data_model.html#bombers-de-la-generalitat-de-catalunya-data-model-pages">Bombers de la Generalitat de Catalunya Data Model Pages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../../data_model.html#id2">Servei Meteorològic de Catalunya</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">MeteocatLightning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apps.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../data_model.html">Data Model</a></li>
+      <li class="breadcrumb-item active">MeteocatLightning</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/meteocat/data_model/lightning.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="meteocatlightning">
+<h1>MeteocatLightning<a class="headerlink" href="#meteocatlightning" title="Link to this heading"></a></h1>
+<p>SQLAlchemy ORM model for Lightning events.</p>
+<p>This module defines the <cite>MeteocatLightning</cite> class representing lightning occurrences
+recorded the Meteo.cat data providers. It inherits from <cite>Lightning</cite> and adds the properties of
+a lightning that are recorded by Meteo.Cat.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>MeteocatLightning<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.meteocat.data_model.lightning.</span></span><span class="sig-name descname"><span class="pre">MeteocatLightning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../data_model/lightning.html#src.data_model.lightning.Lightning" title="src.data_model.lightning.Lightning"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lightning</span></code></a></p>
+<p>ORM model for lightning events from the Meteocat dataset.</p>
+<p>Inherits from <a class="reference internal" href="../../data_model/lightning.html#src.data_model.lightning.Lightning" title="src.data_model.lightning.Lightning"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lightning</span></code></a> and adds
+Meteocat-specific attributes, validation rules, and JSON decoding
+support. Coordinates are managed through metaclass-provided
+location attributes, supporting EPSG:4258 and EPSG:25831.</p>
+<section id="location-systems">
+<h4>Location systems<a class="headerlink" href="#location-systems" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>EPSG:4258 (ETRS89 geographic)</p></li>
+<li><p>EPSG:25831 (ETRS89 / UTM zone 31N)</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_id">
+<span class="sig-name descname"><span class="pre">meteocat_id</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_id" title="Link to this definition"></a></dt>
+<dd><p>Unique Meteocat identifier for the lightning event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_peak_current">
+<span class="sig-name descname"><span class="pre">meteocat_peak_current</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_peak_current" title="Link to this definition"></a></dt>
+<dd><p>Peak current of the lightning discharge, in kiloamperes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_chi_squared">
+<span class="sig-name descname"><span class="pre">meteocat_chi_squared</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_chi_squared" title="Link to this definition"></a></dt>
+<dd><p>Chi-squared value from location quality estimation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_ellipse_major_axis">
+<span class="sig-name descname"><span class="pre">meteocat_ellipse_major_axis</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_ellipse_major_axis" title="Link to this definition"></a></dt>
+<dd><p>Length of the confidence ellipse major axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_ellipse_minor_axis">
+<span class="sig-name descname"><span class="pre">meteocat_ellipse_minor_axis</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_ellipse_minor_axis" title="Link to this definition"></a></dt>
+<dd><p>Length of the confidence ellipse minor axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_ellipse_angle">
+<span class="sig-name descname"><span class="pre">meteocat_ellipse_angle</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_ellipse_angle" title="Link to this definition"></a></dt>
+<dd><p>Angle (degrees) of the ellipse orientation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_number_of_sensors">
+<span class="sig-name descname"><span class="pre">meteocat_number_of_sensors</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_number_of_sensors" title="Link to this definition"></a></dt>
+<dd><p>Number of sensors that detected the event (must be &gt; 0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_hit_ground">
+<span class="sig-name descname"><span class="pre">meteocat_hit_ground</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_hit_ground" title="Link to this definition"></a></dt>
+<dd><p>Whether the lightning stroke reached ground.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_multiplicity">
+<span class="sig-name descname"><span class="pre">meteocat_multiplicity</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_multiplicity" title="Link to this definition"></a></dt>
+<dd><p>Number of strokes in the same flash (maybe <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.meteocat_municipality_code">
+<span class="sig-name descname"><span class="pre">meteocat_municipality_code</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.meteocat_municipality_code" title="Link to this definition"></a></dt>
+<dd><p>Code of the municipality where the event was located.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">x_25831,</span> <span class="pre">y_25831</span></span></dt>
+<dd><p>Projected coordinates in EPSG:25831.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">x_4258,</span> <span class="pre">y_4258</span></span></dt>
+<dd><p>Geographic coordinates in EPSG:4258.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">geometry_4258,</span> <span class="pre">geometry_25831</span></span></dt>
+<dd><p>Shapely point or WKT representation of the geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>shapely.geometry.Point or str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a MeteocatLightning instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<em>Unpack</em><em>[</em><a class="reference internal" href="#src.meteocat.data_model.lightning.MeteocatLightningParams" title="src.meteocat.data_model.lightning.MeteocatLightningParams"><em>MeteocatLightningParams</em></a><em>]</em>) – Keyword arguments matching the Meteocat-specific lightning parameters.
+See <a class="reference internal" href="#src.meteocat.data_model.lightning.MeteocatLightningParams" title="src.meteocat.data_model.lightning.MeteocatLightningParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeteocatLightningParams</span></code></a> for details.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">number_of_sensors</span></code> is provided and is less than 1.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.__iter__" title="Link to this definition"></a></dt>
+<dd><p>Yield key-value pairs of object attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator producing attribute names and values,
+allowing dict-like unpacking of the instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterator[Tuple[str, Any]]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lightning</span> <span class="o">=</span> <span class="n">MeteocatLightning</span><span class="p">(</span><span class="n">meteocat_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">peak_current</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">chi_squared</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="gp">... </span>                              <span class="n">ellipse_major_axis</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">ellipse_minor_axis</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="gp">... </span>                              <span class="n">ellipse_angle</span><span class="o">=</span><span class="mf">45.0</span><span class="p">,</span> <span class="n">number_of_sensors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                              <span class="n">hit_ground</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">x_4258</span><span class="o">=</span><span class="mf">2.1</span><span class="p">,</span> <span class="n">y_4258</span><span class="o">=</span><span class="mf">41.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span><span class="p">(</span><span class="n">lightning</span><span class="p">)[</span><span class="s2">&quot;meteocat_id&quot;</span><span class="p">]</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightning.object_hook_gisfire_api">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">object_hook_gisfire_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.meteocat.data_model.lightning.MeteocatLightning" title="src.meteocat.data_model.lightning.MeteocatLightning"><span class="pre">MeteocatLightning</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightning.object_hook_gisfire_api" title="Link to this definition"></a></dt>
+<dd><p>Decode a GisFIRE API JSON dictionary into a MeteocatLightning object.</p>
+<p>This method is intended to be passed as the <code class="docutils literal notranslate"><span class="pre">object_hook</span></code>
+argument of <code class="xref py py-func docutils literal notranslate"><span class="pre">json.loads()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dct</strong> (<em>dict</em>) – A dictionary parsed from JSON by the standard library.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>A <a class="reference internal" href="#src.meteocat.data_model.lightning.MeteocatLightning" title="src.meteocat.data_model.lightning.MeteocatLightning"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeteocatLightning</span></code></a> instance if all required
+fields are present.</p></li>
+<li><p>A dictionary if the keys <code class="docutils literal notranslate"><span class="pre">lightning</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code>
+are detected (used for nested structures).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> if the dictionary does not match known formats.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.meteocat.data_model.lightning.MeteocatLightning" title="src.meteocat.data_model.lightning.MeteocatLightning">MeteocatLightning</a> or dict or None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">json_str</span> <span class="o">=</span> <span class="s1">&#39;{&quot;meteocat_id&quot;: &quot;1&quot;, &quot;peak_current&quot;: &quot;5.0&quot;, &quot;multiplicity&quot;: &quot;1&quot;, ... }&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_str</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">MeteocatLightning</span><span class="o">.</span><span class="n">object_hook_gisfire_api</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">MeteocatLightning</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="meteocatlightningparams">
+<h3>MeteocatLightningParams<a class="headerlink" href="#meteocatlightningparams" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.meteocat.data_model.lightning.</span></span><span class="sig-name descname"><span class="pre">MeteocatLightningParams</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../data_model/lightning.html#src.data_model.lightning.LightningParams" title="src.data_model.lightning.LightningParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">LightningParams</span></code></a></p>
+<p>Typed parameter specification for initializing a <a class="reference internal" href="#src.meteocat.data_model.lightning.MeteocatLightning" title="src.meteocat.data_model.lightning.MeteocatLightning"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeteocatLightning</span></code></a>.</p>
+<p>Extends the generic <a class="reference internal" href="../../data_model/lightning.html#src.data_model.lightning.LightningParams" title="src.data_model.lightning.LightningParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">LightningParams</span></code></a>
+with Meteocat-specific fields. These parameters are used for
+type-checking and keyword unpacking when creating
+<a class="reference internal" href="#src.meteocat.data_model.lightning.MeteocatLightning" title="src.meteocat.data_model.lightning.MeteocatLightning"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeteocatLightning</span></code></a> instances.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_id">
+<span class="sig-name descname"><span class="pre">meteocat_id</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_id" title="Link to this definition"></a></dt>
+<dd><p>Unique Meteocat identifier for the lightning event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_peak_current">
+<span class="sig-name descname"><span class="pre">meteocat_peak_current</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_peak_current" title="Link to this definition"></a></dt>
+<dd><p>Peak current of the lightning discharge, in kiloamperes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.multiplicity">
+<span class="sig-name descname"><span class="pre">multiplicity</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.multiplicity" title="Link to this definition"></a></dt>
+<dd><p>Number of strokes in the same flash (maybe <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.chi_squared">
+<span class="sig-name descname"><span class="pre">chi_squared</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.chi_squared" title="Link to this definition"></a></dt>
+<dd><p>Chi-squared value from location quality estimation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.ellipse_major_axis">
+<span class="sig-name descname"><span class="pre">ellipse_major_axis</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.ellipse_major_axis" title="Link to this definition"></a></dt>
+<dd><p>Length of the confidence ellipse major axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.ellipse_minor_axis">
+<span class="sig-name descname"><span class="pre">ellipse_minor_axis</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.ellipse_minor_axis" title="Link to this definition"></a></dt>
+<dd><p>Length of the confidence ellipse minor axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.ellipse_angle">
+<span class="sig-name descname"><span class="pre">ellipse_angle</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.ellipse_angle" title="Link to this definition"></a></dt>
+<dd><p>Angle (degrees) of the ellipse orientation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.number_of_sensors">
+<span class="sig-name descname"><span class="pre">number_of_sensors</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.number_of_sensors" title="Link to this definition"></a></dt>
+<dd><p>Number of sensors that detected the event (must be &gt; 0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.hit_ground">
+<span class="sig-name descname"><span class="pre">hit_ground</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.hit_ground" title="Link to this definition"></a></dt>
+<dd><p>Whether the lightning stroke reached ground.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.municipality_code">
+<span class="sig-name descname"><span class="pre">municipality_code</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.municipality_code" title="Link to this definition"></a></dt>
+<dd><p>Code of the municipality where the event was located.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.x_4258">
+<span class="sig-name descname"><span class="pre">x_4258</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.x_4258" title="Link to this definition"></a></dt>
+<dd><p>X coordinate (longitude/easting) in EPSG:4258.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.y_4258">
+<span class="sig-name descname"><span class="pre">y_4258</span></span><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.y_4258" title="Link to this definition"></a></dt>
+<dd><p>Y coordinate (latitude/northing) in EPSG:4258.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">meteocat_peak_current</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_chi_squared">
+<span class="sig-name descname"><span class="pre">meteocat_chi_squared</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_chi_squared" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_ellipse_major_axis">
+<span class="sig-name descname"><span class="pre">meteocat_ellipse_major_axis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_ellipse_major_axis" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_ellipse_minor_axis">
+<span class="sig-name descname"><span class="pre">meteocat_ellipse_minor_axis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_ellipse_minor_axis" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_ellipse_angle">
+<span class="sig-name descname"><span class="pre">meteocat_ellipse_angle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_ellipse_angle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_number_of_sensors">
+<span class="sig-name descname"><span class="pre">meteocat_number_of_sensors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_number_of_sensors" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_hit_ground">
+<span class="sig-name descname"><span class="pre">meteocat_hit_ground</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_hit_ground" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_multiplicity">
+<span class="sig-name descname"><span class="pre">meteocat_multiplicity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_multiplicity" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_municipality_code">
+<span class="sig-name descname"><span class="pre">meteocat_municipality_code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.meteocat_municipality_code" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.x_4326">
+<span class="sig-name descname"><span class="pre">x_4326</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.x_4326" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.y_4326">
+<span class="sig-name descname"><span class="pre">y_4326</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.y_4326" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.lightning_utc_date_time">
+<span class="sig-name descname"><span class="pre">lightning_utc_date_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.lightning_utc_date_time" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.meteocat.data_model.lightning.MeteocatLightningParams.data_provider">
+<span class="sig-name descname"><span class="pre">data_provider</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#src.meteocat.data_model.lightning.MeteocatLightningParams.data_provider" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../data_model/thunderstorm.html" class="btn btn-neutral float-left" title="Thunderstorm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../modules.html" class="btn btn-neutral float-right" title="Modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

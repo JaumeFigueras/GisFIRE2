@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thunderstorm &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MeteocatLightning" href="../meteocat/data_model/lightning.html" />
+    <link rel="prev" title="Thunderstorm Experiment" href="thunderstorm_experiment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../data_model.html">Data Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#what-is-a-data-model">What is a Data Model?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#id1">Data Model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../data_model.html#data-model-pages">Data Model Pages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../data_model.html#general-data-model-pages">General Data Model Pages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="metaclass.html">ModelMeta Metaclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mixins.html">Mixins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base.html">Base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_provider.html">Data Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lightning.html">Lightning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm_experiment.html">Thunderstorm Experiment</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Thunderstorm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#bombers-de-la-generalitat-de-catalunya-data-model-pages">Bombers de la Generalitat de Catalunya Data Model Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#id2">Servei Meteorològic de Catalunya</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../data_model.html">Data Model</a></li>
+      <li class="breadcrumb-item active">Thunderstorm</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/data_model/thunderstorm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="thunderstorm">
+<h1>Thunderstorm<a class="headerlink" href="#thunderstorm" title="Link to this heading"></a></h1>
+<p>This module defines the SQLAlchemy ORM model for a thunderstorm.
+in GisFire a thunderstorm experiment is the algorithm and parametrs used to determine
+the <cite>Lightning</cite> set that belong to a <cite>Thunderstorm</cite>.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Thunderstorm<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.thunderstorm.</span></span><span class="sig-name descname"><span class="pre">Thunderstorm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code>, <a class="reference internal" href="mixins.html#src.data_model.mixins.location.LocationMixIn" title="src.data_model.mixins.location.LocationMixIn"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationMixIn</span></code></a>, <a class="reference internal" href="mixins.html#src.data_model.mixins.time_stamp.TimeStampMixIn" title="src.data_model.mixins.time_stamp.TimeStampMixIn"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeStampMixIn</span></code></a></p>
+<p>Represents a thunderstorm event with spatial, temporal, and physical characteristics.</p>
+<p>This class models a thunderstorm as a spatiotemporal phenomenon, capturing its
+location, duration, movement, and intensity. It integrates geographic metadata
+through <cite>LocationMixIn</cite>, temporal metadata via <cite>DateTimeMixIn</cite>, and timestamping
+through <cite>TimeStampMixIn</cite>. The class also supports relationships to lightning events
+and experimental contexts.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.thunderstorm_id">
+<span class="sig-name descname"><span class="pre">thunderstorm_id</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.thunderstorm_id" title="Link to this definition"></a></dt>
+<dd><p>Unique identifier for the thunderstorm record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.lightnings_per_minute">
+<span class="sig-name descname"><span class="pre">lightnings_per_minute</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.lightnings_per_minute" title="Link to this definition"></a></dt>
+<dd><p>Frequency of lightning strikes per minute during the storm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.thunderstorm_travelled_distance">
+<span class="sig-name descname"><span class="pre">thunderstorm_travelled_distance</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.thunderstorm_travelled_distance" title="Link to this definition"></a></dt>
+<dd><p>Distance traveled by the storm in meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.thunderstorm_cardinal_direction">
+<span class="sig-name descname"><span class="pre">thunderstorm_cardinal_direction</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.thunderstorm_cardinal_direction" title="Link to this definition"></a></dt>
+<dd><p>Direction of storm movement in degrees (0 degrees is North, 90 is East, 180 is South, 270 is West).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.thunderstorm_speed">
+<span class="sig-name descname"><span class="pre">thunderstorm_speed</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.thunderstorm_speed" title="Link to this definition"></a></dt>
+<dd><p>Speed of storm movement in m/s.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm._convex_hull_4326">
+<span class="sig-name descname"><span class="pre">_convex_hull_4326</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm._convex_hull_4326" title="Link to this definition"></a></dt>
+<dd><p>Geometry representing the convex hull of the storm in EPSG:4326.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>WKBElement</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.x_4326">
+<span class="sig-name descname"><span class="pre">x_4326</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.x_4326" title="Link to this definition"></a></dt>
+<dd><p>Longitude coordinate of the storm location in EPSG:4326 (generated by metaclass).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.y_4326">
+<span class="sig-name descname"><span class="pre">y_4326</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.y_4326" title="Link to this definition"></a></dt>
+<dd><p>Latitude coordinate of the storm location in EPSG:4326 (generated by metaclass).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.geometry_4326">
+<span class="sig-name descname"><span class="pre">geometry_4326</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.geometry_4326" title="Link to this definition"></a></dt>
+<dd><p>Geometry representation of the storm location in EPSG:4326 (generated by metaclass).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[str, Point]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.date_time_start">
+<span class="sig-name descname"><span class="pre">date_time_start</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.date_time_start" title="Link to this definition"></a></dt>
+<dd><p>Start time of the thunderstorm event (generated by metaclass).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.tzinfo_date_time_start">
+<span class="sig-name descname"><span class="pre">tzinfo_date_time_start</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.tzinfo_date_time_start" title="Link to this definition"></a></dt>
+<dd><p>Timezone information for the start time (generated by metaclass).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.date_time_end">
+<span class="sig-name descname"><span class="pre">date_time_end</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.date_time_end" title="Link to this definition"></a></dt>
+<dd><p>End time of the thunderstorm event (generated by metaclass).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.tzinfo_date_time_end">
+<span class="sig-name descname"><span class="pre">tzinfo_date_time_end</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.tzinfo_date_time_end" title="Link to this definition"></a></dt>
+<dd><p>Timezone information for the end time (generated by metaclass).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.thunderstorm_experiment_id">
+<span class="sig-name descname"><span class="pre">thunderstorm_experiment_id</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.thunderstorm_experiment_id" title="Link to this definition"></a></dt>
+<dd><p>Foreign key linking to the associated thunderstorm experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.thunderstorm_experiment">
+<span class="sig-name descname"><span class="pre">thunderstorm_experiment</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.thunderstorm_experiment" title="Link to this definition"></a></dt>
+<dd><p>Relationship to the parent experiment that includes this thunderstorm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="thunderstorm_experiment.html#src.data_model.thunderstorm_experiment.ThunderstormExperiment" title="src.data_model.thunderstorm_experiment.ThunderstormExperiment">ThunderstormExperiment</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.lightnings">
+<span class="sig-name descname"><span class="pre">lightnings</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.lightnings" title="Link to this definition"></a></dt>
+<dd><p>Many-to-many relationship to associated lightning events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="lightning.html#src.data_model.lightning.Lightning" title="src.data_model.lightning.Lightning">Lightning</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.lightning_associations">
+<span class="sig-name descname"><span class="pre">lightning_associations</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.lightning_associations" title="Link to this definition"></a></dt>
+<dd><p>Association objects linking this thunderstorm to lightning events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#src.data_model.thunderstorm.ThunderstormLightningAssociation" title="src.data_model.thunderstorm.ThunderstormLightningAssociation">ThunderstormLightningAssociation</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.ts">
+<span class="sig-name descname"><span class="pre">ts</span></span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.ts" title="Link to this definition"></a></dt>
+<dd><p>Insertion and update time in the database (generated by metaclass).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The location and date attributes are dynamically generated by metaclasses.</p></li>
+<li><p>Geometry fields use GeoAlchemy2 and are stored in WKB format.</p></li>
+<li><p>Relationships to lightning events support both direct and association-based access.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a Thunderstorm instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<a class="reference internal" href="#src.data_model.thunderstorm.ThunderstormParams" title="src.data_model.thunderstorm.ThunderstormParams"><em>ThunderstormParams</em></a>) – Keyword arguments matching the thunderstorm schema.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Only keys matching existing attributes are set.</p></li>
+<li><p>Extra/unrecognized keys are ignored.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.Thunderstorm.convex_hull_4326">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convex_hull_4326</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Polygon</span></em><a class="headerlink" href="#src.data_model.thunderstorm.Thunderstorm.convex_hull_4326" title="Link to this definition"></a></dt>
+<dd><p>Converts the stored geometry to a Shapely Polygon object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Shapely representation of the region’s geometry.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>shapely.geometry.Polygon</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="thunderstormparams">
+<h3>ThunderstormParams<a class="headerlink" href="#thunderstormparams" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.thunderstorm.</span></span><span class="sig-name descname"><span class="pre">ThunderstormParams</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Typed dictionary for initializing a <a class="reference internal" href="#src.data_model.thunderstorm.Thunderstorm" title="src.data_model.thunderstorm.Thunderstorm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Thunderstorm</span></code></a>.</p>
+<p>This dictionary defines the expected keyword arguments that can be
+passed into the <cite>Thunderstorm</cite> constructor.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.x_4326">
+<span class="sig-name descname"><span class="pre">x_4326</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.x_4326" title="Link to this definition"></a></dt>
+<dd><p>Longitude coordinate of the storm location in EPSG:4326.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.y_4326">
+<span class="sig-name descname"><span class="pre">y_4326</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.y_4326" title="Link to this definition"></a></dt>
+<dd><p>Latitude coordinate of the storm location in EPSG:4326.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.date_time_start">
+<span class="sig-name descname"><span class="pre">date_time_start</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.date_time_start" title="Link to this definition"></a></dt>
+<dd><p>Start time of the thunderstorm event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.date_time_end">
+<span class="sig-name descname"><span class="pre">date_time_end</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.date_time_end" title="Link to this definition"></a></dt>
+<dd><p>End time of the thunderstorm event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.lightnings_per_minute">
+<span class="sig-name descname"><span class="pre">lightnings_per_minute</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.lightnings_per_minute" title="Link to this definition"></a></dt>
+<dd><p>Frequency of lightning strikes per minute during the storm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.travelled_distance">
+<span class="sig-name descname"><span class="pre">travelled_distance</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.travelled_distance" title="Link to this definition"></a></dt>
+<dd><p>Distance traveled by the storm in meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.cardinal_direction">
+<span class="sig-name descname"><span class="pre">cardinal_direction</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.cardinal_direction" title="Link to this definition"></a></dt>
+<dd><p>Direction of storm movement in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.speed">
+<span class="sig-name descname"><span class="pre">speed</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.speed" title="Link to this definition"></a></dt>
+<dd><p>Speed of storm movement in m/s.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.thunderstorm_experiment">
+<span class="sig-name descname"><span class="pre">thunderstorm_experiment</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.thunderstorm_experiment" title="Link to this definition"></a></dt>
+<dd><p>Identifier of the associated thunderstorm experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="thunderstorm_experiment.html#src.data_model.thunderstorm_experiment.ThunderstormExperiment" title="src.data_model.thunderstorm_experiment.ThunderstormExperiment">ThunderstormExperiment</a> or int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.thunderstorm_utc_date_time_start">
+<span class="sig-name descname"><span class="pre">thunderstorm_utc_date_time_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.thunderstorm_utc_date_time_start" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.thunderstorm_utc_date_time_end">
+<span class="sig-name descname"><span class="pre">thunderstorm_utc_date_time_end</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.thunderstorm_utc_date_time_end" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.thunderstorm_lightnings_per_minute">
+<span class="sig-name descname"><span class="pre">thunderstorm_lightnings_per_minute</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.thunderstorm_lightnings_per_minute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.thunderstorm_travelled_distance">
+<span class="sig-name descname"><span class="pre">thunderstorm_travelled_distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.thunderstorm_travelled_distance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.thunderstorm_cardinal_direction">
+<span class="sig-name descname"><span class="pre">thunderstorm_cardinal_direction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.thunderstorm_cardinal_direction" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.thunderstorm_speed">
+<span class="sig-name descname"><span class="pre">thunderstorm_speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.thunderstorm_speed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormParams.thunderstorm_number_of_lightnings">
+<span class="sig-name descname"><span class="pre">thunderstorm_number_of_lightnings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormParams.thunderstorm_number_of_lightnings" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">thunderstorm_experiment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="thunderstorm_experiment.html#src.data_model.thunderstorm_experiment.ThunderstormExperiment" title="src.data_model.thunderstorm_experiment.ThunderstormExperiment"><span class="pre">ThunderstormExperiment</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="thunderstormlightningassociation">
+<h3>ThunderstormLightningAssociation<a class="headerlink" href="#thunderstormlightningassociation" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormLightningAssociation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.thunderstorm.</span></span><span class="sig-name descname"><span class="pre">ThunderstormLightningAssociation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormLightningAssociation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></p>
+<p>Association table linking thunderstorms and lightning events.</p>
+<p>This class models the many-to-many relationship between thunderstorms and
+lightning strikes. Each record represents a single association between a
+thunderstorm and a lightning event, allowing for detailed tracking and analysis
+of how lightning activity corresponds to storm occurrences.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormLightningAssociation.thunderstorm_id">
+<span class="sig-name descname"><span class="pre">thunderstorm_id</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormLightningAssociation.thunderstorm_id" title="Link to this definition"></a></dt>
+<dd><p>Foreign key referencing the associated thunderstorm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormLightningAssociation.lightning_id">
+<span class="sig-name descname"><span class="pre">lightning_id</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormLightningAssociation.lightning_id" title="Link to this definition"></a></dt>
+<dd><p>Foreign key referencing the associated lightning event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormLightningAssociation.lightning">
+<span class="sig-name descname"><span class="pre">lightning</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormLightningAssociation.lightning" title="Link to this definition"></a></dt>
+<dd><p>The lightning event linked to the thunderstorm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="lightning.html#src.data_model.lightning.Lightning" title="src.data_model.lightning.Lightning"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lightning</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.thunderstorm.ThunderstormLightningAssociation.thunderstorm">
+<span class="sig-name descname"><span class="pre">thunderstorm</span></span><a class="headerlink" href="#src.data_model.thunderstorm.ThunderstormLightningAssociation.thunderstorm" title="Link to this definition"></a></dt>
+<dd><p>The thunderstorm linked to the lightning event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.data_model.thunderstorm.Thunderstorm" title="src.data_model.thunderstorm.Thunderstorm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Thunderstorm</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>This table uses a composite primary key (<cite>thunderstorm_id</cite>, <cite>lightning_id</cite>)
+to uniquely identify each association. It enables efficient querying of
+lightning events per thunderstorm and vice versa.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#src.data_model.thunderstorm.Thunderstorm" title="src.data_model.thunderstorm.Thunderstorm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Thunderstorm</span></code></a></dt><dd><p>Model representing individual thunderstorm records.</p>
+</dd>
+<dt><a class="reference internal" href="lightning.html#src.data_model.lightning.Lightning" title="src.data_model.lightning.Lightning"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lightning</span></code></a></dt><dd><p>Model representing individual lightning strike records.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="thunderstorm_experiment.html" class="btn btn-neutral float-left" title="Thunderstorm Experiment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../meteocat/data_model/lightning.html" class="btn btn-neutral float-right" title="MeteocatLightning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

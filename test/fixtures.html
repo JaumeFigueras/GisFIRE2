@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing Fixtures &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Model Fixtures" href="fixtures/data_model.html" />
+    <link rel="prev" title="conftest.py" href="conftest.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apps.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../testing.html">Testing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#conftest-py">conftest.py</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../testing.html#pages">Pages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="conftest.html">conftest.py</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Testing Fixtures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-fixtures-are-necessary">Why Fixtures are Necessary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-usage">Advanced Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pages">Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database.html">Database Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_model.html">Data Model Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apps.html">Apps Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../testing.html">Testing</a></li>
+      <li class="breadcrumb-item active">Testing Fixtures</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/test/fixtures.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="testing-fixtures">
+<h1>Testing Fixtures<a class="headerlink" href="#testing-fixtures" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#why-fixtures-are-necessary" id="id2">Why Fixtures are Necessary</a></p></li>
+<li><p><a class="reference internal" href="#example" id="id3">Example</a></p></li>
+<li><p><a class="reference internal" href="#advanced-usage" id="id4">Advanced Usage</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id5">References</a></p></li>
+<li><p><a class="reference internal" href="#pages" id="id6">Pages</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>In pytest, a <strong>fixture</strong> is a reusable piece of code that provides a fixed baseline for your tests. Fixtures are used to set up and tear down resources that tests depend on, such as databases, files, or network connections.</p>
+<p>Fixtures help you:</p>
+<ul class="simple">
+<li><p>Avoid code duplication in test setup and teardown.</p></li>
+<li><p>Ensure tests run in a consistent and isolated environment.</p></li>
+<li><p>Make tests easier to maintain and more readable.</p></li>
+<li><p>Manage external dependencies in a controlled manner.</p></li>
+</ul>
+</section>
+<section id="why-fixtures-are-necessary">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Why Fixtures are Necessary</a><a class="headerlink" href="#why-fixtures-are-necessary" title="Link to this heading"></a></h2>
+<p>Using fixtures is necessary because:</p>
+<ol class="arabic simple">
+<li><p><strong>Reusability</strong>
+If multiple tests need the same setup (e.g., creating a temporary database or populating test data), fixtures allow you to define this setup once and reuse it across tests.</p></li>
+<li><p><strong>Isolation</strong>
+Fixtures can create isolated environments for each test, ensuring that tests do not interfere with one another.</p></li>
+<li><p><strong>Automatic Cleanup</strong>
+Fixtures can include teardown code, which automatically cleans up resources after a test finishes. This prevents side effects like leftover files or persistent database records.</p></li>
+<li><p><strong>Modularity and Readability</strong>
+Fixtures separate setup code from test logic, making tests easier to read and maintain.</p></li>
+</ol>
+</section>
+<section id="example">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Example</a><a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<p>Here is a simple fixture example using pytest:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_list</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides a sample list for tests.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_sum</span><span class="p">(</span><span class="n">sample_list</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sample_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<p>Explanation:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">sample_list</span></code> fixture provides the test data.</p></li>
+<li><p>The test function <code class="docutils literal notranslate"><span class="pre">test_sum</span></code> automatically receives the fixture as an argument.</p></li>
+<li><p>The fixture ensures consistent test input and isolates setup from test logic.</p></li>
+</ul>
+</section>
+<section id="advanced-usage">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Advanced Usage</a><a class="headerlink" href="#advanced-usage" title="Link to this heading"></a></h2>
+<p>Fixtures can also:</p>
+<ul class="simple">
+<li><p>Use different scopes (function, class, module, session) to control how often they are set up and torn down.</p></li>
+<li><p>Depend on other fixtures.</p></li>
+<li><p>Use factories to provide dynamic or parameterized test data.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">References</a><a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.pytest.org/en/stable/fixture.html">pytest Fixtures</a></p></li>
+</ul>
+</section>
+<section id="pages">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Pages</a><a class="headerlink" href="#pages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fixtures/data_model.html">Data Model Fixtures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fixtures/meteocat.html">Meteocat Fixtures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fixtures/apps.html">Apps Fixtures</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="conftest.html" class="btn btn-neutral float-left" title="conftest.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fixtures/data_model.html" class="btn btn-neutral float-right" title="Data Model Fixtures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

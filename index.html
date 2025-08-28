@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GisFIRE2 documentation &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=10f1778b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setup" href="setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apps.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">GisFIRE2 documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gisfire2-documentation">
+<h1>GisFIRE2 documentation<a class="headerlink" href="#gisfire2-documentation" title="Link to this heading"></a></h1>
+<p>This repository contains all the code developed for my PhD research on lightning-caused wildfires in Catalonia — from
+data preparation to predictive modelling and operational logistics.</p>
+<p>It includes:</p>
+<ul class="simple">
+<li><p><strong>Data processing</strong> pipelines for integrating wildfire perimeters, lightning strike datasets, meteorological observations, and geographic information.</p></li>
+<li><p><strong>Algorithms</strong> for linking lightning events to wildfire ignitions using spatial–temporal analysis and validation methods.</p></li>
+<li><dl class="simple">
+<dt><strong>Machine learning</strong> models for:</dt><dd><ul>
+<li><p>Predicting which lightning strikes are likely to cause an ignition (pre-ignition classification).</p></li>
+<li><p>Thusnderstorm characterization</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Techniques for imbalanced datasets</strong>, including re-sampling, cost-sensitive learning, and rare-event evaluation metrics.</p></li>
+<li><p><strong>Optimization algorithms</strong> for aerial firefighting: minimal-disc coverage of lightning events, route planning, and resource allocation.</p></li>
+</ul>
+<p>The project also uses <a class="reference external" href="https://www.qgis.org">QGIS</a>, so different <strong>plugins</strong> have also been developed.</p>
+<p>The aim is to bridge environmental data science with operational wildfire management, enabling better risk prediction
+and efficient firefighting deployment.</p>
+<p>The documents ar organized as follow:</p>
+<ul class="simple">
+<li><p><strong>GisFIRE Setup</strong>:</p></li>
+<li><p><strong>GisFIRE Data Model</strong>:</p></li>
+<li><dl class="simple">
+<dt><strong>GisFIRE Project Modules</strong>:</dt><dd><ul>
+<li><p><strong>Geo</strong>:</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>GisFIRE API</strong>:</p></li>
+<li><p><strong>Applications</strong>:</p></li>
+<li><p><strong>QGIS Plugins</strong>:</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#setup-pages">Setup Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_model.html">Data Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#what-is-a-data-model">What is a Data Model?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#id1">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#data-model-pages">Data Model Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#modules-pages">Modules Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="apps.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="apps.html#applications-pages">Applications Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#conftest-py">conftest.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#pages">Pages</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="setup.html" class="btn btn-neutral float-right" title="Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Database Testing &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Model Tests" href="data_model.html" />
+    <link rel="prev" title="Multiprocessing Fixtures" href="fixtures/apps/multiprocessing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apps.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../testing.html">Testing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#conftest-py">conftest.py</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../testing.html#pages">Pages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="conftest.html">conftest.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fixtures.html">Testing Fixtures</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Database Testing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-test.test_00_database">Code Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data_model.html">Data Model Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apps.html">Apps Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../testing.html">Testing</a></li>
+      <li class="breadcrumb-item active">Database Testing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/test/database.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="database-testing">
+<h1>Database Testing<a class="headerlink" href="#database-testing" title="Link to this heading"></a></h1>
+<section id="module-test.test_00_database">
+<span id="code-contents"></span><h2>Code Contents<a class="headerlink" href="#module-test.test_00_database" title="Link to this heading"></a></h2>
+<p>Pytest test module for verifying the initial state of the test database.</p>
+<p>This module contains tests to ensure that the temporary PostgreSQL database
+used for testing is properly initialized. It checks that:</p>
+<ul class="simple">
+<li><p>No user-defined tables exist at startup.</p></li>
+<li><p>ORM-mapped tables are empty before inserting test data.</p></li>
+<li><p>Fixtures properly populate test data as expected.</p></li>
+</ul>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>test_database_init_01(postgresql_gisfire)</dt><dd><p>Checks that no user-defined tables exist in the ‘public’ schema at database start.</p>
+</dd>
+<dt>test_database_init_02(db_session)</dt><dd><p>Verifies that all relevant ORM-mapped tables are empty at test start.</p>
+</dd>
+<dt>test_database_init_03(db_session, data_provider)</dt><dd><p>Verifies that the <cite>data_provider</cite> fixture correctly populates the DataProvider table.</p>
+</dd>
+</dl>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_00_database.test_database_init_01">
+<span class="sig-prename descclassname"><span class="pre">test.test_00_database.</span></span><span class="sig-name descname"><span class="pre">test_database_init_01</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postgresql_gisfire</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#test.test_00_database.test_database_init_01" title="Link to this definition"></a></dt>
+<dd><p>Ensure that no user-defined tables exist in the ‘public’ schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>postgresql_gisfire</strong> (<em>Any</em>) – A test PostgreSQL database fixture (e.g., from pytest_postgresql).</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This test confirms that the database starts clean and no leftover tables
+from previous tests exist.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_00_database.test_database_init_02">
+<span class="sig-prename descclassname"><span class="pre">test.test_00_database.</span></span><span class="sig-name descname"><span class="pre">test_database_init_02</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#test.test_00_database.test_database_init_02" title="Link to this definition"></a></dt>
+<dd><p>Verify that all relevant ORM-mapped tables are empty at test start.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>db_session</strong> (<em>Session</em>) – A SQLAlchemy session connected to the test database.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This test checks that tables such as <cite>DataProvider</cite>, <cite>Lightning</cite>,
+<cite>Thunderstorm</cite>, etc., are empty before any test data is inserted.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.test_00_database.test_database_init_03">
+<span class="sig-prename descclassname"><span class="pre">test.test_00_database.</span></span><span class="sig-name descname"><span class="pre">test_database_init_03</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><span class="pre">DataProvider</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#test.test_00_database.test_database_init_03" title="Link to this definition"></a></dt>
+<dd><p>Verify that the <cite>data_provider</cite> fixture correctly populates the DataProvider table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_session</strong> (<em>Session</em>) – A SQLAlchemy session connected to the test database.</p></li>
+<li><p><strong>data_provider</strong> (<em>list</em><em> of </em><a class="reference internal" href="../src/data_model/data_provider.html#src.data_model.data_provider.DataProvider" title="src.data_model.data_provider.DataProvider"><em>DataProvider</em></a>) – Fixture that provides sample <cite>DataProvider</cite> instances for testing.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This test ensures that the <cite>data_provider</cite> fixture inserts exactly two
+DataProvider records and that other tables remain empty.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fixtures/apps/multiprocessing.html" class="btn btn-neutral float-left" title="Multiprocessing Fixtures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="data_model.html" class="btn btn-neutral float-right" title="Data Model Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

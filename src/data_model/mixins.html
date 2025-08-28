@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mixins &mdash; GisFIRE2 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Base" href="base.html" />
+    <link rel="prev" title="ModelMeta Metaclass" href="metaclass.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GisFIRE2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../data_model.html">Data Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#what-is-a-data-model">What is a Data Model?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_model.html#id1">Data Model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../data_model.html#data-model-pages">Data Model Pages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../data_model.html#general-data-model-pages">General Data Model Pages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="metaclass.html">ModelMeta Metaclass</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Mixins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base.html">Base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_provider.html">Data Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lightning.html">Lightning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm_experiment.html">Thunderstorm Experiment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thunderstorm.html">Thunderstorm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#bombers-de-la-generalitat-de-catalunya-data-model-pages">Bombers de la Generalitat de Catalunya Data Model Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data_model.html#id2">Servei Meteorològic de Catalunya</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GisFIRE2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../data_model.html">Data Model</a></li>
+      <li class="breadcrumb-item active">Mixins</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/data_model/mixins.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mixins">
+<h1>Mixins<a class="headerlink" href="#mixins" title="Link to this heading"></a></h1>
+<p>This section documents the reusable SQLAlchemy mixins available in the project.
+These mixins add specific behaviors or attributes to models, such as timestamping,
+date/time handling, and location coordinate management.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These mixins use the SQLAlchemy <code class="docutils literal notranslate"><span class="pre">&#64;declarative_mixin</span></code> decorator, meaning they
+are intended to be inherited by declarative ORM classes.</p>
+</div>
+<section id="datetimemixin">
+<h2>DateTimeMixIn<a class="headerlink" href="#datetimemixin" title="Link to this heading"></a></h2>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">DateTimeMixIn</span></code> mixin provides an iterable interface for accessing date/time
+attributes with timezone awareness, and supports equality comparison between objects.</p>
+<p><strong>Features:</strong></p>
+<ul class="simple">
+<li><p>Handles date/time attributes defined in the class-level <code class="docutils literal notranslate"><span class="pre">__date__</span></code> list.</p></li>
+<li><p>Preserves timezone offsets when iterating over attributes.</p></li>
+<li><p>Compares objects based on both timestamp and timezone.</p></li>
+</ul>
+</section>
+<section id="locationmixin">
+<h2>LocationMixIn<a class="headerlink" href="#locationmixin" title="Link to this heading"></a></h2>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">LocationMixIn</span></code> mixin provides an iterable interface for accessing location
+coordinates in various EPSG spatial reference systems.</p>
+<p><strong>Features:</strong></p>
+<ul class="simple">
+<li><p>Uses the <code class="docutils literal notranslate"><span class="pre">__location__</span></code> class attribute to determine available coordinate sets.</p></li>
+<li><p>Iterates through X and Y coordinates for each EPSG code.</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.mixins.location.LocationMixIn">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.mixins.location.</span></span><span class="sig-name descname"><span class="pre">LocationMixIn</span></span><a class="headerlink" href="#src.data_model.mixins.location.LocationMixIn" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin for iterating over location coordinates in different spatial reference systems.</p>
+<p>This mixin is intended for SQLAlchemy models that define one or more
+location attributes (coordinates) with associated EPSG codes.
+The mixin allows consistent iteration over these location attributes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.mixins.location.LocationMixIn.__location__">
+<span class="sig-name descname"><span class="pre">__location__</span></span><a class="headerlink" href="#src.data_model.mixins.location.LocationMixIn.__location__" title="Link to this definition"></a></dt>
+<dd><p>List of dictionaries defining location attributes.
+Each dictionary must contain an <code class="docutils literal notranslate"><span class="pre">'epsg'</span></code> key specifying the EPSG
+code for that location coordinate set.
+The model is expected to have attributes named <code class="docutils literal notranslate"><span class="pre">x_&lt;epsg&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">y_&lt;epsg&gt;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of dict of str to Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.data_model.mixins.location.LocationMixIn.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.mixins.location.LocationMixIn.__iter__" title="Link to this definition"></a></dt>
+<dd><p>Iterate over location coordinates defined in <code class="docutils literal notranslate"><span class="pre">__location__</span></code>.</p>
+<p>For each location dictionary in <code class="docutils literal notranslate"><span class="pre">__location__</span></code>, yields a tuple for
+the X coordinate and another tuple for the Y coordinate, using the
+format <code class="docutils literal notranslate"><span class="pre">('x_&lt;epsg&gt;',</span> <span class="pre">value)</span></code> and <code class="docutils literal notranslate"><span class="pre">('y_&lt;epsg&gt;',</span> <span class="pre">value)</span></code>.</p>
+<dl class="simple">
+<dt>The order of yielded tuples is:</dt><dd><ol class="arabic simple">
+<li><p>X coordinate for the EPSG code</p></li>
+<li><p>Y coordinate for the EPSG code</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>tuple of (str, Any)</em> – The coordinate attribute name and its value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="timestampmixin">
+<h2>TimeStampMixIn<a class="headerlink" href="#timestampmixin" title="Link to this heading"></a></h2>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">TimeStampMixIn</span></code> mixin adds a <code class="docutils literal notranslate"><span class="pre">ts</span></code> timestamp column to models,
+automatically populated with the current server time.</p>
+<p><strong>Features:</strong></p>
+<ul class="simple">
+<li><p>Stores the timestamp with timezone support.</p></li>
+<li><p>Iterates to produce an ISO 8601 UTC string representation of the timestamp.</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data_model.mixins.time_stamp.TimeStampMixIn">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.data_model.mixins.time_stamp.</span></span><span class="sig-name descname"><span class="pre">TimeStampMixIn</span></span><a class="headerlink" href="#src.data_model.mixins.time_stamp.TimeStampMixIn" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin for adding a timestamp column to SQLAlchemy models.</p>
+<p>This mixin provides a <cite>ts</cite> field that stores the record’s timestamp
+with timezone support. The default value is set to the current time
+in the database server using <code class="docutils literal notranslate"><span class="pre">func.now()</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.data_model.mixins.time_stamp.TimeStampMixIn.ts">
+<span class="sig-name descname"><span class="pre">ts</span></span><a class="headerlink" href="#src.data_model.mixins.time_stamp.TimeStampMixIn.ts" title="Link to this definition"></a></dt>
+<dd><p>Timestamp of the record with timezone information. Defaults to the
+current server time and cannot be null.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sqlalchemy.orm.Mapped[datetime.datetime]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.data_model.mixins.time_stamp.TimeStampMixIn.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_model.mixins.time_stamp.TimeStampMixIn.__iter__" title="Link to this definition"></a></dt>
+<dd><p>Iterate over the mixin’s timestamp attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>tuple of (str, str or None)</em> – The string <code class="docutils literal notranslate"><span class="pre">'ts'</span></code> and its corresponding timestamp value
+formatted as an ISO 8601 string in UTC, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if
+the timestamp is not set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="metaclass.html" class="btn btn-neutral float-left" title="ModelMeta Metaclass" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="base.html" class="btn btn-neutral float-right" title="Base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jaume Figueras.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
