@@ -18,7 +18,7 @@ Run the script directly with the required database connection arguments:
 
 .. code-block:: bash
 
-    python3 create_data_providers.py --host <DB_HOST> --port <DB_PORT> --database <DB_NAME> --username <DB_USER> --password <DB_PASSWORD>
+    python3 -m src.apps.auxiliar.create_data_providers --host <DB_HOST> --port <DB_PORT> --database <DB_NAME> --username <DB_USER> --password <DB_PASSWORD>
 
 Named Arguments
 ---------------

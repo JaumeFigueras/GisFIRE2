@@ -8,10 +8,6 @@ from sqlalchemy.orm import Session
 
 from src.data_model.thunderstorm import Thunderstorm
 from src.data_model.data_provider import DataProvider
-from src.data_model.thunderstorm_experiment import ThunderstormExperiment
-from src.data_model.thunderstorm_experiment import ThunderstormExperimentParams
-from src.data_model.thunderstorm_experiment import ThunderstormExperimentAlgorithm
-from src.data_model.lightning import Lightning
 
 from typing import List
 

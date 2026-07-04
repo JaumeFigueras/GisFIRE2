@@ -324,7 +324,7 @@ def test_lightning_iter_00(db_session: Session, data_provider: List[DataProvider
     ----------
     db_session : Session
         SQLAlchemy session fixture.
-    data_provider : list of DataProvider
+    data_provider : List[DataProvider]
         Fixture with available data providers.
 
     Expected behavior
@@ -353,7 +353,7 @@ def test_lightning_iter_00(db_session: Session, data_provider: List[DataProvider
     iter_dict = dict(lightning)
 
     assert iter_dict["lightning_id"] == 1
-    assert iter_dict["data_provider"] == data_provider[0].data_provider_name
+    assert iter_dict["data_provider_name"] == data_provider[0].data_provider_name
     assert iter_dict["x_4326"] == 2.113066
     assert iter_dict["y_4326"] == 41.388147
     assert iter_dict["lightning_utc_date_time"] == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S.%f%z")
@@ -383,7 +383,7 @@ def test_lightning_iter_01(db_session: Session, data_provider: List[DataProvider
     ----------
     db_session : Session
         SQLAlchemy session fixture.
-    data_provider : list of DataProvider
+    data_provider : List[DataProvider]
         Fixture with available data providers.
 
     Expected behavior
@@ -410,7 +410,7 @@ def test_lightning_iter_01(db_session: Session, data_provider: List[DataProvider
     iter_dict = dict(lightning)
 
     assert iter_dict["lightning_id"] == 1
-    assert iter_dict["data_provider"] == data_provider[0].data_provider_name
+    assert iter_dict["data_provider_name"] == data_provider[0].data_provider_name
     assert iter_dict["x_4326"] == 2.113066
     assert iter_dict["y_4326"] == 41.388147
     assert iter_dict["lightning_utc_date_time"] == datetime.datetime(2025, 6, 24, 17, 0, 0, tzinfo=pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S.%f%z")
@@ -477,7 +477,7 @@ def test_meteocat_lightning_object_hook_gisfire_api_json_loads_02():
         "meteocat_hit_ground": True,
         "meteocat_municipality_code": "08019",
         "lightning_id": "555",
-        "data_provider": "TestProvider",
+        "data_provider_name": "TestProvider",
         "x_25831": "425846.42118526914",
         "y_25831": "4582226.001558889",
         "x_4258": "2.113066",
@@ -533,7 +533,7 @@ def test_meteocat_lightning_object_hook_gisfire_api_json_loads_03():
         "meteocat_hit_ground": True,
         "meteocat_municipality_code": "08019",
         "lightning_id": "555",
-        "data_provider": "TestProvider",
+        "data_provider_name": "TestProvider",
         "x_25831": "425846.42118526914",
         "y_25831": "4582226.001558889",
         "x_4258": "2.113066",

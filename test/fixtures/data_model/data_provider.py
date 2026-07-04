@@ -21,10 +21,16 @@ data_provider(db_session: Session)
 
 import pytest
 
+from sqlalchemy.orm import Session
+
 from src.data_model.data_provider import DataProvider
 
 from typing import List
-from sqlalchemy.orm import Session
+from typing import Generator
+from typing import TypeVar
+
+T = TypeVar("T")
+YieldFixture = Generator[T, None, None]
 
 def create_data_providers(session: Session) -> List[DataProvider]:
     """
@@ -56,7 +62,7 @@ def create_data_providers(session: Session) -> List[DataProvider]:
     return [dp1, dp2]
 
 @pytest.fixture(scope='function')
-def data_provider(db_session: Session):
+def data_provider(db_session: Session) -> YieldFixture[List[DataProvider]]:
     """
     Pytest fixture that provides sample `DataProvider` instances for tests.
 

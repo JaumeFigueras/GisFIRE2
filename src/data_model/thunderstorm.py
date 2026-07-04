@@ -209,7 +209,7 @@ class Thunderstorm(Base, LocationMixIn, TimeStampMixIn):
 
         Parameters
         ----------
-        **kwargs : ThunderstormParams
+        **kwargs : Unpack[ThunderstormParams]
             Keyword arguments matching the thunderstorm schema.
 
         Notes
@@ -218,7 +218,7 @@ class Thunderstorm(Base, LocationMixIn, TimeStampMixIn):
         - Extra/unrecognized keys are ignored.
         """
         super().__init__()
-        for key, value in kwargs.items():
+        for key, value in kwargs.items(): # type: ignore[attr-defined]
             if hasattr(self, key) and not Base.is_defined_in_parents(Thunderstorm, key):
                 if (key == "thunderstorm_experiment") and (isinstance(value, int)):
                     self.thunderstorm_experiment_id = value

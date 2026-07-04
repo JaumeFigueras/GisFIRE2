@@ -24,7 +24,7 @@ Run the script directly with the required arguments:
 
 .. code-block:: bash
 
-   python3 import_lightnings_from_csv_mp.py --host <DB_HOST> --port <DB_PORT> --database <DB_NAME> --username <DB_USER> --password <DB_PASS> --file <CSV_FILE> [--log-file <LOG_FILE>]
+   python3 -m src.apps.meteocat.import_lightnings_from_csv_mp --host <DB_HOST> --port <DB_PORT> --database <DB_NAME> --username <DB_USER> --password <DB_PASS> --file <CSV_FILE> [--log-file <LOG_FILE>]
 
 Named Arguments
 ---------------
@@ -52,7 +52,7 @@ Notes
 - Data chunks of 10,000 records are processed in parallel.
 - All records must be valid `MeteocatLightning` objects before insertion.
 - The script exits with a non-zero status on error.
-"""
+"""  # noinspection GrammarInspection
 
 import time
 import multiprocessing as mp

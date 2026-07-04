@@ -44,6 +44,14 @@ from src.data_model.thunderstorm import Thunderstorm  # pragma: no cover
 from src.data_model.thunderstorm import ThunderstormLightningAssociation  # pragma: no cover
 from src.data_model.thunderstorm_experiment import ThunderstormExperiment  # pragma: no cover
 from src.meteocat.data_model.thunderstorm import MeteocatThunderstorm  # pragma: no cover # noqa: F401
+from src.data_model.variable import Variable  # pragma: no cover
+from src.meteocat.data_model.variable import MeteocatVariable  # pragma: no cover
+from src.meteocat.data_model.variable import MeteocatVariableState  # pragma: no cover
+from src.meteocat.data_model.variable import MeteocatVariableTimeBase  # pragma: no cover
+from src.data_model.weather_station import WeatherStation  # pragma: no cover
+from src.meteocat.data_model.weather_station import MeteocatWeatherStation  # pragma: no cover
+from src.meteocat.data_model.weather_station import MeteocatWeatherStationState  # pragma: no cover
+
 
 
 def main(e: Engine):  # pragma: no cover
@@ -69,6 +77,11 @@ def main(e: Engine):  # pragma: no cover
     print(CreateTable(Thunderstorm.__table__).compile(e))
     print(CreateTable(ThunderstormLightningAssociation.__table__).compile(e))
     print(CreateTable(ThunderstormExperiment.__table__).compile(e))
+    print(CreateTable(Variable.__table__).compile(e))
+    print(CreateTable(MeteocatVariableState.__table__).compile(e))
+    print(CreateTable(MeteocatVariableTimeBase.__table__).compile(e))
+    print(CreateTable(WeatherStation.__table__).compile(e))
+    print(CreateTable(MeteocatWeatherStationState.__table__).compile(e))
     # print(CreateTable(MeteocatLightning.__table__).compile(e))
 
     # print(CreateTable(Request.__table__).compile(e))

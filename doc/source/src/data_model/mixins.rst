@@ -9,23 +9,6 @@ date/time handling, and location coordinate management.
    These mixins use the SQLAlchemy ``@declarative_mixin`` decorator, meaning they
    are intended to be inherited by declarative ORM classes.
 
-DateTimeMixIn
--------------
-
-The :class:`DateTimeMixIn` mixin provides an iterable interface for accessing date/time
-attributes with timezone awareness, and supports equality comparison between objects.
-
-**Features:**
-
-- Handles date/time attributes defined in the class-level ``__date__`` list.
-- Preserves timezone offsets when iterating over attributes.
-- Compares objects based on both timestamp and timezone.
-
-.. autoclass:: src.data_model.mixins.date_time.DateTimeMixIn
-   :members: __eq__, __iter__
-   :undoc-members:
-   :show-inheritance:
-
 LocationMixIn
 -------------
 

@@ -83,6 +83,7 @@ def db_session(postgresql_gisfire):
         str(test_folder.parent) + '/src/data_model/database/thunderstorm_experiment.sql',
         str(test_folder.parent) + '/src/data_model/database/thunderstorm.sql',
         str(test_folder.parent) + '/src/data_model/database/thunderstorm_lightning_association.sql',
+        str(test_folder.parent) + '/src/data_model/database/variable.sql',
     ]
 
     # Execute each SQL file to initialize the schema
@@ -117,4 +118,5 @@ pytest_plugins = [
     'test.fixtures.data_model.data_provider',
     'test.fixtures.apps.mp',
     'test.fixtures.meteocat.data_model.lightnings',
+    'test.fixtures.meteocat.remote_api.variables',
 ]

@@ -71,6 +71,8 @@ class DataProvider(Base, TimeStampMixIn):
     lightnings: Mapped[List["Lightning"]] = relationship(back_populates="data_provider")  # type: ignore
     requests: Mapped[List["APIRequestLog"]] = relationship(back_populates="data_provider")  # type: ignore
     thunderstorm_experiments: Mapped[List["ThunderstormExperiment"]] = relationship(back_populates="data_provider")  # type: ignore
+    weather_stations: Mapped[List["WeatherStation"]] = relationship(back_populates="data_provider")  # type: ignore
+    variables: Mapped[List["Variable"]] = relationship(back_populates="data_provider")  # type: ignore
 
 
     def __init__(self, **kwargs: Unpack[DataProviderParams]) -> None:

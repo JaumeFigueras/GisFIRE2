@@ -234,7 +234,7 @@ class MeteocatLightning(Lightning):
         if all(k in dct for k in ("meteocat_id", "meteocat_peak_current", "meteocat_multiplicity",
                                   "meteocat_chi_squared", "meteocat_ellipse_major_axis", "meteocat_ellipse_minor_axis",
                                   "meteocat_ellipse_angle", "meteocat_number_of_sensors", "meteocat_hit_ground",
-                                  "meteocat_municipality_code", "lightning_id", "data_provider", "x_25831", "y_25831",
+                                  "meteocat_municipality_code", "lightning_id", "data_provider_name", "x_25831", "y_25831",
                                   "x_4258", "y_4258", "lightning_utc_date_time")):
             lightning = MeteocatLightning(
                 meteocat_id=int(dct['meteocat_id']),
@@ -247,7 +247,7 @@ class MeteocatLightning(Lightning):
                 meteocat_number_of_sensors=int(dct['meteocat_number_of_sensors']),
                 meteocat_hit_ground=bool(dct['meteocat_hit_ground']),
                 meteocat_municipality_code=dct['meteocat_municipality_code'],
-                data_provider=dct['data_provider'],
+                data_provider=dct['data_provider_name'],
                 x_4258=float(dct['x_4258']),
                 y_4258=float(dct['y_4258']),
                 lightning_utc_date_time=datetime.datetime.strptime(dct['lightning_utc_date_time'], "%Y-%m-%dT%H:%M:%S.%f%z")

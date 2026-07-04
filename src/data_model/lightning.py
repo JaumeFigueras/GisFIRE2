@@ -11,7 +11,7 @@ Classes
 -------
 LightningParams : TypedDict
     Type hints for parameters accepted by the Lightning constructor.
-Lightning : Base, LocationMixIn, DateTimeMixIn, TimeStampMixIn
+Lightning : Base, LocationMixIn, TimeStampMixIn
     ORM-mapped class for lightning events, including relationships to
     data providers and polymorphic identity support.
 """
@@ -36,8 +36,8 @@ from src.data_model.data_provider import DataProvider
 from typing import Union
 from typing import List
 from typing import TypedDict
-from typing_extensions import Unpack
-from typing_extensions import NotRequired
+from typing import Unpack
+from typing import NotRequired
 
 class LightningParams(TypedDict):
     """
@@ -86,8 +86,6 @@ class Lightning(Base, LocationMixIn, TimeStampMixIn):
         Geometric representation of the lightning location.
     lightning_utc_date_time : datetime.datetime  # noinspection GrammarInspection
         Datetime of the lightning event.
-    tzinfo_date_time : str
-        Timezone information for the event datetime.
     """
     # Metaclass location attributes
     __location__ = [
@@ -97,10 +95,6 @@ class Lightning(Base, LocationMixIn, TimeStampMixIn):
     x_4326: float
     y_4326: float
     geometry_4326: Union[str, Point]
-    # Metaclass date_time attributes
-    __date__ = [
-        {'name': 'date_time', 'nullable': False}
-    ]
     # SQLAlchemy columns
     __tablename__ = "lightning"
     lightning_id: Mapped[int] = mapped_column('lightning_id', Integer, primary_key=True, autoincrement=True)
@@ -125,7 +119,7 @@ class Lightning(Base, LocationMixIn, TimeStampMixIn):
 
         Parameters
         ----------
-        **kwargs : LightningParams
+        **kwargs : Unpack[LightningParams]
             Keyword arguments matching LightningParams TypedDict. Only attributes
             present in the class are set.
 
@@ -135,7 +129,7 @@ class Lightning(Base, LocationMixIn, TimeStampMixIn):
         """
         Base.__init__(self)
         TimeStampMixIn.__init__(self)
-        for key, value in kwargs.items():
+        for key, value in kwargs.items(): # type: ignore[attr-defined]
             if hasattr(self, key):
                 if key == "data_provider" and isinstance(value, str):
                     self.data_provider_name = value
@@ -154,6 +148,9 @@ class Lightning(Base, LocationMixIn, TimeStampMixIn):
         """
         yield "lightning_id", self.lightning_id
         yield "lightning_utc_date_time", self.lightning_utc_date_time.strftime("%Y-%m-%dT%H:%M:%S.%f%z")
-        yield "data_provider", self.data_provider.data_provider_name
+        if self.data_provider is not None:
+            yield "data_provider_name", self.data_provider.data_provider_name
+        else:
+            yield "data_provider_name", self.data_provider_name
         yield from LocationMixIn.__iter__(self)
 
